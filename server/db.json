@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "An Đặng",
+      "email": "an@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759417015/yylio3hbfbhm03ysgcy5.jpg",
+      "bio": "Full-stack developer với 5 năm kinh nghiệm",
+      "phone": "0123456789",
+      "address": "Hà Nội, Việt Nam",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2025-10-02T14:57:19.637Z"
+    },
+    {
+      "id": "2",
+      "name": "Cẩm Linh",
+      "email": "linh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/folder/sample2.jpg",
+      "bio": "Frontend developer chuyên về React và Vue.js",
+      "phone": "0987654321",
+      "address": "Hà Nội, Việt Nam",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Linh Anh",
+      "email": "anh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/another/sample3.jpg",
+      "bio": "Backend developer và DevOps engineer",
+      "phone": "0111222333",
+      "address": "Đà Nẵng, Việt Nam",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "name": "Xây dựng website thương mại điện tử",
+      "description": "Dự án nhằm phát triển một nền tảng thương mại điện tử với các tính năng như giỏ hàng, thanh toán và quản lý sản phẩm.",
+      "ownerId": "1",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Phát triển ứng dụng di động",
+      "description": "Ứng dụng mobile để quản lý công việc cá nhân",
+      "ownerId": "1",
+      "createdAt": "2024-01-02T00:00:00Z",
+      "updatedAt": "2024-01-02T00:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Quản lý dữ liệu khách hàng",
+      "description": "Hệ thống CRM để quản lý thông tin khách hàng",
+      "ownerId": "2",
+      "createdAt": "2024-01-03T00:00:00Z",
+      "updatedAt": "2024-01-03T00:00:00Z"
+    }
+  ]
+}
