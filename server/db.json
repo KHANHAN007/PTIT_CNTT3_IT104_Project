@@ -37,6 +37,90 @@
       "updatedAt": "2024-01-01T00:00:00Z"
     },
     {
+      "id": "4",
+      "name": "Minh Hoàng",
+      "email": "minh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/male-avatar-1.jpg",
+      "bio": "UI/UX Designer với 3 năm kinh nghiệm trong thiết kế mobile app",
+      "phone": "0999111222",
+      "address": "Hồ Chí Minh, Việt Nam",
+      "createdAt": "2024-01-15T00:00:00Z",
+      "updatedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Bơ Béo",
+      "email": "huong@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/female-avatar-2.jpg",
+      "bio": "Project Manager và Scrum Master được chứng nhận",
+      "phone": "0888777666",
+      "address": "Hà Nội, Việt Nam",
+      "createdAt": "2024-02-01T00:00:00Z",
+      "updatedAt": "2024-02-01T00:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Văn Tuấn",
+      "email": "tuan@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/male-avatar-2.jpg",
+      "bio": "Mobile Developer chuyên React Native và Flutter",
+      "phone": "0777888999",
+      "address": "Cần Thơ, Việt Nam",
+      "createdAt": "2024-02-10T00:00:00Z",
+      "updatedAt": "2024-02-10T00:00:00Z"
+    },
+    {
+      "id": "7",
+      "name": "Quốc Đại",
+      "email": "thao@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/female-avatar-3.jpg",
+      "bio": "QA Engineer và Test Automation specialist",
+      "phone": "0666555444",
+      "address": "Đà Nẵng, Việt Nam",
+      "createdAt": "2024-02-20T00:00:00Z",
+      "updatedAt": "2024-02-20T00:00:00Z"
+    },
+    {
+      "id": "8",
+      "name": "Đức Nam",
+      "email": "nam@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/male-avatar-3.jpg",
+      "bio": "DevOps Engineer với kinh nghiệm AWS và Docker",
+      "phone": "0555444333",
+      "address": "Hải Phòng, Việt Nam",
+      "createdAt": "2024-03-01T00:00:00Z",
+      "updatedAt": "2024-03-01T00:00:00Z"
+    },
+    {
+      "id": "9",
+      "name": "An Nguyễn",
+      "email": "lananh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/female-avatar-4.jpg",
+      "bio": "Business Analyst và Product Owner",
+      "phone": "0444333222",
+      "address": "Nha Trang, Việt Nam",
+      "createdAt": "2024-03-10T00:00:00Z",
+      "updatedAt": "2024-03-10T00:00:00Z"
+    },
+    {
+      "id": "10",
+      "name": "Quang Huy",
+      "email": "huy@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/demo/image/upload/v1640995392/avatars/male-avatar-4.jpg",
+      "bio": "Data Scientist và Machine Learning Engineer",
+      "phone": "0333222111",
+      "address": "Hà Nội, Việt Nam",
+      "createdAt": "2024-03-15T00:00:00Z",
+      "updatedAt": "2024-03-15T00:00:00Z"
+    },
+    {
       "name": "an",
       "email": "a@gmail.com",
       "password": "12345678",
@@ -54,6 +138,7 @@
       "id": "1",
       "name": "Xây dựng website thương mại điện tử",
       "description": "Dự án nhằm phát triển một nền tảng thương mại điện tử với các tính năng như giỏ hàng, thanh toán và quản lý sản phẩm.",
+      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759417015/yylio3hbfbhm03ysgcy5.jpg",
       "ownerId": "1",
       "createdAt": "2024-01-01T00:00:00Z",
       "updatedAt": "2024-01-01T00:00:00Z"
@@ -61,7 +146,8 @@
     {
       "id": "2",
       "name": "Phát triển ứng dụng di động",
-      "description": "Ứng dụng mobile để quản lý công việc cá nhân",
+      "description": "Ứng dụng mobile để quản lý công việc cá nhân với giao diện thân thiện và tính năng đồng bộ dữ liệu",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/mobile-app-project.jpg",
       "ownerId": "1",
       "createdAt": "2024-01-02T00:00:00Z",
       "updatedAt": "2024-01-02T00:00:00Z"
@@ -69,64 +155,327 @@
     {
       "id": "3",
       "name": "Quản lý dữ liệu khách hàng",
-      "description": "Hệ thống CRM để quản lý thông tin khách hàng",
+      "description": "Hệ thống CRM để quản lý thông tin khách hàng, theo dõi lịch sử giao dịch và phân tích hành vi mua hàng",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/crm-system-project.jpg",
       "ownerId": "2",
-      "createdAt": "2024-01-03T00:00:00Z",
-      "updatedAt": "2024-01-03T00:00:00Z"
-    }
-  ],
-  "tasks": [
-    {
-      "id": "1",
-      "name": "Soạn thảo đề cương dự án",
-      "description": "Tạo đề cương chi tiết cho dự án",
-      "projectId": "1",
-      "assigneeId": "1",
-      "status": "Done",
-      "priority": "High",
-      "startDate": "2024-02-24",
-      "deadline": "2024-02-27",
-      "createdAt": "2024-01-01T00:00:00Z",
-      "updatedAt": "2024-01-01T00:00:00Z"
-    },
-    {
-      "id": "2",
-      "name": "Soạn thảo đề cương dự án",
-      "description": "Tạo đề cương chi tiết cho dự án",
-      "projectId": "1",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "priority": "Medium",
-      "startDate": "2024-02-24",
-      "deadline": "2024-02-27",
-      "createdAt": "2024-01-02T00:00:00Z",
-      "updatedAt": "2024-01-02T00:00:00Z"
-    },
-    {
-      "id": "3",
-      "name": "Soạn thảo đề cương dự án",
-      "description": "Tạo đề cương chi tiết cho dự án",
-      "projectId": "1",
-      "assigneeId": "1",
-      "status": "Pending",
-      "priority": "Low",
-      "startDate": "2024-02-24",
-      "deadline": "2024-02-27",
       "createdAt": "2024-01-03T00:00:00Z",
       "updatedAt": "2024-01-03T00:00:00Z"
     },
     {
       "id": "4",
-      "name": "Lên lịch họp kickoff",
-      "description": "Tổ chức cuộc họp khởi động dự án",
+      "name": "Hệ thống quản lý kho",
+      "description": "Phát triển hệ thống quản lý kho hàng tự động với tính năng theo dõi tồn kho và báo cáo",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/warehouse-management.jpg",
+      "ownerId": "1",
+      "createdAt": "2024-02-01T00:00:00Z",
+      "updatedAt": "2024-02-01T00:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Ứng dụng học trực tuyến",
+      "description": "Xây dựng nền tảng học trực tuyến với video call, bài tập tương tác và hệ thống đánh giá",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/elearning-platform.jpg",
+      "ownerId": "1",
+      "createdAt": "2024-02-15T00:00:00Z",
+      "updatedAt": "2024-02-15T00:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Hệ thống thanh toán điện tử",
+      "description": "Phát triển hệ thống thanh toán an toàn với tích hợp multiple payment gateway",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/payment-system.jpg",
+      "ownerId": "YifdFK2",
+      "createdAt": "2024-03-01T00:00:00Z",
+      "updatedAt": "2024-03-01T00:00:00Z"
+    },
+    {
+      "id": "7",
+      "name": "Ứng dụng đặt món ăn",
+      "description": "Ứng dụng di động để đặt món ăn trực tuyến với tính năng theo dõi đơn hàng real-time",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/food-delivery-app.jpg",
+      "ownerId": "1",
+      "createdAt": "2024-03-15T00:00:00Z",
+      "updatedAt": "2024-03-15T00:00:00Z"
+    },
+    {
+      "id": "8",
+      "name": "Hệ thống quản lý nhân sự",
+      "description": "Phần mềm quản lý nhân sự với tính năng chấm công, tính lương và đánh giá hiệu suất",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/hr-management.jpg",
+      "ownerId": "YifdFK2",
+      "createdAt": "2024-04-01T00:00:00Z",
+      "updatedAt": "2024-04-01T00:00:00Z"
+    },
+    {
+      "id": "9",
+      "name": "Website tin tức công nghệ",
+      "description": "Portal tin tức công nghệ với hệ thống CMS và tính năng bình luận tương tác",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/tech-news-portal.jpg",
+      "ownerId": "YifdFK2",
+      "createdAt": "2024-04-15T00:00:00Z",
+      "updatedAt": "2024-04-15T00:00:00Z"
+    },
+    {
+      "id": "10",
+      "name": "Ứng dụng quản lý tài chính cá nhân",
+      "description": "Ứng dụng giúp theo dõi thu chi, lập kế hoạch tài chính và phân tích chi tiêu",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/personal-finance-app.jpg",
+      "ownerId": "1",
+      "createdAt": "2024-05-01T00:00:00Z",
+      "updatedAt": "2024-05-01T00:00:00Z"
+    },
+    {
+      "id": "11",
+      "name": "Hệ thống booking khách sạn",
+      "description": "Nền tảng đặt phòng khách sạn trực tuyến với tính năng so sánh giá và đánh giá",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/hotel-booking-system.jpg",
+      "ownerId": "1",
+      "createdAt": "2024-05-15T00:00:00Z",
+      "updatedAt": "2024-05-15T00:00:00Z"
+    },
+    {
+      "id": "12",
+      "name": "Ứng dụng thể dục thể thao",
+      "description": "Ứng dụng theo dõi hoạt động thể thao, lập kế hoạch tập luyện và kết nối cộng đồng",
+      "imageUrl": "https://res.cloudinary.com/demo/image/upload/v1640995392/fitness-tracking-app.jpg",
+      "ownerId": "1",
+      "createdAt": "2024-06-01T00:00:00Z",
+      "updatedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "name": "Ứng dụng quản lý ghi chú tính hợp AI",
+      "description": "Dự án quản lý ghi chú hiệu quả, an toàn được tích hợp AI",
+      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759527850/tr1b2sr7p60sbbw9axwy.png",
+      "ownerId": "1",
+      "createdAt": "2025-10-03T21:44:36.687Z",
+      "updatedAt": "2025-10-03T21:44:36.687Z",
+      "id": "96xCsyp"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "name": "Phân tích yêu cầu hệ thống thương mại điện tử",
+      "description": "Thu thập và phân tích các yêu cầu chức năng cho website thương mại điện tử",
+      "projectId": "1",
+      "assigneeId": "1",
+      "progress": "Hoàn thành",
+      "status": "Done",
+      "priority": "High",
+      "startDate": "2024-01-01",
+      "deadline": "2024-01-05",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-05T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Thiết kế database cho hệ thống e-commerce",
+      "description": "Thiết kế cơ sở dữ liệu cho sản phẩm, đơn hàng, khách hàng",
       "projectId": "1",
       "assigneeId": "2",
+      "progress": "Đúng tiến độ",
+      "status": "In Progress",
+      "priority": "High",
+      "startDate": "2024-01-06",
+      "deadline": "2024-01-12",
+      "createdAt": "2024-01-06T00:00:00Z",
+      "updatedAt": "2024-01-10T00:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Phát triển module giỏ hàng",
+      "description": "Xây dựng chức năng thêm, xóa, sửa sản phẩm trong giỏ hàng",
+      "projectId": "1",
+      "assigneeId": "1",
+      "progress": "Có rủi ro",
       "status": "In Progress",
       "priority": "Medium",
-      "startDate": "2024-02-24",
-      "deadline": "2024-02-27",
-      "createdAt": "2024-01-04T00:00:00Z",
-      "updatedAt": "2024-01-04T00:00:00Z"
+      "startDate": "2024-01-13",
+      "deadline": "2024-01-20",
+      "createdAt": "2024-01-13T00:00:00Z",
+      "updatedAt": "2024-01-13T00:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Tích hợp cổng thanh toán",
+      "description": "Tích hợp VNPay, Momo và các cổng thanh toán khác",
+      "projectId": "1",
+      "assigneeId": "2",
+      "progress": "Trễ hẹn",
+      "status": "In Progress",
+      "priority": "High",
+      "startDate": "2024-01-21",
+      "deadline": "2024-01-28",
+      "createdAt": "2024-01-21T00:00:00Z",
+      "updatedAt": "2024-01-21T00:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Thiết kế giao diện ứng dụng mobile",
+      "description": "Tạo wireframe và mockup cho ứng dụng quản lý công việc",
+      "projectId": "2",
+      "assigneeId": "2",
+      "progress": "Hoàn thành",
+      "status": "Done",
+      "priority": "High",
+      "startDate": "2024-01-02",
+      "deadline": "2024-01-08",
+      "createdAt": "2024-01-02T00:00:00Z",
+      "updatedAt": "2024-01-08T00:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Phát triển chức năng đồng bộ dữ liệu",
+      "description": "Xây dựng hệ thống đồng bộ dữ liệu giữa mobile và cloud",
+      "projectId": "2",
+      "assigneeId": "1",
+      "progress": "Đúng tiến độ",
+      "status": "In Progress",
+      "priority": "High",
+      "startDate": "2024-01-09",
+      "deadline": "2024-01-18",
+      "createdAt": "2024-01-09T00:00:00Z",
+      "updatedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "7",
+      "name": "Tạo notification system",
+      "description": "Phát triển hệ thống thông báo push cho ứng dụng mobile",
+      "projectId": "2",
+      "assigneeId": "1",
+      "progress": "Có rủi ro",
+      "status": "In Progress",
+      "priority": "Medium",
+      "startDate": "2024-01-19",
+      "deadline": "2024-01-25",
+      "createdAt": "2024-01-19T00:00:00Z",
+      "updatedAt": "2024-01-19T00:00:00Z"
+    },
+    {
+      "id": "8",
+      "name": "Thiết kế database CRM",
+      "description": "Thiết kế cơ sở dữ liệu cho hệ thống quản lý khách hàng",
+      "projectId": "3",
+      "assigneeId": "2",
+      "progress": "Hoàn thành",
+      "status": "Done",
+      "priority": "High",
+      "startDate": "2024-01-03",
+      "deadline": "2024-01-10",
+      "createdAt": "2024-01-03T00:00:00Z",
+      "updatedAt": "2024-01-10T00:00:00Z"
+    },
+    {
+      "id": "9",
+      "name": "Phát triển module quản lý lead",
+      "description": "Xây dựng chức năng theo dõi và chăm sóc khách hàng tiềm năng",
+      "projectId": "3",
+      "assigneeId": "2",
+      "progress": "Đúng tiến độ",
+      "status": "In Progress",
+      "priority": "High",
+      "startDate": "2024-01-11",
+      "deadline": "2024-01-20",
+      "createdAt": "2024-01-11T00:00:00Z",
+      "updatedAt": "2024-01-18T00:00:00Z"
+    },
+    {
+      "id": "10",
+      "name": "Tạo báo cáo phân tích khách hàng",
+      "description": "Phát triển dashboard và báo cáo thống kê hành vi khách hàng",
+      "projectId": "3",
+      "assigneeId": "1",
+      "progress": "Trễ hẹn",
+      "status": "In Progress",
+      "priority": "Medium",
+      "startDate": "2024-01-21",
+      "deadline": "2024-01-30",
+      "createdAt": "2024-01-21T00:00:00Z",
+      "updatedAt": "2024-01-21T00:00:00Z"
+    },
+    {
+      "id": "11",
+      "name": "Thiết kế kiến trúc hệ thống quản lý kho",
+      "description": "Lên kế hoạch kiến trúc cho hệ thống quản lý kho tự động",
+      "projectId": "4",
+      "assigneeId": "1",
+      "progress": "Hoàn thành",
+      "status": "Done",
+      "priority": "High",
+      "startDate": "2024-02-01",
+      "deadline": "2024-02-05",
+      "createdAt": "2024-02-01T00:00:00Z",
+      "updatedAt": "2024-02-05T00:00:00Z"
+    },
+    {
+      "id": "12",
+      "name": "Phát triển module theo dõi tồn kho",
+      "description": "Xây dựng chức năng theo dõi số lượng hàng tồn kho real-time",
+      "projectId": "4",
+      "assigneeId": "1",
+      "progress": "Đúng tiến độ",
+      "status": "In Progress",
+      "priority": "High",
+      "startDate": "2024-02-06",
+      "deadline": "2024-02-15",
+      "createdAt": "2024-02-06T00:00:00Z",
+      "updatedAt": "2024-02-12T00:00:00Z"
+    },
+    {
+      "id": "13",
+      "name": "Tạo báo cáo xuất nhập kho",
+      "description": "Phát triển hệ thống báo cáo tự động cho xuất nhập kho",
+      "projectId": "4",
+      "assigneeId": "1",
+      "progress": "Có rủi ro",
+      "status": "In Progress",
+      "priority": "Medium",
+      "startDate": "2024-02-16",
+      "deadline": "2024-02-25",
+      "createdAt": "2024-02-16T00:00:00Z",
+      "updatedAt": "2024-02-16T00:00:00Z"
+    },
+    {
+      "id": "14",
+      "name": "Thiết kế platform học trực tuyến",
+      "description": "Thiết kế kiến trúc và giao diện cho nền tảng e-learning",
+      "projectId": "5",
+      "assigneeId": "1",
+      "progress": "Hoàn thành",
+      "status": "Done",
+      "priority": "High",
+      "startDate": "2024-02-15",
+      "deadline": "2024-02-22",
+      "createdAt": "2024-02-15T00:00:00Z",
+      "updatedAt": "2024-02-22T00:00:00Z"
+    },
+    {
+      "id": "15",
+      "name": "Tích hợp video call",
+      "description": "Tích hợp WebRTC hoặc Zoom SDK cho chức năng video call",
+      "projectId": "5",
+      "assigneeId": "1",
+      "progress": "Đúng tiến độ",
+      "status": "In Progress",
+      "priority": "High",
+      "startDate": "2024-02-23",
+      "deadline": "2024-03-05",
+      "createdAt": "2024-02-23T00:00:00Z",
+      "updatedAt": "2024-03-01T00:00:00Z"
+    },
+    {
+      "id": "16",
+      "name": "Phát triển hệ thống bài tập tương tác",
+      "description": "Xây dựng module tạo và quản lý bài tập có tính tương tác",
+      "projectId": "5",
+      "assigneeId": "1",
+      "progress": "Trễ hẹn",
+      "status": "To Do",
+      "priority": "Medium",
+      "startDate": "2024-03-06",
+      "deadline": "2024-03-15",
+      "createdAt": "2024-03-06T00:00:00Z",
+      "updatedAt": "2024-03-06T00:00:00Z"
     }
   ],
   "members": [
@@ -134,29 +483,222 @@
       "id": "1",
       "projectId": "1",
       "userId": "1",
-      "email": "an@example.com",
-      "role": "Project owner"
+      "role": "Project owner",
+      "joinedAt": "2024-01-01T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
     },
     {
       "id": "2",
       "projectId": "1",
       "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Frontend developer"
+      "role": "Frontend developer",
+      "joinedAt": "2024-01-02T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
     },
     {
       "id": "3",
       "projectId": "2",
       "userId": "1",
-      "email": "an@example.com",
-      "role": "Project owner"
+      "role": "Project owner",
+      "joinedAt": "2024-01-02T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
     },
     {
       "id": "4",
+      "projectId": "2",
+      "userId": "2",
+      "role": "Mobile developer",
+      "joinedAt": "2024-01-03T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "5",
       "projectId": "3",
       "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Project owner"
+      "role": "Project owner",
+      "joinedAt": "2024-01-03T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "6",
+      "projectId": "3",
+      "userId": "1",
+      "role": "Backend developer",
+      "joinedAt": "2024-01-04T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "7",
+      "projectId": "4",
+      "userId": "1",
+      "role": "Project owner",
+      "joinedAt": "2024-02-01T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "8",
+      "projectId": "5",
+      "userId": "1",
+      "role": "Project owner",
+      "joinedAt": "2024-02-15T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "9",
+      "projectId": "1",
+      "userId": "YifdFK2",
+      "role": "UI/UX Designer",
+      "joinedAt": "2024-03-01T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "10",
+      "projectId": "7",
+      "userId": "1",
+      "role": "Project owner",
+      "joinedAt": "2024-03-15T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "11",
+      "projectId": "8",
+      "userId": "YifdFK2",
+      "role": "Project owner",
+      "joinedAt": "2024-04-01T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "12",
+      "projectId": "9",
+      "userId": "YifdFK2",
+      "role": "Project owner",
+      "joinedAt": "2024-04-15T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "13",
+      "projectId": "10",
+      "userId": "1",
+      "role": "Project owner",
+      "joinedAt": "2024-05-01T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "14",
+      "projectId": "11",
+      "userId": "1",
+      "role": "Project owner",
+      "joinedAt": "2024-05-15T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "15",
+      "projectId": "12",
+      "userId": "1",
+      "role": "UI/UX Designer",
+      "joinedAt": "2024-06-01T00:00:00Z",
+      "permissions": [
+        "read",
+        "write",
+        "admin"
+      ]
+    },
+    {
+      "id": "16",
+      "projectId": "10",
+      "userId": "2",
+      "role": "Developer",
+      "joinedAt": "2024-05-05T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "17",
+      "projectId": "1",
+      "userId": "5",
+      "role": "Backend developer",
+      "joinedAt": "2024-05-20T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "18",
+      "projectId": "6",
+      "userId": "1",
+      "role": "Backend developer",
+      "joinedAt": "2024-03-05T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "id": "19",
+      "projectId": "1",
+      "userId": "3",
+      "role": "Mobile developer",
+      "joinedAt": "2024-03-20T00:00:00Z",
+      "permissions": [
+        "read",
+        "write"
+      ]
     }
   ]
 }
