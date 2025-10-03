@@ -53,3 +53,60 @@ export interface ProjectsState {
     loading: boolean;
     error: string | null;
 }
+
+
+export const TaskStatus = {
+    TODO: 'To Do',
+    IN_PROGRESS: 'In Progress',
+    PENDING: 'Pending',
+    DONE: 'Done'
+} as const;
+
+export const TaskPriority = {
+    LOW: 'Low',
+    MEDIUM: 'Medium',
+    HIGH: 'High',
+} as const;
+export type TaskStatusType = typeof TaskStatus[keyof typeof TaskStatus];
+export type TaskPriorityType = typeof TaskPriority[keyof typeof TaskPriority];
+export interface Task {
+    id: string;
+    name: string;
+    description?: string;
+    projectId: string;
+    assigneeId: string;
+    status: TaskStatusType;
+    priority: TaskPriorityType;
+    startDate: string;
+    deadline: string;
+    createdAt: string;
+    updatedAt: string;
+}
+export interface TasksState {
+    tasks: Task[];
+    loading: boolean;
+    error: string | null;
+}
+
+
+export const MemberRole = {
+    PROJECT_OWNER: 'Project owner',
+    FRONTEND_DEVELOPER: 'Frontend Developer',
+    BACKEND_DEVELOPER: 'Backend Developer',
+    FULLSTACK_DEVELOPER: 'Fullstack developer',
+    TESTER: 'Tester',
+    DESIGNER: 'Designer',
+} as const;
+export type MemberRoleType = typeof MemberRole[keyof typeof MemberRole];
+export interface ProjectMember {
+    id: string;
+    projectId: string;
+    userId: string;
+    role: MemberRoleType;
+    email: string;
+}
+export interface MembersState {
+    members: ProjectMember[];
+    loading: boolean;
+    error: string | null;
+}

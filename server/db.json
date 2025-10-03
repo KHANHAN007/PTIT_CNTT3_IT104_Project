@@ -35,6 +35,18 @@
       "address": "Đà Nẵng, Việt Nam",
       "createdAt": "2024-01-01T00:00:00Z",
       "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "name": "an",
+      "email": "a@gmail.com",
+      "password": "12345678",
+      "avatar": "",
+      "bio": "",
+      "phone": "",
+      "address": "",
+      "createdAt": "2025-10-03T02:44:35.849Z",
+      "updatedAt": "2025-10-03T02:44:35.849Z",
+      "id": "YifdFK2"
     }
   ],
   "projects": [
@@ -61,6 +73,90 @@
       "ownerId": "2",
       "createdAt": "2024-01-03T00:00:00Z",
       "updatedAt": "2024-01-03T00:00:00Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "name": "Soạn thảo đề cương dự án",
+      "description": "Tạo đề cương chi tiết cho dự án",
+      "projectId": "1",
+      "assigneeId": "1",
+      "status": "Done",
+      "priority": "High",
+      "startDate": "2024-02-24",
+      "deadline": "2024-02-27",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Soạn thảo đề cương dự án",
+      "description": "Tạo đề cương chi tiết cho dự án",
+      "projectId": "1",
+      "assigneeId": "1",
+      "status": "In Progress",
+      "priority": "Medium",
+      "startDate": "2024-02-24",
+      "deadline": "2024-02-27",
+      "createdAt": "2024-01-02T00:00:00Z",
+      "updatedAt": "2024-01-02T00:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Soạn thảo đề cương dự án",
+      "description": "Tạo đề cương chi tiết cho dự án",
+      "projectId": "1",
+      "assigneeId": "1",
+      "status": "Pending",
+      "priority": "Low",
+      "startDate": "2024-02-24",
+      "deadline": "2024-02-27",
+      "createdAt": "2024-01-03T00:00:00Z",
+      "updatedAt": "2024-01-03T00:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Lên lịch họp kickoff",
+      "description": "Tổ chức cuộc họp khởi động dự án",
+      "projectId": "1",
+      "assigneeId": "2",
+      "status": "In Progress",
+      "priority": "Medium",
+      "startDate": "2024-02-24",
+      "deadline": "2024-02-27",
+      "createdAt": "2024-01-04T00:00:00Z",
+      "updatedAt": "2024-01-04T00:00:00Z"
+    }
+  ],
+  "members": [
+    {
+      "id": "1",
+      "projectId": "1",
+      "userId": "1",
+      "email": "an@example.com",
+      "role": "Project owner"
+    },
+    {
+      "id": "2",
+      "projectId": "1",
+      "userId": "2",
+      "email": "linh@gmail.com",
+      "role": "Frontend developer"
+    },
+    {
+      "id": "3",
+      "projectId": "2",
+      "userId": "1",
+      "email": "an@example.com",
+      "role": "Project owner"
+    },
+    {
+      "id": "4",
+      "projectId": "3",
+      "userId": "2",
+      "email": "linh@gmail.com",
+      "role": "Project owner"
     }
   ]
 }

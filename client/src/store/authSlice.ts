@@ -2,9 +2,19 @@ import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/tool
 import type { AuthState, User } from "../types";
 import { authService } from "../services/authService";
 
+const getUserFromStorage = (): User | null => {
+    try {
+        const userStr = localStorage.getItem('user');
+        return userStr ? JSON.parse(userStr) : null;
+    } catch (error) {
+        console.error('Error parsing user from localStorage:', error);
+        localStorage.removeItem('user');
+        return null;
+    }
+};
 const initialState: AuthState = {
-    user: JSON.parse(localStorage.getItem('user') || 'null'),
-    isAuthenticated: false,
+    user: getUserFromStorage(),
+    isAuthenticated: !!getUserFromStorage(),
     loading: false,
     error: null,
 }
@@ -35,16 +45,7 @@ export const getUserProfile = createAsyncThunk(
     }
 )
 
-// const getUserFromStorage = (): User | null => {
-//     try {
-//         const userStr = localStorage.getItem('user');
-//         return userStr ? JSON.parse(userStr) : null;
-//     } catch (error) {
-//         console.error('Error parsing user from localStorage:', error);
-//         localStorage.removeItem('user');
-//         return null;
-//     }
-// };
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,

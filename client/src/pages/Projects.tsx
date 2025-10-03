@@ -14,9 +14,11 @@ import {
     Alert,
 } from 'antd'; import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
+import { useNavigate } from 'react-router';
 
 
 function Projects() {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { projects, loading, error } = useAppSelector(state => state.projects);
     const user = useAppSelector(state => state.auth.user);
@@ -33,7 +35,9 @@ function Projects() {
         project.name.toLowerCase().includes(searchText.toLowerCase()) ||
         project.description.toLowerCase().includes(searchText.toLowerCase())
     );
-
+    const handleViewProject = (projectId: string) => {
+        navigate('/projects/' + projectId);
+    }
     const startIndex = (currentPage - 1) * pageSize;
     const paginatedProjects = filteredProjects.slice(startIndex, startIndex + pageSize);
 
@@ -61,7 +65,9 @@ function Projects() {
                         type="primary"
                         size='small'
                         icon={<EyeOutlined />}
-                    >Chi tiết
+                        onClick={() => handleViewProject(record.id)}
+                    >
+                        Chi tiết
                     </Button>
                     <Button
                         size="small"

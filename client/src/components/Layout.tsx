@@ -100,7 +100,7 @@ function Layout({ children }: LayoutProps) {
             <Content style={{ padding: '20px' }}>
                 {children}
             </Content>
-            <Footer style={{ textAlign: 'center', background: '#f0f2f5' }}>
+            <Footer style={{ textAlign: 'center', background: '#212529', color: 'white' }}>
                 © 2025 Team management. All rights reserved.
             </Footer>
         </AntLayout>

@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import { ProtectedRoute, AuthRoute } from './guards';
 import { Suspense } from "react";
-import { Login, Layout, Register, Projects } from "./lazyComponents";
+import { Login, Layout, Register, Projects, ProjectDetail } from "./lazyComponents";
 import type { RouteObject } from "react-router-dom";
 
 const PageLoading = () => (
@@ -59,4 +59,14 @@ export const routes: RouteObject[] = [
                 </SuspenseWrapper>
             </ProtectedLayout>,
     },
+    {
+        path: '/projects/:id',
+        element: (
+            <ProtectedLayout>
+                <SuspenseWrapper>
+                    <ProjectDetail />
+                </SuspenseWrapper>
+            </ProtectedLayout>
+        )
+    }
 ];

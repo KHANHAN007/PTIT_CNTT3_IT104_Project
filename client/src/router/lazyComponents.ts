@@ -2,7 +2,7 @@ import { lazy } from 'react';
 export const Login = lazy(() => import('../pages/Login'));
 export const Register = lazy(() => import('../pages/Register'));
 export const Projects = lazy(() => import('../pages/Projects'));
-// export const ProjectDetail = lazy(() => import('../pages/ProjectDetail'));
+export const ProjectDetail = lazy(() => import('../pages/ProjectDetail'));
 // export const PersonalTasks = lazy(() => import('../pages/PersonalTasks'));
 // export const UserProfile = lazy(() => import('../pages/UserProfile'));
 
