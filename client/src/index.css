@@ -1,0 +1,193 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.team-management-btn {
+  background-color: #E2E3E5 !important;
+  border-color: #E2E3E5 !important;
+  color: black !important;
+  transition: all 0.3s ease;
+}
+
+.team-management-btn:hover {
+  background-color: #D1D3D4 !important;
+  border-color: #D1D3D4 !important;
+  color: black !important;
+}
+
+.team-management-btn:focus {
+  background-color: #E2E3E5 !important;
+  color: black !important;
+}
+
+.team-management-btn:active {
+  background-color: #C6C8CA !important;
+  border-color: #C6C8CA !important;
+  color: black !important;
+}
+
+.ant-collapse-content-box {
+  padding: 0 !important;
+}
+
+.task-table-header {
+  display: flex;
+  background-color: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px 6px 0 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #212529;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.header-col-task-name {
+  width: 30%;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px 12px 12px 16px;
+  box-sizing: border-box;
+}
+
+.header-col-assignee {
+  width: 15%;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.header-col-priority {
+  width: 10%;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.header-col-start-date {
+  width: 12%;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.header-col-deadline {
+  width: 12%;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.header-col-progress {
+  width: 10%;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.header-col-actions {
+  width: 11%;
+  padding: 12px 16px 12px 12px;
+  box-sizing: border-box;
+}
+
+.table-col-task-name {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px 12px 12px 16px !important;
+  box-sizing: border-box !important;
+  color: #212529 !important;
+  font-weight: 400 !important;
+}
+
+.table-col-assignee {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px !important;
+  text-align: center;box-sizing: border-box !important; 
+}
+
+.table-col-priority {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px !important;
+  text-align: center;box-sizing: border-box !important;
+}
+
+.table-col-start-date {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px !important;
+  text-align: center;box-sizing: border-box !important;
+}
+
+.table-col-deadline {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  text-align: center;
+  }
+
+.table-col-progress {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  text-align: center;
+  }
+
+.table-col-actions {
+  padding: 12px 16px 12px 12px !important;
+  box-sizing: border-box !important;
+  text-align: center;
+  }
+
+.task-collapse {
+  background: transparent;
+  border: 1px solid #f0f0f0;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+
+.ant-table-tbody > tr > td {
+  vertical-align: middle !important;
+}
+
+.ant-table-wrapper {
+  margin: 0 !important;
+}
+
+.ant-table {
+  margin: 0 !important;
+  border-spacing: 0 !important;
+  table-layout: fixed !important;
+}
+
+.ant-table-container {
+  padding:  0  !important;
+}
+
+.custom-ant-table colgroup col:nth-child(1) {
+  width: 30% !important;
+}
+
+.custom-ant-table colgroup col:nth-child(2) {
+  width: 15% !important;
+}
+
+.custom-ant-table colgroup col:nth-child(3) {
+  width: 10% !important;
+}
+
+.custom-ant-table colgroup col:nth-child(4) {
+  width: 12% !important;
+}
+
+.custom-ant-table colgroup col:nth-child(5) {
+  width: 12% !important;
+}
+
+.custom-ant-table colgroup col:nth-child(6) {
+  width: 10% !important;
+}
+
+.custom-ant-table colgroup col:nth-child(7) {
+  width: 11% !important;
+}

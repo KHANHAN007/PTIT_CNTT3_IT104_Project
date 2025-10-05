@@ -1,0 +1,83 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.image-uploader .ant-upload {
+  width: 104px !important;
+  height: 104px !important;
+}
+
+.image-uploader .ant-upload-select-picture-card {
+  width: 104px !important;
+  height: 104px !important;
+}
+
+.image-uploader .ant-upload-list-picture-card-container {
+  width: 104px !important;
+  height: 104px !important;
+}
+
+.team-management-btn {
+  background-color: #E2E3E5 !important;
+  border-color: #E2E3E5 !important;
+  color: black !important;
+  transition: all 0.3s ease;
+}
+
+.team-management-btn:hover {
+  background-color: #D1D3D4 !important;
+  border-color: #D1D3D4 !important;
+  color: black !important;
+}
+
+.team-management-btn:focus {
+  background-color: #E2E3E5 !important;
+  border-color: #1890ff !important;
+  color: black !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+.team-management-btn:active {
+  background-color: #C6C8CA !important;
+  border-color: #C6C8CA !important;
+  color: black !important;
+}
