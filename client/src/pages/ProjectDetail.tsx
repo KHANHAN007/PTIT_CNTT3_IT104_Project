@@ -20,6 +20,7 @@ import {
     Menu,
     InputNumber
 } from 'antd';
+import { message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import {
     PlusOutlined,
@@ -31,6 +32,7 @@ import {
 } from '@ant-design/icons';
 import { useParams, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { tasksService } from '../services/tasksService';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
     fetchTasksAsync,
@@ -38,14 +40,15 @@ import {
     createTaskAsync,
     updateTaskAsync,
     deleteTaskAsync,
-    clearError as clearTasksError
+    clearError as clearTasksError,
+    clearFormError as clearTasksFormError
 } from '../store/tasksSlice';
 import {
-    addMemberAsync,
     updateMemberRoleAsync,
     removeMemberAsync,
     clearError as clearMembersError
 } from '../store/membersSlice';
+import { requestsService } from '../services/requestsService';
 import { setCurrentProject, fetchProjects } from '../store/projectsSlice';
 import { fetchAllUsers } from '../store/usersSlice';
 import type { Task, ProjectMember, TaskPriorityType, MemberRoleType, TaskProgressType } from '../types';
@@ -64,6 +67,8 @@ interface TaskModalProps {
     onCancel: () => void;
     onOk: (values: any) => void;
     loading: boolean;
+    formErrorExternal?: string | string[] | null;
+    onClearFormError?: () => void;
 }
 
 const TaskModal: React.FC<TaskModalProps> = ({
@@ -74,8 +79,63 @@ const TaskModal: React.FC<TaskModalProps> = ({
     onCancel,
     onOk,
     loading
+    , formErrorExternal, onClearFormError
 }) => {
     const [form] = Form.useForm();
+    const duplicateTimerRef = React.useRef<number | null>(null);
+
+    // Cleanup timer on unmount
+    useEffect(() => {
+        return () => {
+            if (duplicateTimerRef.current) clearTimeout(duplicateTimerRef.current);
+        };
+    }, []);
+
+    const runDuplicateCheck = (name: string) => {
+        if (duplicateTimerRef.current) clearTimeout(duplicateTimerRef.current);
+        // debounce server check
+        duplicateTimerRef.current = window.setTimeout(async () => {
+            try {
+                if (!name || !name.trim() || name.length < 3) return;
+                const existing = await tasksService.getTasks(projectId);
+                const dup = existing.find(t => t.name.toLowerCase() === name.toLowerCase() && (!task || t.id !== task.id));
+                if (dup) {
+                    form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ đã tồn tại trong dự án'] }]);
+                }
+            } catch (err) {
+                // ignore network errors for duplicate checking
+            }
+        }, 450) as unknown as number;
+    };
+
+    const handleImmediateValidation = (changedValues: any, allValues: any) => {
+        // name validations
+        if (Object.prototype.hasOwnProperty.call(changedValues, 'name')) {
+            const name = changedValues.name;
+            // clear previous name errors
+            form.setFields([{ name: 'name', errors: [] }]);
+
+            if (!name || !name.trim()) {
+                form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ không được để trống'] }]);
+            } else if (name.length < 3 || name.length > 100) {
+                form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ phải có độ dài từ 3-100 ký tự'] }]);
+            } else {
+                // debounce server-side duplicate check
+                runDuplicateCheck(name);
+            }
+        }
+
+        // date relation validation
+        if (Object.prototype.hasOwnProperty.call(changedValues, 'startDate') || Object.prototype.hasOwnProperty.call(changedValues, 'deadline')) {
+            const start = allValues.startDate;
+            const deadline = allValues.deadline;
+            if (start && deadline && deadline.isBefore(start, 'day')) {
+                form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
+            } else {
+                form.setFields([{ name: 'deadline', errors: [] }, { name: 'startDate', errors: [] }]);
+            }
+        }
+    };
 
     useEffect(() => {
         if (visible) {
@@ -91,26 +151,78 @@ const TaskModal: React.FC<TaskModalProps> = ({
         }
     }, [visible, task, form]);
 
+    // Map slice-provided form errors into Form.Item field errors for inline display
+    useEffect(() => {
+        // clear known field errors first
+        form.setFields([
+            { name: 'name', errors: [] },
+            { name: 'startDate', errors: [] },
+            { name: 'deadline', errors: [] },
+            { name: 'assigneeId', errors: [] },
+        ]);
+
+        if (!formErrorExternal) return;
+
+        const errors = Array.isArray(formErrorExternal) ? formErrorExternal : [formErrorExternal];
+
+        const mapErrorToField = (msg: string) => {
+            const lower = msg.toLowerCase();
+            if (lower.includes('tên nhiệm vụ') || lower.includes('đã tồn tại') || lower.includes('tên')) return 'name';
+            if (lower.includes('ngày bắt đầu') || lower.includes('bắt đầu')) return 'startDate';
+            if (lower.includes('hạn chót') || lower.includes('hạn cuối') || lower.includes('deadline')) return 'deadline';
+            if (lower.includes('người phụ trách') || lower.includes('assignee')) return 'assigneeId';
+            return 'name';
+        };
+
+        const fieldsErrors: Record<string, string[]> = {};
+        errors.forEach((m: string) => {
+            const field = mapErrorToField(m as string);
+            fieldsErrors[field] = fieldsErrors[field] || [];
+            fieldsErrors[field].push(m as string);
+        });
+
+        const setPayload = Object.entries(fieldsErrors).map(([name, errs]) => ({ name, errors: errs }));
+        if (setPayload.length) form.setFields(setPayload as any);
+    }, [formErrorExternal, form]);
+
+
     const handleOk = () => {
         form.validateFields().then(values => {
+            const start = values.startDate;
+            const deadline = values.deadline;
+            if (start && deadline && deadline.isBefore(start, 'day')) {
+                form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
+                return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
+            }
+
             const formattedValues = {
                 ...values,
                 projectId,
                 startDate: values.startDate.format('YYYY-MM-DD'),
                 deadline: values.deadline.format('YYYY-MM-DD')
             };
-            onOk(formattedValues);
+            form.setFields([
+                { name: 'startDate', errors: [] },
+                { name: 'deadline', errors: [] },
+                { name: 'name', errors: [] },
+            ]);
+
+            Promise.resolve(onOk(formattedValues)).catch(() => {
+            });
         });
     };
 
-    const [formError, setFormError] = useState<string | null>(null);
 
     return (
         <Modal
             title={task ? 'Sửa nhiệm vụ' : 'Thêm nhiệm vụ'}
             open={visible}
             onCancel={() => {
-                setFormError(null);
+                form.setFields([
+                    { name: 'startDate', errors: [] },
+                    { name: 'deadline', errors: [] },
+                    { name: 'name', errors: [] },
+                ]);
                 onCancel();
             }}
             footer={[
@@ -123,17 +235,8 @@ const TaskModal: React.FC<TaskModalProps> = ({
             ]}
             width={600}
         >
-            {formError && (
-                <Alert
-                    message={formError}
-                    type="error"
-                    showIcon
-                    closable
-                    onClose={() => setFormError(null)}
-                    style={{ marginBottom: 16 }}
-                />
-            )}
-            <Form form={form} layout="vertical">
+
+            <Form form={form} layout="vertical" onValuesChange={(changedValues, allValues) => { onClearFormError && onClearFormError(); handleImmediateValidation(changedValues, allValues); }}>
                 <Form.Item
                     label="Tên nhiệm vụ"
                     name="name"
@@ -185,7 +288,7 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                         if (!value || !deadline || !deadline.isBefore(value, 'day')) {
                                             return Promise.resolve();
                                         }
-                                        return Promise.reject('Hạn cuối phải sau hoặc bằng ngày bắt đầu');
+                                        return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
                                     }
                                 })
                             ]}
@@ -199,9 +302,9 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                     const startDate = form.getFieldValue('startDate');
                                     const deadline = form.getFieldValue('deadline');
                                     if (startDate && deadline && deadline.isBefore(startDate, 'day')) {
-                                        setFormError('Hạn cuối phải sau hoặc bằng ngày bắt đầu');
+                                        form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
                                     } else {
-                                        setFormError(null);
+                                        form.setFields([{ name: 'deadline', errors: [] }]);
                                     }
                                 }}
                             />
@@ -217,9 +320,10 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                     validator(_, value) {
                                         const startDate = getFieldValue('startDate');
                                         if (!value || !startDate || !value.isBefore(startDate, 'day')) {
+                                            // no error
                                             return Promise.resolve();
                                         }
-                                        return Promise.reject('Hạn cuối phải sau hoặc bằng ngày bắt đầu');
+                                        return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
                                     }
                                 })
                             ]}
@@ -233,9 +337,9 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                     const startDate = form.getFieldValue('startDate');
                                     const deadline = form.getFieldValue('deadline');
                                     if (startDate && deadline && deadline.isBefore(startDate, 'day')) {
-                                        setFormError('Hạn cuối phải sau hoặc bằng ngày bắt đầu');
+                                        form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
                                     } else {
-                                        setFormError(null);
+                                        form.setFields([{ name: 'deadline', errors: [] }]);
                                     }
                                 }}
                             />
@@ -278,25 +382,62 @@ interface MemberModalProps {
     onCancel: () => void;
     onOk: (values: any) => void;
     loading: boolean;
+    members: ProjectMember[];
+    users: any[];
 }
-
 const AddMemberModal: React.FC<MemberModalProps> = ({
     visible,
     onCancel,
     onOk,
-    loading
+    loading,
+    members,
+    users
 }) => {
     const [form] = Form.useForm();
+    const [formError, setFormError] = useState<string | null>(null);
+    const [method, setMethod] = useState<'email' | 'user'>('user');
 
     useEffect(() => {
         if (visible) {
             form.resetFields();
+            setFormError(null);
+            setMethod('user');
         }
     }, [visible, form]);
 
+    const availableUsers = users.filter(u => !members.some(m => m.userId === u.id));
+
     const handleOk = () => {
         form.validateFields().then(values => {
-            onOk(values);
+            const selectedRole = values.role;
+
+            // Prevent selecting Project owner via the modal
+            if (selectedRole === MemberRole.PROJECT_OWNER) {
+                setFormError('Không thể gán vai trò Chủ dự án (Project owner)');
+                return;
+            }
+
+            // Prevent adding another Project manager if one already exists
+            const hasManager = members.some(m => m.role === MemberRole.PROJECT_MANAGER);
+            if (selectedRole === MemberRole.PROJECT_MANAGER && hasManager) {
+                setFormError('Dự án đã có quản lý (Project manager). Không thể thêm thành viên khác với vai trò này.');
+                return;
+            }
+
+            // method-specific checks
+            if (method === 'user') {
+                if (!values.userId) { setFormError('Vui lòng chọn người dùng'); return; }
+                if (members.some(m => m.userId === values.userId)) { setFormError('Người dùng đã là thành viên'); return; }
+            } else {
+                if (!values.email) { setFormError('Vui lòng nhập email'); return; }
+                const emailLower = values.email.toLowerCase();
+                if (members.some(m => (m.email || '').toLowerCase() === emailLower)) { setFormError('Người dùng đã là thành viên'); return; }
+            }
+
+            setFormError(null);
+            onOk({ method, ...values });
+        }).catch(() => {
+            setFormError(null);
         });
     };
 
@@ -310,21 +451,49 @@ const AddMemberModal: React.FC<MemberModalProps> = ({
                     Hủy
                 </Button>,
                 <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-                    Lưu
+                    Gửi yêu cầu
                 </Button>,
             ]}
         >
+            {formError && (
+                <Alert
+                    message={formError}
+                    type="error"
+                    showIcon
+                    closable
+                    onClose={() => setFormError(null)}
+                    style={{ marginBottom: 16 }}
+                />
+            )}
+
             <Form form={form} layout="vertical">
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        { required: true, message: 'Email không được để trống' },
-                        { type: 'email', message: 'Email không đúng định dạng' }
-                    ]}
-                >
-                    <Input placeholder="nguyenquangan318@gmail.com" />
+                <Form.Item label="Phương thức" name="method" initialValue={method}>
+                    <Select value={method} onChange={(v: any) => setMethod(v)}>
+                        <Option value="user">Chọn người dùng (trong hệ thống)</Option>
+                        <Option value="email">Gửi lời mời qua Email</Option>
+                    </Select>
                 </Form.Item>
+
+                {method === 'user' ? (
+                    <Form.Item label="Chọn người dùng" name="userId" rules={[{ required: true, message: 'Vui lòng chọn người dùng' }]}>
+                        <Select placeholder="Chọn người dùng">
+                            {availableUsers.map(u => (
+                                <Option key={u.id} value={u.id}>{u.name} - {u.email}</Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                ) : (
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                            { required: true, message: 'Email không được để trống' },
+                            { type: 'email', message: 'Email không đúng định dạng' }
+                        ]}
+                    >
+                        <Input placeholder="nguyenquangan318@gmail.com" />
+                    </Form.Item>
+                )}
 
                 <Form.Item
                     label="Vai trò"
@@ -332,6 +501,7 @@ const AddMemberModal: React.FC<MemberModalProps> = ({
                     rules={[{ required: true, message: 'Vui lòng chọn vai trò' }]}
                 >
                     <Select placeholder="Chọn vai trò">
+                        <Option value={MemberRole.PROJECT_MANAGER} disabled={members.some(m => m.role === MemberRole.PROJECT_MANAGER)}>{MemberRole.PROJECT_MANAGER}</Option>
                         <Option value={MemberRole.FRONTEND_DEVELOPER}>{MemberRole.FRONTEND_DEVELOPER}</Option>
                         <Option value={MemberRole.BACKEND_DEVELOPER}>{MemberRole.BACKEND_DEVELOPER}</Option>
                         <Option value={MemberRole.FULLSTACK_DEVELOPER}>{MemberRole.FULLSTACK_DEVELOPER}</Option>
@@ -350,7 +520,7 @@ const ProjectDetail: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const { projects } = useAppSelector(state => state.projects);
-    const { tasks, loading: tasksLoading, error: tasksError } = useAppSelector(state => state.tasks);
+    const { tasks, loading: tasksLoading, error: tasksError, errorForm: tasksErrorForm } = useAppSelector(state => state.tasks);
     const { members, loading: membersLoading, error: membersError } = useAppSelector(state => state.members);
     const { user } = useAppSelector(state => state.auth);
     const { users } = useAppSelector(state => state.users);
@@ -395,11 +565,13 @@ const ProjectDetail: React.FC = () => {
 
     const handleAddTask = () => {
         setEditingTask(undefined);
+        dispatch(clearTasksFormError());
         setTaskModalVisible(true);
     };
 
     const handleEditTask = (task: Task) => {
         setEditingTask(task);
+        dispatch(clearTasksFormError());
         setTaskModalVisible(true);
     };
 
@@ -410,13 +582,17 @@ const ProjectDetail: React.FC = () => {
 
     const handleTaskModalOk = async (values: any) => {
         try {
+            // clear any previous slice error so UI is controlled by modal
+            dispatch(clearTasksError());
             if (editingTask) {
                 await dispatch(updateTaskAsync({ id: editingTask.id, taskData: values })).unwrap();
             } else {
                 await dispatch(createTaskAsync(values)).unwrap();
             }
             setTaskModalVisible(false);
-        } catch (err) {
+        } catch (err: any) {
+            // bubble the error message so the modal can display it via its setFormError
+            throw err;
         }
     };
 
@@ -434,20 +610,59 @@ const ProjectDetail: React.FC = () => {
 
     const handleAddMember = async (values: any) => {
         try {
-            await dispatch(addMemberAsync({
-                ...values,
-                projectId: id!,
-                userId: Date.now().toString()
-            })).unwrap();
+            // values.method === 'user' or 'email'
+            if (values.method === 'user') {
+                const userId = values.userId;
+                const userObj = users.find(u => u.id === userId);
+                if (!userObj) throw new Error('Người dùng không tồn tại');
+
+                // create an invite request so recipient can accept; payload holds role
+                await requestsService.createRequest({
+                    type: 'invite',
+                    senderId: user!.id,
+                    recipientId: userId,
+                    projectId: id!,
+                    payload: { role: values.role, email: userObj.email, userId },
+                });
+                message.success('Đã gửi lời mời tới người dùng');
+            } else {
+                // by email: we'll send an invite (email sending to be implemented later)
+                await requestsService.createRequest({
+                    type: 'invite',
+                    senderId: user!.id,
+                    recipientId: '',
+                    projectId: id!,
+                    payload: { role: values.role, email: values.email },
+                });
+                message.success('Đã gửi lời mời qua email (thực tế gửi email chưa được cài đặt)');
+            }
+
             setAddMemberModalVisible(false);
-        } catch (err) {
+        } catch (err: any) {
+            console.error(err);
+            message.error(err?.message || 'Không thể gửi lời mời');
         }
     };
 
     const handleUpdateMemberRole = async (memberId: string, role: MemberRoleType) => {
+        // Prevent assigning Project owner via role change
+        if (role === MemberRole.PROJECT_OWNER) {
+            message.error('Không thể gán vai trò Chủ dự án (Project owner) cho thành viên');
+            return;
+        }
+
+        // Prevent assigning Project manager if another manager exists (and it's not the same member)
+        const existingManager = members.find(m => m.role === MemberRole.PROJECT_MANAGER);
+        if (role === MemberRole.PROJECT_MANAGER && existingManager && existingManager.id !== memberId) {
+            message.error('Dự án đã có một quản lý (Project manager). Vui lòng đổi vai trò của quản lý hiện tại trước khi gán.');
+            return;
+        }
+
         try {
             await dispatch(updateMemberRoleAsync({ memberId, role })).unwrap();
+            message.success('Cập nhật vai trò thành công');
         } catch (err) {
+            message.error('Có lỗi xảy ra khi cập nhật vai trò');
         }
     };
 
@@ -626,21 +841,27 @@ const ProjectDetail: React.FC = () => {
             title: 'Vai trò',
             dataIndex: 'role',
             key: 'role',
-            render: (role, record) => (
-                <Select
-                    value={role}
-                    style={{ width: '100%' }}
-                    disabled={role === MemberRole.PROJECT_OWNER}
-                    onChange={(value) => handleUpdateMemberRole(record.id, value)}
-                >
-                    <Option value={MemberRole.PROJECT_OWNER} disabled>{MemberRole.PROJECT_OWNER}</Option>
-                    <Option value={MemberRole.FRONTEND_DEVELOPER}>{MemberRole.FRONTEND_DEVELOPER}</Option>
-                    <Option value={MemberRole.BACKEND_DEVELOPER}>{MemberRole.BACKEND_DEVELOPER}</Option>
-                    <Option value={MemberRole.FULLSTACK_DEVELOPER}>{MemberRole.FULLSTACK_DEVELOPER}</Option>
-                    <Option value={MemberRole.DESIGNER}>{MemberRole.DESIGNER}</Option>
-                    <Option value={MemberRole.TESTER}>{MemberRole.TESTER}</Option>
-                </Select>
-            ),
+            render: (role, record) => {
+                const existingManager = members.find(m => m.role === MemberRole.PROJECT_MANAGER);
+                const disableManagerOption = !!existingManager && existingManager.id !== record.id;
+
+                return (
+                    <Select
+                        value={role}
+                        style={{ width: '100%' }}
+                        disabled={role === MemberRole.PROJECT_OWNER}
+                        onChange={(value) => handleUpdateMemberRole(record.id, value)}
+                    >
+                        <Option value={MemberRole.PROJECT_OWNER} disabled>{MemberRole.PROJECT_OWNER}</Option>
+                        <Option value={MemberRole.PROJECT_MANAGER} disabled={disableManagerOption}>{MemberRole.PROJECT_MANAGER}</Option>
+                        <Option value={MemberRole.FRONTEND_DEVELOPER}>{MemberRole.FRONTEND_DEVELOPER}</Option>
+                        <Option value={MemberRole.BACKEND_DEVELOPER}>{MemberRole.BACKEND_DEVELOPER}</Option>
+                        <Option value={MemberRole.FULLSTACK_DEVELOPER}>{MemberRole.FULLSTACK_DEVELOPER}</Option>
+                        <Option value={MemberRole.DESIGNER}>{MemberRole.DESIGNER}</Option>
+                        <Option value={MemberRole.TESTER}>{MemberRole.TESTER}</Option>
+                    </Select>
+                );
+            },
         },
         {
             title: '',
@@ -712,7 +933,11 @@ const ProjectDetail: React.FC = () => {
                                     </Text>
                                     <Space>
                                         <Tag color={getRoleColor(MemberRole.PROJECT_OWNER)} >{getOwnerInfo(currentProject.ownerId)?.name}</Tag>
-                                        <Tag color={getRoleColor(MemberRole.PROJECT_MANAGER)}>{getOwnerInfo(currentProject.managerId)?.name}</Tag>
+                                        {currentProject.managerId ? (
+                                            <Tag color={getRoleColor(MemberRole.PROJECT_MANAGER)}>{getOwnerInfo(currentProject.managerId)?.name || 'Không rõ'}</Tag>
+                                        ) : (
+                                            <Tag color={getRoleColor(MemberRole.PROJECT_MANAGER)}>Chưa phân công</Tag>
+                                        )}
                                         <Tag color="blue">{dayjs(currentProject.createdAt).format('DD/MM/YYYY')}</Tag>
                                     </Space>
                                 </div>
@@ -767,20 +992,23 @@ const ProjectDetail: React.FC = () => {
                                     />
                                 </Dropdown>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 5 }}>
+                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 5, width: '100%' }}>
                                 <div style={{
                                     display: 'flex',
                                     flexDirection: 'column',
                                     gap: '10px',
                                     marginBottom: 10,
-                                    marginLeft: 10,
+                                    marginLeft: 5,
+                                    width: '100%',
+                                    marginRight: 35
                                 }}>
                                     <div style={{
                                         display: 'flex',
-                                        justifyContent: 'flex-start',
+                                        justifyContent: 'space-around',
+                                        width: '100%'
                                     }}>
                                         {members.slice(0, 2).map(member => (
-                                            <div key={member.id} style={{ width: '240px', textAlign: 'center' }}>
+                                            <div key={member.id} style={{ minWidth: '180px', textAlign: 'center' }}>
                                                 <MemberAvatar
                                                     member={member}
                                                     size={50}
@@ -792,10 +1020,11 @@ const ProjectDetail: React.FC = () => {
                                     </div>
                                     <div style={{
                                         display: 'flex',
-                                        justifyContent: 'flex-start',
+                                        justifyContent: 'space-around',
+                                        width: '100%'
                                     }}>
                                         {members.slice(2, 4).map(member => (
-                                            <div key={member.id} style={{ width: '240px', textAlign: 'center' }}>
+                                            <div key={member.id} style={{ minWidth: '180px', textAlign: 'center' }}>
                                                 <MemberAvatar
                                                     member={member}
                                                     size={50}
@@ -943,8 +1172,10 @@ const ProjectDetail: React.FC = () => {
                 members={members}
                 projectId={currentProject.id}
                 loading={tasksLoading}
-                onCancel={() => setTaskModalVisible(false)}
+                onCancel={() => { dispatch(clearTasksFormError()); setTaskModalVisible(false); }}
                 onOk={handleTaskModalOk}
+                formErrorExternal={tasksErrorForm}
+                onClearFormError={() => dispatch(clearTasksFormError())}
             />
 
             <Modal
@@ -963,6 +1194,8 @@ const ProjectDetail: React.FC = () => {
             <AddMemberModal
                 visible={addMemberModalVisible}
                 loading={membersLoading}
+                members={members}
+                users={users}
                 onCancel={() => setAddMemberModalVisible(false)}
                 onOk={handleAddMember}
             />
@@ -975,9 +1208,9 @@ const ProjectDetail: React.FC = () => {
                     <Button key="close" onClick={() => setMembersModalVisible(false)}>
                         Đóng
                     </Button>,
-                    <Button key="add" type="primary" onClick={() => {
+                    <Button key="invite" type="primary" onClick={() => {
                         setMembersModalVisible(false);
-                        setAddMemberModalVisible(true);
+                        handleUpdateMemberRole('', MemberRole.PROJECT_MANAGER);
                     }}>
                         Lưu
                     </Button>,

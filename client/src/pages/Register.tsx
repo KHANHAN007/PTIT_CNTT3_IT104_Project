@@ -26,7 +26,7 @@ function Register() {
     const onFinish = async (values: RegisterForm) => {
         try {
             await dispatch(register(values)).unwrap();
-            navigate('/projects');
+            navigate('/profile');
         } catch (err) {
             console.error("Login failed:", error);
         }

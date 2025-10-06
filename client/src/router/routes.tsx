@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import { ProtectedRoute, AuthRoute } from './guards';
 import { Suspense } from "react";
-import { Login, Layout, Register, Projects, ProjectDetail, Profile } from "./lazyComponents";
+import { Login, Layout, Register, Projects, ProjectDetail, Profile, IncomingRequests, PersonalTasks } from "./lazyComponents";
 import type { RouteObject } from "react-router-dom";
 
 const PageLoading = () => (
@@ -30,12 +30,16 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         </SuspenseWrapper>
     </ProtectedRoute>
 );
-const HomePage = () => <div>Home Page</div>;
+
 
 export const routes: RouteObject[] = [
     {
         path: "/",
-        element: <ProtectedLayout><HomePage /></ProtectedLayout>,
+        element: (
+            <ProtectedLayout>
+                <Profile />
+            </ProtectedLayout>
+        ),
     },
     {
         path: "/login",
@@ -74,5 +78,38 @@ export const routes: RouteObject[] = [
                 <Profile />
             </ProtectedLayout>
         ),
-    }
+    },
+    {
+        path: '/requests',
+        element: (
+            <ProtectedLayout>
+                <IncomingRequests />
+            </ProtectedLayout>
+        ),
+    },
+    {
+        path: '/personal-tasks',
+        element: (
+            <ProtectedLayout>
+                <PersonalTasks />
+            </ProtectedLayout>
+        ),
+    },
+    {
+        path: '*',
+        element: (
+            <SuspenseWrapper>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                    flexDirection: 'column'
+                }}>
+                    <h1>404 - Trang không tồn tại</h1>
+                    <p>Trang bạn đang tìm kiếm không tồn tại.</p>
+                </div>
+            </SuspenseWrapper>
+        ),
+    },
 ];

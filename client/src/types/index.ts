@@ -9,6 +9,8 @@ export interface User {
     address?: string;
     createdAt: string;
     updatedAt: string;
+    sentRequests?: IncomingRequest[];
+    receivedRequests?: IncomingRequest[];
 }
 export interface AuthState {
     user: User | null;
@@ -37,15 +39,14 @@ export interface UpdateProfileRequest {
     avatar?: string;
 }
 
-
 export interface Project {
     id: string;
     name: string;
     description: string;
     imageUrl: string;
     ownerId: string;
-    managerId: string;
-    memberIds: string[];
+    managerId: string; // Có thể không có manager
+    memberIds: string[]; // Có thể không có thành viên
     createdAt: string;
     updatedAt: string;
 }
@@ -61,6 +62,7 @@ export interface TasksState {
     tasks: Task[];
     loading: boolean;
     error: string | null;
+    errorForm: string | string[] | null;
 }
 
 export interface MembersState {
@@ -297,3 +299,16 @@ export const TaskProgress = {
     DELAYED: 'Trễ hẹn',
     DONE: 'Hoàn thành'
 } as const;
+
+export interface IncomingRequest {
+    id: string;
+    type: 'invite' | 'request' | 'edit' | string;
+    senderId: string; // user who sent the request
+    recipientId: string; // user who receives the request
+    projectId?: string | null; // optional project context
+    payload?: any; // flexible payload for future use (e.g., role, content)
+    status: 'pending' | 'accepted' | 'rejected';
+    createdAt: string;
+    acceptedAt?: string | null;
+    rejectedAt?: string | null;
+}

@@ -7,6 +7,7 @@ export const useAppNavigation = () => {
 
     const goToProjects = () => navigate('/projects');
     const goToProject = (id: string) => navigate(`/projects/${id}`);
+    const goToRequests = () => navigate('/requests');
     const goToPersonalTasks = () => navigate('/personal-tasks');
     const goToProfile = () => navigate('/profile');
     const goToLogin = () => navigate('/login');
@@ -20,6 +21,7 @@ export const useAppNavigation = () => {
         goToProjects,
         goToProject,
         goToPersonalTasks,
+        goToRequests,
         goToProfile,
         goToLogin,
         goToRegister,
@@ -32,6 +34,7 @@ export const ROUTES = {
     LOGIN: '/login',
     REGISTER: '/register',
     PROJECTS: '/projects',
+    REQUESTS: '/requests',
     PROJECT_DETAIL: '/projects/:id',
     PERSONAL_TASKS: '/personal-tasks',
     PROFILE: '/profile',

@@ -13,6 +13,20 @@ export const fetchProjects = createAsyncThunk(`projects/fetchAll`, async (userId
     return await projectsService.getProjects(userId);
 });
 
+export const fetchProjectById = createAsyncThunk(
+    'projects/fetchById',
+    async (projectId: string) => {
+        return await projectsService.getProjectById(projectId);
+    }
+);
+
+export const fetchProjectsByIds = createAsyncThunk(
+    'projects/fetchByIds',
+    async (ids: string[]) => {
+        return await projectsService.getProjectsByIds(ids);
+    }
+);
+
 export const createProject = createAsyncThunk(
     'projects/create',
     async (projectData: CreateProjectRequest) => {
@@ -105,8 +119,39 @@ const projectsSlice = createSlice({
             .addCase(deleteProject.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Lỗi xóa dự án';
+            })
+
+            .addCase(fetchProjectById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchProjectById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.currentProject = action.payload;
+            })
+            .addCase(fetchProjectById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Lỗi tải dự án';
+            });
+        builder
+            .addCase(fetchProjectsByIds.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchProjectsByIds.fulfilled, (state, action) => {
+                state.loading = false;
+                // merge projects without duplicates
+                const existingIds = new Set(state.projects.map(p => p.id));
+                action.payload.forEach((p: any) => {
+                    if (!existingIds.has(p.id)) state.projects.push(p);
+                });
+            })
+            .addCase(fetchProjectsByIds.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Lỗi tải dự án';
             });
     }
-})
+});
+
 export const { setCurrentProject, clearError } = projectsSlice.actions;
 export default projectsSlice.reducer;
