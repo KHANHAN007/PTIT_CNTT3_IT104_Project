@@ -21,6 +21,8 @@ export const projectsService = {
     async getProjects(userId: string): Promise<Project[]> {
         const ownedRes = await api.get(`/projects?ownerId=${userId}`);
         const ownedProjects: Project[] = ownedRes.data || [];
+        const managerRes = await api.get(`/projects?managerId=${userId}`);
+        const managerProjects: Project[] = managerRes.data || [];
         const membersRes = await api.get(`/members?userId=${userId}`);
         const memberRecords: any[] = membersRes.data || [];
 
@@ -35,8 +37,8 @@ export const projectsService = {
             const memberProjRes = await api.get(`/projects?${query}`);
             memberProjects = memberProjRes.data || [];
         }
-
-        return [...ownedProjects, ...memberProjects];
+        console.log('Fetched projects:', { ownedProjects, managerProjects, memberProjects });
+        return [...ownedProjects, ...memberProjects, ...managerProjects];
     },
 
     async getProjectById(projectId: string): Promise<Project> {

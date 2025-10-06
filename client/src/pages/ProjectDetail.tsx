@@ -49,7 +49,7 @@ import {
 import { setCurrentProject, fetchProjects } from '../store/projectsSlice';
 import { fetchAllUsers } from '../store/usersSlice';
 import type { Task, ProjectMember, TaskPriorityType, MemberRoleType, TaskProgressType } from '../types';
-import { TaskStatus, TaskPriority, MemberRole, TaskProgress } from '../types';
+import { TaskStatus, TaskPriority, MemberRole, TaskProgress, getRoleColor } from '../types';
 import MemberAvatar from '../components/MemberAvatar';
 
 const { Title, Text } = Typography;
@@ -380,6 +380,7 @@ const ProjectDetail: React.FC = () => {
             dispatch(setCurrentProject(currentProject));
             dispatch(fetchTasksAsync(currentProject.id));
             dispatch(fetchMembersAsync(currentProject.id));
+            console.log(currentProject);
         } else if (id && projects.length > 0) {
             navigate('/projects');
         }
@@ -494,6 +495,10 @@ const ProjectDetail: React.FC = () => {
             case TaskProgress.DONE: return 'blue';
             default: return 'default';
         }
+    };
+
+    const getOwnerInfo = (ownerId: string) => {
+        return users.find(u => u.id === ownerId);
     };
     const taskColumns: ColumnsType<Task> = [
         {
@@ -628,7 +633,7 @@ const ProjectDetail: React.FC = () => {
                     disabled={role === MemberRole.PROJECT_OWNER}
                     onChange={(value) => handleUpdateMemberRole(record.id, value)}
                 >
-                    <Option value={MemberRole.PROJECT_OWNER}>{MemberRole.PROJECT_OWNER}</Option>
+                    <Option value={MemberRole.PROJECT_OWNER} disabled>{MemberRole.PROJECT_OWNER}</Option>
                     <Option value={MemberRole.FRONTEND_DEVELOPER}>{MemberRole.FRONTEND_DEVELOPER}</Option>
                     <Option value={MemberRole.BACKEND_DEVELOPER}>{MemberRole.BACKEND_DEVELOPER}</Option>
                     <Option value={MemberRole.FULLSTACK_DEVELOPER}>{MemberRole.FULLSTACK_DEVELOPER}</Option>
@@ -671,7 +676,7 @@ const ProjectDetail: React.FC = () => {
 
     return (
         <div>
-            <Card style={{ marginBottom: 20 }}>
+            <Card style={{ marginBottom: 20, width: '100%' }}>
                 <Row>
                     <Col span={12}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
@@ -705,6 +710,11 @@ const ProjectDetail: React.FC = () => {
                                     <Text type="secondary" style={{ display: 'block', marginTop: 8 }}>
                                         {currentProject.description}
                                     </Text>
+                                    <Space>
+                                        <Tag color={getRoleColor(MemberRole.PROJECT_OWNER)} >{getOwnerInfo(currentProject.ownerId)?.name}</Tag>
+                                        <Tag color={getRoleColor(MemberRole.PROJECT_MANAGER)}>{getOwnerInfo(currentProject.managerId)?.name}</Tag>
+                                        <Tag color="blue">{dayjs(currentProject.createdAt).format('DD/MM/YYYY')}</Tag>
+                                    </Space>
                                 </div>
                             </div>
                             <Button
@@ -717,10 +727,10 @@ const ProjectDetail: React.FC = () => {
                             </Button>
                         </div>
                     </Col>
-                    <Col span={6}></Col>
-                    <Col span={6}>
-                        <div style={{ textAlign: 'right' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', marginBottom: 5 }}>
+                    <Col span={3}></Col>
+                    <Col span={9}>
+                        <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', marginBottom: 5, width: '100%' }}>
                                 <Title level={4}>Thành viên</Title>
                                 <Dropdown
                                     overlay={

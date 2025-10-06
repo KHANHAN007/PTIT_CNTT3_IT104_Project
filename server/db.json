@@ -239,6 +239,18 @@
       "address": "Bình Thuận, Việt Nam",
       "createdAt": "2024-10-15T00:00:00Z",
       "updatedAt": "2024-10-15T00:00:00Z"
+    },
+    {
+      "name": "Ta",
+      "email": "ta@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759711057/pckcqocl2obvuf5tulo1.png",
+      "bio": "",
+      "phone": "",
+      "address": "",
+      "createdAt": "2025-10-06T00:20:01.238Z",
+      "updatedAt": "2025-10-06T00:42:13.423Z",
+      "id": "8X6KFo5"
     }
   ],
   "projects": [
@@ -1126,14 +1138,14 @@
       "projectId": "1",
       "userId": "2",
       "email": "linh@gmail.com",
-      "role": "Frontend developer"
+      "role": "Project owner"
     },
     {
       "id": "3",
       "projectId": "1",
       "userId": "3",
       "email": "anh@gmail.com",
-      "role": "Backend developer"
+      "role": "Frontend developer"
     },
     {
       "id": "4",

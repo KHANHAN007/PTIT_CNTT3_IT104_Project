@@ -44,6 +44,8 @@ export interface Project {
     description: string;
     imageUrl: string;
     ownerId: string;
+    managerId: string;
+    memberIds: string[];
     createdAt: string;
     updatedAt: string;
 }

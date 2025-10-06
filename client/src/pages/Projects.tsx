@@ -225,7 +225,7 @@ function Projects() {
         {
             title: 'Chủ Sở Hữu',
             key: 'owner',
-            width: '8%',
+            width: '11%',
             align: 'center',
             render: (_, record) => {
                 const owner = getOwnerInfo(record.ownerId);

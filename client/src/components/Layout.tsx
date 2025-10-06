@@ -97,7 +97,7 @@ function Layout({ children }: LayoutProps) {
                     </Dropdown>
                 </div>
             </Header>
-            <Content style={{ padding: '20px' }}>
+            <Content style={{ padding: '20px', width:'90%', display:'block', margin:'0 auto' }}>
                 {children}
             </Content>
             <Footer style={{ textAlign: 'center', background: '#212529', color: 'white' }}>
