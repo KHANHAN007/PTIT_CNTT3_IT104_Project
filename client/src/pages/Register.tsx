@@ -26,7 +26,7 @@ function Register() {
     const onFinish = async (values: RegisterForm) => {
         try {
             await dispatch(register(values)).unwrap();
-            navigate('/projects');
+            navigate('/profile');
         } catch (err) {
             console.error("Login failed:", error);
         }
@@ -43,7 +43,7 @@ function Register() {
             background: '#f0f2f5',
         }}>
             <div style={{ textAlign: 'center', marginBottom: 25 }}>
-                <Title level={2} style={{ marginBottom: 0, fontSize: '52px', fontWeight: 650 }}>Đăng nhập</Title>
+                <Title level={2} style={{ marginBottom: 0, fontSize: '52px', fontWeight: 650 }}>Đăng ký</Title>
             </div>
             <Card style={{
                 width: 400,
@@ -189,8 +189,8 @@ function Register() {
 
                 <div style={{ textAlign: 'center' }}>
                     <Text>
-                        Chưa có tài khoản?{' '}
-                        <Link to="/login">Đăng ký</Link>
+                        Đã có tài khoản?{' '}
+                        <Link to="/login">Đăng nhập</Link>
                     </Text>
                 </div>
             </Card>

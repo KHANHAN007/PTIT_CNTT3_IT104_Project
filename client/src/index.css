@@ -1,30 +1,30 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 .team-management-btn {
-  background-color: #E2E3E5 !important;
-  border-color: #E2E3E5 !important;
+  background-color: #e2e3e5 !important;
+  border-color: #e2e3e5 !important;
   color: black !important;
   transition: all 0.3s ease;
 }
 
 .team-management-btn:hover {
-  background-color: #D1D3D4 !important;
-  border-color: #D1D3D4 !important;
+  background-color: #d1d3d4 !important;
+  border-color: #d1d3d4 !important;
   color: black !important;
 }
 
 .team-management-btn:focus {
-  background-color: #E2E3E5 !important;
+  background-color: #e2e3e5 !important;
   color: black !important;
 }
 
 .team-management-btn:active {
-  background-color: #C6C8CA !important;
-  border-color: #C6C8CA !important;
+  background-color: #c6c8ca !important;
+  border-color: #c6c8ca !important;
   color: black !important;
 }
 
@@ -95,7 +95,7 @@
 
 .table-col-task-name {
   border-right: 1px solid #f0f0f0 !important;
-  padding: 12px 12px 12px 16px !important;
+  padding: 12px 12px 12px 20px !important;
   box-sizing: border-box !important;
   color: #212529 !important;
   font-weight: 400 !important;
@@ -104,19 +104,27 @@
 .table-col-assignee {
   border-right: 1px solid #f0f0f0 !important;
   padding: 12px !important;
-  text-align: center;box-sizing: border-box !important; 
+  text-align: center;
+  box-sizing: border-box !important;
 }
 
 .table-col-priority {
   border-right: 1px solid #f0f0f0 !important;
   padding: 12px !important;
-  text-align: center;box-sizing: border-box !important;
+  text-align: center;
+  box-sizing: border-box !important;
 }
-
+.table-col-status {
+  border-right: 1px solid #f0f0f0 !important;
+  padding: 12px !important;
+  text-align: center;
+  box-sizing: border-box !important;
+}
 .table-col-start-date {
   border-right: 1px solid #f0f0f0 !important;
   padding: 12px !important;
-  text-align: center;box-sizing: border-box !important;
+  text-align: center;
+  box-sizing: border-box !important;
 }
 
 .table-col-deadline {
@@ -124,20 +132,20 @@
   padding: 12px !important;
   box-sizing: border-box !important;
   text-align: center;
-  }
+}
 
 .table-col-progress {
   border-right: 1px solid #f0f0f0 !important;
   padding: 12px !important;
   box-sizing: border-box !important;
   text-align: center;
-  }
+}
 
 .table-col-actions {
   padding: 12px 16px 12px 12px !important;
   box-sizing: border-box !important;
   text-align: center;
-  }
+}
 
 .task-collapse {
   background: transparent;
@@ -161,7 +169,7 @@
 }
 
 .ant-table-container {
-  padding:  0  !important;
+  padding: 0 !important;
 }
 
 .custom-ant-table colgroup col:nth-child(1) {
@@ -190,4 +198,65 @@
 
 .custom-ant-table colgroup col:nth-child(7) {
   width: 11% !important;
+}
+
+.ant-table-thead .ant-table-row-expand-icon-cell::before {
+  content: "ID";
+  color: #fff;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+}
+
+.animated-expand-table .collapse-anim-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.35s ease 0.1s, transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
+  transform: translateY(-4px);
+  will-change: grid-template-rows, opacity, transform;
+}
+
+.animated-expand-table .collapse-anim-wrapper.expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animated-expand-table .collapse-anim-wrapper.collapsing {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* Nội dung thật bên trong wrapper */
+.animated-expand-table .collapse-anim-wrapper > div {
+  min-height: 0;
+  /* cần cho grid animation */
+  overflow: hidden;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: background 0.3s ease;
+}
+
+/* Hàng expanded trong bảng */
+.animated-expand-table .ant-table-expanded-row > td {
+  background: #fafbfc !important;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 !important;
+}
+
+/* Hover highlight */
+.animated-expand-table .ant-descriptions-item-label,
+.animated-expand-table .ant-descriptions-item-content {
+  transition: background 0.2s ease;
+}
+
+.animated-expand-table .ant-descriptions-item-label:hover,
+.animated-expand-table .ant-descriptions-item-content:hover {
+  background: #fafafa;
 }

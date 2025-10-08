@@ -46,6 +46,13 @@ export const projectsService = {
         return res.data;
     },
 
+    async getProjectsByIds(ids: string[]): Promise<Project[]> {
+        if (!ids || ids.length === 0) return [];
+        const query = ids.map(id => `id=${id}`).join('&');
+        const res = await api.get(`/projects?${query}`);
+        return res.data || [];
+    },
+
     async createProject(projectData: CreateProjectRequest): Promise<Project> {
         const newProject = {
             ...projectData,

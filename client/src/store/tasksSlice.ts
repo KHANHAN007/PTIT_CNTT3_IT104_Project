@@ -18,17 +18,35 @@ export const fetchTasksByUserAsync = createAsyncThunk(
     }
 );
 
+export const fetchTasksByIdsAsync = createAsyncThunk(
+    'tasks/fetchTasksByIds',
+    async (ids: string[]) => {
+        return await tasksService.getTasksByIds(ids);
+    }
+);
+
 export const createTaskAsync = createAsyncThunk(
     'tasks/createTask',
-    async (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => {
-        return await tasksService.createTask(taskData);
+    async (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>, { rejectWithValue }) => {
+        try {
+            return await tasksService.createTask(taskData);
+        } catch (err: any) {
+            // service may throw { messages: string[] } or Error
+            const payload = err?.messages || err?.message || 'Lỗi khi tạo nhiệm vụ';
+            return rejectWithValue(payload);
+        }
     }
 );
 
 export const updateTaskAsync = createAsyncThunk(
     'tasks/updateTask',
-    async ({ id, taskData }: { id: string; taskData: Partial<Task> }) => {
-        return await tasksService.updateTask(id, taskData);
+    async ({ id, taskData }: { id: string; taskData: Partial<Task> }, { rejectWithValue }) => {
+        try {
+            return await tasksService.updateTask(id, taskData);
+        } catch (err: any) {
+            const payload = err?.messages || err?.message || 'Lỗi khi cập nhật nhiệm vụ';
+            return rejectWithValue(payload);
+        }
     }
 );
 
@@ -65,6 +83,7 @@ const initialState: TasksState = {
     tasks: [],
     loading: false,
     error: null,
+    errorForm: null,
 };
 
 const tasksSlice = createSlice({
@@ -73,6 +92,9 @@ const tasksSlice = createSlice({
     reducers: {
         clearError: (state) => {
             state.error = null;
+        },
+        clearFormError: (state) => {
+            state.errorForm = null;
         },
     },
     extraReducers: (builder) => {
@@ -104,18 +126,23 @@ const tasksSlice = createSlice({
             .addCase(createTaskAsync.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.errorForm = null;
             })
             .addCase(createTaskAsync.fulfilled, (state, action: PayloadAction<Task>) => {
                 state.loading = false;
                 state.tasks.push(action.payload);
+                state.errorForm = null;
             })
             .addCase(createTaskAsync.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Lỗi khi tạo nhiệm vụ';
+                // validation-like errors go to errorForm (from rejectWithValue)
+                state.errorForm = (action.payload as string | string[]) || null;
+                state.error = state.errorForm ? null : (action.error.message || 'Lỗi khi tạo nhiệm vụ');
             })
             .addCase(updateTaskAsync.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.errorForm = null;
             })
             .addCase(updateTaskAsync.fulfilled, (state, action: PayloadAction<Task>) => {
                 state.loading = false;
@@ -123,10 +150,12 @@ const tasksSlice = createSlice({
                 if (index !== -1) {
                     state.tasks[index] = action.payload;
                 }
+                state.errorForm = null;
             })
             .addCase(updateTaskAsync.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Lỗi khi cập nhật nhiệm vụ';
+                state.errorForm = (action.payload as string | string[]) || null;
+                state.error = state.errorForm ? null : (action.error.message || 'Lỗi khi cập nhật nhiệm vụ');
             })
             .addCase(deleteTaskAsync.pending, (state) => {
                 state.loading = true;
@@ -173,7 +202,7 @@ const tasksSlice = createSlice({
     },
 });
 
-export const { clearError } = tasksSlice.actions;
+export const { clearError, clearFormError } = tasksSlice.actions;
 export default tasksSlice.reducer;
 export const fetchTasksAsync = fetchTasksByProjectAsync;
 export const fetchMembersAsync = fetchMembersByProjectAsync;

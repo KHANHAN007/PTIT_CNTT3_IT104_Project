@@ -1,3 +1,4 @@
+// ...existing code...
 import { useEffect } from 'react'
 import { Alert, Button, Card, Form, Input, Typography } from "antd";
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -10,11 +11,17 @@ interface LoginForm {
     password: string;
 }
 function Login() {
+    const user = useAppSelector(state => state.auth.user);
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { loading, error } = useAppSelector(state => state.auth);
 
+    useEffect(() => {
+        if (user && user.id) {
+            navigate('/profile', { replace: true });
+        }
+    }, [user, navigate]);
     useEffect(() => {
         return () => {
             dispatch(clearError());
@@ -24,7 +31,7 @@ function Login() {
     const onFinish = async (values: LoginForm) => {
         try {
             await dispatch(login(values)).unwrap();
-            navigate('/projects');
+            navigate('/profile');
         } catch (error) {
             console.error("Login failed:", error);
         }

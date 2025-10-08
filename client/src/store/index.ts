@@ -4,6 +4,7 @@ import projectsReducer from './projectsSlice';
 import tasksReducer from './tasksSlice';
 import membersReducer from './membersSlice';
 import usersReducer from './usersSlice';
+import requestsReducer from './requestsSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         tasks: tasksReducer,
         members: membersReducer,
         users: usersReducer,
+        requests: requestsReducer,
     }
 })
 

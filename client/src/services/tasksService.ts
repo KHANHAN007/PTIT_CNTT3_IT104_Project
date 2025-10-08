@@ -12,18 +12,27 @@ export const tasksService = {
         return response.data;
     },
 
+    async getTasksByIds(ids: string[]): Promise<Task[]> {
+        if (!ids || ids.length === 0) return [];
+        const query = ids.map(id => `id=${encodeURIComponent(id)}`).join('&');
+        const response = await api.get(`/tasks?${query}`);
+        return response.data;
+    },
+
     async getTask(id: string): Promise<Task> {
         const response = await api.get(`/tasks/${id}`);
         return response.data;
     },
 
     async createTask(taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>): Promise<Task> {
+        const errors: string[] = [];
+
         if (!taskData.name.trim()) {
-            throw new Error('Tên nhiệm vụ không được để trống');
+            errors.push('Tên nhiệm vụ không được để trống');
         }
 
-        if (taskData.name.length < 3 || taskData.name.length > 100) {
-            throw new Error('Tên nhiệm vụ phải có độ dài từ 3-100 ký tự');
+        if (taskData.name && (taskData.name.length < 3 || taskData.name.length > 100)) {
+            errors.push('Tên nhiệm vụ phải có độ dài từ 3-100 ký tự');
         }
         const existingTasksResponse = await api.get(`/tasks?projectId=${taskData.projectId}`);
         const existingTasks = existingTasksResponse.data;
@@ -33,7 +42,7 @@ export const tasksService = {
         );
 
         if (duplicateTask) {
-            throw new Error('Tên nhiệm vụ đã tồn tại trong dự án');
+            errors.push('Tên nhiệm vụ đã tồn tại trong dự án');
         }
 
         const startDate = new Date(taskData.startDate);
@@ -41,11 +50,16 @@ export const tasksService = {
         const now = new Date();
 
         if (startDate <= now) {
-            throw new Error('Ngày bắt đầu phải lớn hơn ngày hiện tại');
+            errors.push('Ngày bắt đầu phải lớn hơn ngày hiện tại');
         }
 
         if (deadline <= startDate) {
-            throw new Error('Hạn chót phải lớn hơn ngày bắt đầu');
+            errors.push('Hạn chót phải lớn hơn ngày bắt đầu');
+        }
+
+        if (errors.length) {
+            // throw an object so the thunk can pass the array through rejectWithValue
+            throw { messages: errors };
         }
 
         const newTask: Partial<Task> = {
@@ -61,13 +75,15 @@ export const tasksService = {
     },
 
     async updateTask(id: string, taskData: Partial<Task>): Promise<Task> {
+        const errors: string[] = [];
+
         if (taskData.name) {
             if (!taskData.name.trim()) {
-                throw new Error('Tên nhiệm vụ không được để trống');
+                errors.push('Tên nhiệm vụ không được để trống');
             }
 
             if (taskData.name.length < 3 || taskData.name.length > 100) {
-                throw new Error('Tên nhiệm vụ phải có độ dài từ 3-100 ký tự');
+                errors.push('Tên nhiệm vụ phải có độ dài từ 3-100 ký tự');
             }
             const currentTaskResponse = await api.get(`/tasks/${id}`);
             const currentTask = currentTaskResponse.data;
@@ -80,7 +96,7 @@ export const tasksService = {
             );
 
             if (duplicateTask) {
-                throw new Error('Tên nhiệm vụ đã tồn tại trong dự án');
+                errors.push('Tên nhiệm vụ đã tồn tại trong dự án');
             }
         }
 
@@ -90,12 +106,16 @@ export const tasksService = {
             const now = new Date();
 
             if (startDate <= now) {
-                throw new Error('Ngày bắt đầu phải lớn hơn ngày hiện tại');
+                errors.push('Ngày bắt đầu phải lớn hơn ngày hiện tại');
             }
 
             if (deadline <= startDate) {
-                throw new Error('Hạn chót phải lớn hơn ngày bắt đầu');
+                errors.push('Hạn chót phải lớn hơn ngày bắt đầu');
             }
+        }
+
+        if (errors.length) {
+            throw { messages: errors };
         }
 
         const updatedData: Partial<Task> = {
