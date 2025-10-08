@@ -397,6 +397,27 @@
       "ownerId": "1",
       "createdAt": "2025-02-01T00:00:00Z",
       "updatedAt": "2025-02-01T00:00:00Z"
+    },
+    {
+      "name": "Ứng dụng Ghi chú",
+      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759717222/awmxfdybd1tncma3ka2c.jpg",
+      "description": "DFDSAFSADFSDA",
+      "ownerId": "1",
+      "managerId": "4",
+      "members": [
+        {
+          "userId": "3"
+        },
+        {
+          "userId": "5"
+        },
+        {
+          "userId": "7"
+        }
+      ],
+      "createdAt": "2025-10-06T02:25:35.310Z",
+      "updatedAt": "2025-10-06T02:25:35.310Z",
+      "id": "6khMX8z"
     }
   ],
   "tasks": [
@@ -1755,6 +1776,46 @@
       "userId": "1",
       "email": "an@gmail.com",
       "role": "Project owner"
+    },
+    {
+      "projectId": "6khMX8z",
+      "userId": "1",
+      "role": "Project owner",
+      "email": "an@gmail.com",
+      "joinedAt": "2025-10-06T02:25:35.397Z",
+      "id": "hBbIZyc"
+    },
+    {
+      "projectId": "6khMX8z",
+      "userId": "4",
+      "role": "Project manager",
+      "email": "mai@gmail.com",
+      "joinedAt": "2025-10-06T02:25:35.397Z",
+      "id": "9TZE_oN"
+    },
+    {
+      "projectId": "6khMX8z",
+      "userId": "3",
+      "role": "Fullstack developer",
+      "email": "",
+      "joinedAt": "2025-10-06T02:25:35.397Z",
+      "id": "jJuG0Tv"
+    },
+    {
+      "projectId": "6khMX8z",
+      "userId": "5",
+      "role": "Fullstack developer",
+      "email": "",
+      "joinedAt": "2025-10-06T02:25:35.397Z",
+      "id": "90Le866"
+    },
+    {
+      "projectId": "6khMX8z",
+      "userId": "7",
+      "role": "Fullstack developer",
+      "email": "",
+      "joinedAt": "2025-10-06T02:25:35.397Z",
+      "id": "EehWE2I"
     }
   ]
 }
