@@ -91,7 +91,6 @@ const usersSlice = createSlice({
             })
             .addCase(fetchUsersByIds.fulfilled, (state, action: PayloadAction<User[]>) => {
                 state.loading = false;
-                // merge users, prefer returned values
                 for (const u of action.payload) {
                     const idx = state.users.findIndex(x => x.id === u.id);
                     if (idx >= 0) state.users[idx] = u;

@@ -11,7 +11,6 @@ interface LayoutProps {
     children: React.ReactNode;
 }
 
-// Global Alert Context
 export interface GlobalAlert {
     type: 'success' | 'error' | 'info' | 'warning';
     message: string;
@@ -21,14 +20,11 @@ export interface GlobalAlert {
 export const GlobalAlertContext = createContext<{ showAlert: (alert: GlobalAlert) => void } | undefined>(undefined);
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-    // ...existing code...
-    // ...existing code...
     const dispatch = useAppDispatch();
     const user = useAppSelector(state => state.auth.user);
-    // ...other hooks and variables...
     useEffect(() => {
         if (user?.id) {
-            dispatch({ type: 'requests/fetchRequestsForUser/pending' }); // trigger loading state
+            dispatch({ type: 'requests/fetchRequestsForUser/pending' });
             dispatch({ type: 'requests/fetchRequestsForUser', payload: user.id });
         }
     }, [user, dispatch]);
@@ -93,7 +89,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             icon={<ProjectOutlined />}
                             onClick={goToProjects}
                             style={{
-                                color: location.pathname === ROUTES.PROJECTS ? '#fff' : 'rgba(255, 255, 255, 0.65)',
+                                color: location.pathname === ROUTES.PROJECTS || location.pathname.startsWith('/projects/') ? '#fff' : 'rgba(255, 255, 255, 0.65)',
                                 border: 'none',
                                 height: '40px',
                                 transition: 'color 0.3s ease',

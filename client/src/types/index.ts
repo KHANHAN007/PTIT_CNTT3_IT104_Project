@@ -303,10 +303,10 @@ export const TaskProgress = {
 export interface IncomingRequest {
     id: string;
     type: 'invite' | 'request' | 'edit' | string;
-    senderId: string; // user who sent the request
-    recipientId: string; // user who receives the request
-    projectId?: string | null; // optional project context
-    payload?: any; // flexible payload for future use (e.g., role, content)
+    senderId: string;
+    recipientId: string;
+    projectId?: string | null;
+    payload?: any;
     status: 'pending' | 'accepted' | 'rejected';
     createdAt: string;
     acceptedAt?: string | null;

@@ -121,7 +121,9 @@ function Register() {
                         name="password"
                         rules={[
                             { required: true, message: 'Vui lòng nhập mật khẩu!' },
-                            { min: 8, message: 'Mật khẩu phải có ít nhất 8 ký tự!' }
+                            {
+                                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, message: 'Mật khẩu phải tổi thiểu 8 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số!'
+                            }
                         ]}
                     >
                         <Input.Password

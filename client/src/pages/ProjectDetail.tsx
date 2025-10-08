@@ -83,8 +83,6 @@ const TaskModal: React.FC<TaskModalProps> = ({
 }) => {
     const [form] = Form.useForm();
     const duplicateTimerRef = React.useRef<number | null>(null);
-
-    // Cleanup timer on unmount
     useEffect(() => {
         return () => {
             if (duplicateTimerRef.current) clearTimeout(duplicateTimerRef.current);
@@ -93,7 +91,6 @@ const TaskModal: React.FC<TaskModalProps> = ({
 
     const runDuplicateCheck = (name: string) => {
         if (duplicateTimerRef.current) clearTimeout(duplicateTimerRef.current);
-        // debounce server check
         duplicateTimerRef.current = window.setTimeout(async () => {
             try {
                 if (!name || !name.trim() || name.length < 3) return;
@@ -103,16 +100,13 @@ const TaskModal: React.FC<TaskModalProps> = ({
                     form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ đã tồn tại trong dự án'] }]);
                 }
             } catch (err) {
-                // ignore network errors for duplicate checking
             }
         }, 450) as unknown as number;
     };
 
     const handleImmediateValidation = (changedValues: any, allValues: any) => {
-        // name validations
         if (Object.prototype.hasOwnProperty.call(changedValues, 'name')) {
             const name = changedValues.name;
-            // clear previous name errors
             form.setFields([{ name: 'name', errors: [] }]);
 
             if (!name || !name.trim()) {
@@ -120,12 +114,9 @@ const TaskModal: React.FC<TaskModalProps> = ({
             } else if (name.length < 3 || name.length > 100) {
                 form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ phải có độ dài từ 3-100 ký tự'] }]);
             } else {
-                // debounce server-side duplicate check
                 runDuplicateCheck(name);
             }
         }
-
-        // date relation validation
         if (Object.prototype.hasOwnProperty.call(changedValues, 'startDate') || Object.prototype.hasOwnProperty.call(changedValues, 'deadline')) {
             const start = allValues.startDate;
             const deadline = allValues.deadline;
@@ -151,9 +142,7 @@ const TaskModal: React.FC<TaskModalProps> = ({
         }
     }, [visible, task, form]);
 
-    // Map slice-provided form errors into Form.Item field errors for inline display
     useEffect(() => {
-        // clear known field errors first
         form.setFields([
             { name: 'name', errors: [] },
             { name: 'startDate', errors: [] },
@@ -320,7 +309,6 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                     validator(_, value) {
                                         const startDate = getFieldValue('startDate');
                                         if (!value || !startDate || !value.isBefore(startDate, 'day')) {
-                                            // no error
                                             return Promise.resolve();
                                         }
                                         return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
@@ -410,21 +398,15 @@ const AddMemberModal: React.FC<MemberModalProps> = ({
     const handleOk = () => {
         form.validateFields().then(values => {
             const selectedRole = values.role;
-
-            // Prevent selecting Project owner via the modal
             if (selectedRole === MemberRole.PROJECT_OWNER) {
                 setFormError('Không thể gán vai trò Chủ dự án (Project owner)');
                 return;
             }
-
-            // Prevent adding another Project manager if one already exists
             const hasManager = members.some(m => m.role === MemberRole.PROJECT_MANAGER);
             if (selectedRole === MemberRole.PROJECT_MANAGER && hasManager) {
                 setFormError('Dự án đã có quản lý (Project manager). Không thể thêm thành viên khác với vai trò này.');
                 return;
             }
-
-            // method-specific checks
             if (method === 'user') {
                 if (!values.userId) { setFormError('Vui lòng chọn người dùng'); return; }
                 if (members.some(m => m.userId === values.userId)) { setFormError('Người dùng đã là thành viên'); return; }
@@ -582,7 +564,6 @@ const ProjectDetail: React.FC = () => {
 
     const handleTaskModalOk = async (values: any) => {
         try {
-            // clear any previous slice error so UI is controlled by modal
             dispatch(clearTasksError());
             if (editingTask) {
                 await dispatch(updateTaskAsync({ id: editingTask.id, taskData: values })).unwrap();
@@ -591,7 +572,6 @@ const ProjectDetail: React.FC = () => {
             }
             setTaskModalVisible(false);
         } catch (err: any) {
-            // bubble the error message so the modal can display it via its setFormError
             throw err;
         }
     };
@@ -610,13 +590,11 @@ const ProjectDetail: React.FC = () => {
 
     const handleAddMember = async (values: any) => {
         try {
-            // values.method === 'user' or 'email'
             if (values.method === 'user') {
                 const userId = values.userId;
                 const userObj = users.find(u => u.id === userId);
                 if (!userObj) throw new Error('Người dùng không tồn tại');
 
-                // create an invite request so recipient can accept; payload holds role
                 await requestsService.createRequest({
                     type: 'invite',
                     senderId: user!.id,
@@ -626,7 +604,6 @@ const ProjectDetail: React.FC = () => {
                 });
                 message.success('Đã gửi lời mời tới người dùng');
             } else {
-                // by email: we'll send an invite (email sending to be implemented later)
                 await requestsService.createRequest({
                     type: 'invite',
                     senderId: user!.id,
@@ -645,13 +622,10 @@ const ProjectDetail: React.FC = () => {
     };
 
     const handleUpdateMemberRole = async (memberId: string, role: MemberRoleType) => {
-        // Prevent assigning Project owner via role change
         if (role === MemberRole.PROJECT_OWNER) {
             message.error('Không thể gán vai trò Chủ dự án (Project owner) cho thành viên');
             return;
         }
-
-        // Prevent assigning Project manager if another manager exists (and it's not the same member)
         const existingManager = members.find(m => m.role === MemberRole.PROJECT_MANAGER);
         if (role === MemberRole.PROJECT_MANAGER && existingManager && existingManager.id !== memberId) {
             message.error('Dự án đã có một quản lý (Project manager). Vui lòng đổi vai trò của quản lý hiện tại trước khi gán.');

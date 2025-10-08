@@ -67,6 +67,20 @@
           "status": "pending",
           "createdAt": "2025-10-06T19:51:09.470Z",
           "id": 4
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "rejected",
+          "createdAt": "2025-10-07T02:28:59.123Z",
+          "id": 5
         }
       ],
       "tasks": [
@@ -152,6 +166,20 @@
           "status": "pending",
           "createdAt": "2025-10-06T19:51:09.470Z",
           "id": 4
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-07T02:28:59.123Z",
+          "id": 5
         }
       ],
       "tasks": [
@@ -490,19 +518,6 @@
       "tasks": [
         "42"
       ]
-    },
-    {
-      "name": "Ta",
-      "email": "ta@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759711057/pckcqocl2obvuf5tulo1.png",
-      "bio": "",
-      "phone": "",
-      "address": "",
-      "createdAt": "2025-10-06T00:20:01.238Z",
-      "updatedAt": "2025-10-06T00:42:13.423Z",
-      "id": "8X6KFo5",
-      "tasks": []
     }
   ],
   "projects": [
@@ -734,17 +749,6 @@
       ],
       "createdAt": "2024-02-20T00:00:00Z",
       "updatedAt": "2024-02-20T00:00:00Z"
-    },
-    {
-      "name": "Đặng Khánh An",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759726081/ixkkpjej6mdxlik64m3u.jpg",
-      "description": "ádfgasdfasdf",
-      "ownerId": "1",
-      "managerId": "3",
-      "memberIds": [],
-      "createdAt": "2025-10-06T04:48:48.073Z",
-      "updatedAt": "2025-10-06T04:48:48.073Z",
-      "id": "pGznrr0"
     }
   ],
   "tasks": [
@@ -812,13 +816,13 @@
       "description": "Xây dựng hệ thống monitoring real-time với alerts và notifications",
       "projectId": "11",
       "assigneeId": "1",
-      "status": "To do",
+      "status": "In Progress",
       "priority": "medium",
       "progress": "Đúng tiến độ",
       "startDate": "2024-06-16",
       "deadline": "2024-06-30",
       "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z"
+      "updatedAt": "2025-10-06T23:58:27.388Z"
     },
     {
       "id": "14",
@@ -2082,37 +2086,6 @@
       "userId": "1",
       "email": "an@gmail.com",
       "role": "Project owner"
-    },
-    {
-      "projectId": "pGznrr0",
-      "userId": "1",
-      "role": "Project owner",
-      "email": "an@gmail.com",
-      "joinedAt": "2025-10-06T04:48:48.169Z",
-      "id": "E4yTnbN"
-    },
-    {
-      "projectId": "pGznrr0",
-      "userId": "3",
-      "role": "Project manager",
-      "email": "anh@gmail.com",
-      "joinedAt": "2025-10-06T04:48:48.169Z",
-      "id": "roGty4y"
-    },
-    {
-      "projectId": "pGznrr0",
-      "userId": "5",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-06T04:48:48.169Z",
-      "id": "PVrSxUF"
-    },
-    {
-      "projectId": "1",
-      "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Frontend developer",
-      "id": "hePo02P"
     }
   ],
   "requests": [
@@ -2175,6 +2148,21 @@
       "createdAt": "2025-10-06T19:51:09.470Z",
       "id": 4,
       "acceptedAt": "2025-10-06T19:54:22.829Z"
+    },
+    {
+      "type": "invite",
+      "senderId": "1",
+      "recipientId": "2",
+      "projectId": "1",
+      "payload": {
+        "role": "Frontend developer",
+        "email": "linh@gmail.com",
+        "userId": "2"
+      },
+      "status": "rejected",
+      "createdAt": "2025-10-07T02:28:59.123Z",
+      "id": 5,
+      "rejectedAt": "2025-10-07T02:31:39.291Z"
     }
   ]
 }

@@ -24,8 +24,8 @@ import {
     updateTaskStatusAsync,
     clearError
 } from '../store/tasksSlice';
-import type { Task, TaskStatusType, TaskPriorityType } from '../types';
-import { TaskStatus, TaskPriority } from '../types';
+import type { Task, TaskStatusType, TaskPriorityType, TaskProgressType } from '../types';
+import { TaskStatus, TaskPriority, TaskProgress } from '../types';
 import { fetchProjectsByIds, fetchProjects } from '../store/projectsSlice';
 
 const { Title } = Typography;
@@ -100,12 +100,10 @@ const PersonalTasks: React.FC = () => {
     const [editingTask, setEditingTask] = useState<Task | undefined>();
     const [searchText, setSearchText] = useState('');
     const [sortBy, setSortBy] = useState<'deadline' | 'priority'>('deadline');
-    // sections represent grouped panels by task status
     console.log(tasks);
     useEffect(() => {
         if (user?.id) {
             dispatch(fetchUserTasksAsync(user.id));
-            // Load projects belonging to the user (fetchProjects expects a userId)
             dispatch(fetchProjects(user.id));
         }
     }, [dispatch, user?.id]);
@@ -116,7 +114,6 @@ const PersonalTasks: React.FC = () => {
         };
     }, [dispatch]);
     console.log(projects);
-    // handler is invoked from modal flow; keep edit state only
 
     const handleStatusModalOk = async (status: TaskStatusType) => {
         if (editingTask) {
@@ -124,17 +121,10 @@ const PersonalTasks: React.FC = () => {
                 await dispatch(updateTaskStatusAsync({ id: editingTask.id, status })).unwrap();
                 setStatusModalVisible(false);
             } catch (err) {
-                // Error is handled by the slice
             }
         }
     };
 
-    const openStatusModalForTask = (task: Task) => {
-        setEditingTask(task);
-        setStatusModalVisible(true);
-    };
-
-    // Filter and sort tasks
     const filteredTasks = tasks.filter(task =>
         task.name.toLowerCase().includes(searchText.toLowerCase())
     ).sort((a, b) => {
@@ -146,7 +136,6 @@ const PersonalTasks: React.FC = () => {
         }
     });
 
-    // Fetch user tasks (support when user.tasks is an array of task IDs)
     useEffect(() => {
         if (user?.id) {
             if (user && 'tasks' in user && Array.isArray((user as any).tasks) && (user as any).tasks.length > 0 && (user as any).tasks.every((t: any) => typeof t === 'string')) {
@@ -156,16 +145,12 @@ const PersonalTasks: React.FC = () => {
             }
         }
     }, [dispatch, user?.id]);
-
-    // Ensure we have project data for projects referenced by filteredTasks
     useEffect(() => {
         const projectIds = Array.from(new Set(filteredTasks.map(t => t.projectId).filter(Boolean)));
         if (projectIds.length > 0) {
             dispatch(fetchProjectsByIds(projectIds));
         }
     }, [dispatch, filteredTasks]);
-
-    // Build sections grouped by projectId from filteredTasks
     const sections = Array.from(
         filteredTasks.reduce((map, task) => {
             if (!map.has(task.projectId)) {
@@ -180,7 +165,15 @@ const PersonalTasks: React.FC = () => {
         }, new Map())
     ).map(([, v]) => v as { projectId: string; key: string; title: string; color: string });
 
-    // Columns for custom table (no header)
+    const getProgressColor = (progress: TaskProgressType) => {
+        switch (progress) {
+            case TaskProgress.ON_TRACK: return 'green';
+            case TaskProgress.AT_RISK: return 'orange';
+            case TaskProgress.DELAYED: return 'red';
+            case TaskProgress.DONE: return 'blue';
+            default: return 'default';
+        }
+    };
     const taskColumns: ColumnsType<Task> = [
         {
             dataIndex: 'name',
@@ -220,24 +213,25 @@ const PersonalTasks: React.FC = () => {
             render: (date) => dayjs(date).format('DD-MM'),
         },
         {
-            dataIndex: 'status',
-            key: 'status',
+            dataIndex: 'progress',
+            key: 'progress',
             className: 'table-col-progress',
-            render: (status) => (
-                <Tag color={getStatusColor(status)}>{status}</Tag>
+            render: (progress: string, record) => (
+                <div>
+                    <Tag color={getProgressColor(progress as TaskProgressType)}>
+                        {progress}
+                    </Tag>
+                    {record.estimatedHours !== undefined && (
+                        <div style={{ fontSize: 12, color: '#888', marginTop: 4 }}>
+                            {typeof record.timeSpentMinutes === 'number' && record.estimatedHours > 0
+                                ? `🚀 ${(record.timeSpentMinutes / 60).toFixed(2)}/${record.estimatedHours} giờ`
+                                : `Ước tính: ${record.estimatedHours} giờ`}
+                        </div>
+                    )}
+                </div>
             ),
         },
     ];
-
-    const getStatusColor = (status: TaskStatusType) => {
-        switch (status) {
-            case TaskStatus.TODO: return 'blue';
-            case TaskStatus.IN_PROGRESS: return 'orange';
-            case TaskStatus.PENDING: return 'red';
-            case TaskStatus.DONE: return 'green';
-            default: return 'default';
-        }
-    };
 
     const getPriorityColor = (priority: TaskPriorityType) => {
         switch (priority) {
@@ -303,7 +297,7 @@ const PersonalTasks: React.FC = () => {
                     <div className="header-col-priority">Trạng thái</div>
                     <div className="header-col-start-date">Ngày Bắt Đầu</div>
                     <div className="header-col-deadline">Hạn Chót</div>
-                    <div className="header-col-progress">Tiến độ</div>
+                    <div className="header-col-progress" style={{ flex: 1 }}>Tiến độ</div>
                 </div>
 
                 <Collapse
@@ -311,7 +305,6 @@ const PersonalTasks: React.FC = () => {
                     ghost
                 >
                     {sections.map(section => {
-                        // group tasks by their projectId
                         const sectionTasks = filteredTasks.filter(task => task.projectId === section.projectId);
                         return (
                             <Collapse.Panel
@@ -348,6 +341,12 @@ const PersonalTasks: React.FC = () => {
                                     size="small"
                                     showHeader={false}
                                     rowClassName={(_record, index) => `personal-task-row row-${index}`}
+                                    onRow={(record) => ({
+                                        onClick: () => {
+                                            setEditingTask(record);
+                                            setStatusModalVisible(true);
+                                        }
+                                    })}
                                     style={{
                                         border: 'none',
                                         borderTop: '1px solid #f0f0f0',

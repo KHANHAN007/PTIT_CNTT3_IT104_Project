@@ -478,7 +478,7 @@ function Projects() {
 
 
 
-                    <Row gutter={0} align="top">
+                    <Row gutter={10} align="top">
                         <Col xs={24} md={8}>
                             <Form.Item
                                 label="Hình ảnh dự án"
@@ -489,10 +489,11 @@ function Projects() {
                         </Col>
 
                         <Col xs={24} md={16}>
-                            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                                <div style={{ flex: 1 }}>
-                                    <Form.Item label="Quản lý dự án (Manager)">
+                            <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+                                <div style={{ flex: 1, width: '100%' }}>
+                                    <Form.Item label="Quản lý dự án (Manager)" style={{ marginBottom: 8 }}>
                                         <Select
+                                            style={{ width: '100%' }}
                                             placeholder="Chọn quản lý dự án"
                                             value={managerId}
                                             onChange={(val) => {
@@ -508,9 +509,10 @@ function Projects() {
                                     </Form.Item>
                                 </div>
 
-                                <div style={{ flex: 1 }}>
+                                <div style={{ flex: 1, width: '100%' }}>
                                     <Form.Item label="Thêm thành viên">
                                         <Select
+                                            style={{ width: '100%' }}
                                             mode="multiple"
                                             placeholder="Chọn thành viên"
                                             value={memberIds}

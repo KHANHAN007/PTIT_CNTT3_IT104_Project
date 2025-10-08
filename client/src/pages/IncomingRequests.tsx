@@ -50,8 +50,6 @@ const IncomingRequests: React.FC = () => {
             });
         });
     }, [expandedPendingKeys, expandedHistoryKeys]);
-
-    // Combine all requests for lookup
     const allRequests = [...receivedRequests, ...sentRequests];
     useEffect(() => {
         if (allRequests.length === 0) return;
@@ -130,7 +128,6 @@ const IncomingRequests: React.FC = () => {
     };
     const onCancelRequest = async (id: string) => {
         try {
-            // Update status to rejected before delete
             await dispatch(rejectRequest({ id })).unwrap();
             await dispatch(deleteRequest(id)).unwrap();
             if (showAlert) {
@@ -160,7 +157,6 @@ const IncomingRequests: React.FC = () => {
     };
 
 
-    // Requests for current tab
     const pending = (tab === 'received' ? receivedRequests : sentRequests).filter((r: any) => r.status === 'pending');
     const history = (tab === 'received' ? receivedRequests : sentRequests).filter((r: any) => r.status !== 'pending');
 
@@ -293,7 +289,6 @@ const IncomingRequests: React.FC = () => {
                     );
                 } else {
                     const sender = resolveUser(record.senderId);
-                    // Nếu là bạn thì ghi "Bạn"
                     const isMe = sender?.id === user?.id;
                     return (
                         <div style={{ textAlign: 'center', width: '100%' }}>
@@ -463,16 +458,12 @@ const IncomingRequests: React.FC = () => {
         const id = record.id;
 
         if (expanded) {
-            // Bước 1: render row ngay
             setExpandedPendingKeys([id]);
-            // Bước 2: set trạng thái "đóng" trước
             setCollapsingRows(prev => ({ ...prev, [id]: true }));
-            // Bước 3: sau 1 frame -> thêm class mở
             requestAnimationFrame(() => {
                 setCollapsingRows(prev => ({ ...prev, [id]: false }));
             });
         } else {
-            // Khi đóng, thêm class collapsing -> rồi ẩn sau 400ms
             setCollapsingRows(prev => ({ ...prev, [id]: true }));
             setTimeout(() => {
                 setExpandedPendingKeys([]);
@@ -489,16 +480,12 @@ const IncomingRequests: React.FC = () => {
         const id = record.id;
 
         if (expanded) {
-            // Bước 1: render row ngay
             setExpandedHistoryKeys([id]);
-            // Bước 2: set trạng thái "đóng" trước
             setCollapsingRows(prev => ({ ...prev, [id]: true }));
-            // Bước 3: sau 1 frame -> thêm class mở
             requestAnimationFrame(() => {
                 setCollapsingRows(prev => ({ ...prev, [id]: false }));
             });
         } else {
-            // Khi đóng, thêm class collapsing -> rồi ẩn sau 400ms
             setCollapsingRows(prev => ({ ...prev, [id]: true }));
             setTimeout(() => {
                 setExpandedHistoryKeys([]);

@@ -31,7 +31,6 @@ export const createTaskAsync = createAsyncThunk(
         try {
             return await tasksService.createTask(taskData);
         } catch (err: any) {
-            // service may throw { messages: string[] } or Error
             const payload = err?.messages || err?.message || 'Lỗi khi tạo nhiệm vụ';
             return rejectWithValue(payload);
         }
@@ -135,7 +134,6 @@ const tasksSlice = createSlice({
             })
             .addCase(createTaskAsync.rejected, (state, action) => {
                 state.loading = false;
-                // validation-like errors go to errorForm (from rejectWithValue)
                 state.errorForm = (action.payload as string | string[]) || null;
                 state.error = state.errorForm ? null : (action.error.message || 'Lỗi khi tạo nhiệm vụ');
             })

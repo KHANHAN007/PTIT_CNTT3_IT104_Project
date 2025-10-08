@@ -60,7 +60,6 @@ export const usePermissions = (projectId?: string) => {
         isOwner,
         isManager,
         canManage,
-        // Quick permission checks
         canEditProject: checkPermission('canEditProject'),
         canDeleteProject: checkPermission('canDeleteProject'),
         canManageMembers: checkPermission('canManageMembers'),

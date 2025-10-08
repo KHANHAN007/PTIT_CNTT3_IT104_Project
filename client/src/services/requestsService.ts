@@ -3,9 +3,7 @@ import type { IncomingRequest } from '../types';
 
 export const requestsService = {
     async getRequestsForUser(userId: string): Promise<{ sentRequests: IncomingRequest[]; receivedRequests: IncomingRequest[] }> {
-        // Lấy yêu cầu đã gửi
         const sentRes = await api.get(`/requests?senderId=${userId}`);
-        // Lấy yêu cầu đã nhận
         const receivedRes = await api.get(`/requests?recipientId=${userId}`);
         return {
             sentRequests: sentRes.data,
@@ -18,7 +16,6 @@ export const requestsService = {
         const response = await api.post('/requests', payload);
         const createdRequest = response.data;
 
-        // Add to sender's sentRequests
         if (createdRequest.senderId) {
             try {
                 const senderRes = await api.get(`/users/${createdRequest.senderId}`);
@@ -28,10 +25,8 @@ export const requestsService = {
                     sentRequests: [...sentRequests, createdRequest]
                 });
             } catch (err) {
-                // ignore if user not found
             }
         }
-        // Add to recipient's receivedRequests
         if (createdRequest.recipientId) {
             try {
                 const recipientRes = await api.get(`/users/${createdRequest.recipientId}`);
@@ -41,7 +36,6 @@ export const requestsService = {
                     receivedRequests: [...receivedRequests, createdRequest]
                 });
             } catch (err) {
-                // ignore if user not found
             }
         }
         return createdRequest;
@@ -61,10 +55,8 @@ export const requestsService = {
     },
 
     async deleteRequest(id: string) {
-        // Lấy request để biết senderId
         const reqRes = await api.get(`/requests/${id}`);
         const request = reqRes.data;
-        // Update status trong sentRequests của user
         if (request.senderId) {
             const userRes = await api.get(`/users/${request.senderId}`);
             const user = userRes.data;

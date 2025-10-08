@@ -1,4 +1,3 @@
-// ...existing code...
 import { useEffect } from 'react'
 import { Alert, Button, Card, Form, Input, Typography } from "antd";
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -51,7 +50,6 @@ function Login() {
             <Card style={{
                 width: 400,
                 maxWidth: '90vw',
-                // padding: '30px 30px',
                 borderRadius: '12px',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                 border: '1px solid #e8e8e8'
@@ -102,7 +100,7 @@ function Login() {
                         label={<span style={{ fontSize: '16px', fontWeight: 500, color: '#333' }}>Mật khẩu</span>}
                         name="password"
                         rules={[
-                            { required: true, message: 'Vui lòng nhập mật khẩu!' }
+                            { required: true, message: 'Vui lòng nhập mật khẩu!' },
                         ]}
                         style={{ marginBottom: 32 }}
                     >
