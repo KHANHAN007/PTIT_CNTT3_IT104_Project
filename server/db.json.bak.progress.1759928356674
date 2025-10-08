@@ -110,11 +110,190 @@
       "address": "Hà Nội, Việt Nam",
       "createdAt": "2024-01-15T00:00:00Z",
       "updatedAt": "2025-10-06T20:05:42.623Z",
-      "receivedRequests": [],
-      "tasks": [
-        "14",
-        "37"
-      ]
+      "receivedRequests": [
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T19:44:00.761Z",
+          "id": 1
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T19:48:27.190Z",
+          "id": 2
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T19:50:43.172Z",
+          "id": 3
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T19:51:09.470Z",
+          "id": 4
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "2",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "linh@gmail.com",
+            "userId": "2"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-07T02:28:59.123Z",
+          "id": 5
+        }
+      ],
+      "tasks": ["3", "7", "8"]
+    },
+    {
+      "id": "3",
+      "name": "Phạm Minh Anh",
+      "email": "anh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192975/samples/people/boy-snow-hoodie.jpg",
+      "bio": "Backend developer và DevOps engineer chuyên về microservices",
+      "phone": "0111222333",
+      "address": "Đà Nẵng, Việt Nam",
+      "createdAt": "2024-02-01T00:00:00Z",
+      "updatedAt": "2024-02-01T00:00:00Z",
+      "tasks": ["1", "11", "15", "16", "19", "2", "22"]
+    },
+    {
+      "id": "4",
+      "name": "Lê Thị Mai",
+      "email": "mai@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192975/samples/people/kitchen-bar.jpg",
+      "bio": "QA Engineer và Tester với kinh nghiệm automation testing",
+      "phone": "0444555666",
+      "address": "Hải Phòng, Việt Nam",
+      "createdAt": "2024-02-15T00:00:00Z",
+      "updatedAt": "2024-02-15T00:00:00Z",
+      "tasks": ["5"]
+    },
+    {
+      "id": "5",
+      "name": "Hoàng Văn Đức",
+      "email": "duc@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192973/samples/people/jazz.jpg",
+      "bio": "Mobile developer chuyên về React Native và Flutter",
+      "phone": "0777888999",
+      "address": "Cần Thơ, Việt Nam",
+      "createdAt": "2024-03-01T00:00:00Z",
+      "updatedAt": "2024-03-01T00:00:00Z",
+      "receivedRequests": [
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "5",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "duc@gmail.com",
+            "userId": "5"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T19:27:21.350Z",
+          "id": 1
+        },
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "5",
+          "projectId": "1",
+          "payload": {
+            "role": "Frontend developer",
+            "email": "duc@gmail.com",
+            "userId": "5"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T19:31:17.039Z",
+          "id": 2
+        }
+      ],
+      "tasks": ["12", "21", "23"]
+    },
+    {
+      "id": "6",
+      "name": "Nguyễn Thị Lan",
+      "email": "lan@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192972/samples/people/bicycle.jpg",
+      "bio": "UI/UX Designer với 3 năm kinh nghiệm trong product design",
+      "phone": "0666777888",
+      "address": "Huế, Việt Nam",
+      "createdAt": "2024-03-15T00:00:00Z",
+      "updatedAt": "2024-03-15T00:00:00Z",
+      "tasks": ["10", "31"]
+    },
+    {
+      "id": "7",
+      "name": "Trần Quang Huy",
+      "email": "huy@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192973/samples/man-portrait.jpg",
+      "bio": "Data Analyst và Business Intelligence specialist",
+      "phone": "0555666777",
+      "address": "Vũng Tàu, Việt Nam",
+      "createdAt": "2024-04-01T00:00:00Z",
+      "updatedAt": "2024-04-01T00:00:00Z",
+      "receivedRequests": [
+        {
+          "type": "invite",
+          "senderId": "1",
+          "recipientId": "7",
+          "projectId": "1",
+          "payload": {
+            "role": "Backend developer",
+            "email": "huy@gmail.com",
+            "userId": "7"
+          },
+          "status": "pending",
+          "createdAt": "2025-10-06T18:55:05.908Z",
+          "id": 2
+        }
+      ],
+      "tasks": ["14", "37"]
     },
     {
       "id": "8",
@@ -127,9 +306,7 @@
       "address": "Quảng Ninh, Việt Nam",
       "createdAt": "2024-04-15T00:00:00Z",
       "updatedAt": "2024-04-15T00:00:00Z",
-      "tasks": [
-        "17"
-      ]
+      "tasks": ["17"]
     },
     {
       "id": "9",
@@ -142,10 +319,7 @@
       "address": "Nghệ An, Việt Nam",
       "createdAt": "2024-05-01T00:00:00Z",
       "updatedAt": "2024-05-01T00:00:00Z",
-      "tasks": [
-        "18",
-        "28"
-      ]
+      "tasks": ["18", "28"]
     },
     {
       "id": "10",
@@ -158,10 +332,7 @@
       "address": "Bình Dương, Việt Nam",
       "createdAt": "2024-05-15T00:00:00Z",
       "updatedAt": "2024-05-15T00:00:00Z",
-      "tasks": [
-        "20",
-        "32"
-      ]
+      "tasks": ["20", "32"]
     },
     {
       "id": "11",
@@ -174,10 +345,7 @@
       "address": "Đà Lạt, Việt Nam",
       "createdAt": "2024-06-01T00:00:00Z",
       "updatedAt": "2024-06-01T00:00:00Z",
-      "tasks": [
-        "24",
-        "36"
-      ]
+      "tasks": ["24", "36"]
     },
     {
       "id": "12",
@@ -190,10 +358,7 @@
       "address": "Nha Trang, Việt Nam",
       "createdAt": "2024-06-15T00:00:00Z",
       "updatedAt": "2024-06-15T00:00:00Z",
-      "tasks": [
-        "26",
-        "27"
-      ]
+      "tasks": ["26", "27"]
     },
     {
       "id": "13",
@@ -206,12 +371,7 @@
       "address": "Thủ Đức, TP.HCM, Việt Nam",
       "createdAt": "2024-07-01T00:00:00Z",
       "updatedAt": "2024-07-01T00:00:00Z",
-      "tasks": [
-        "25",
-        "29",
-        "30",
-        "34"
-      ]
+      "tasks": ["25", "29", "30", "34"]
     },
     {
       "id": "14",
@@ -224,9 +384,7 @@
       "address": "Hội An, Quảng Nam, Việt Nam",
       "createdAt": "2024-07-15T00:00:00Z",
       "updatedAt": "2024-07-15T00:00:00Z",
-      "tasks": [
-        "33"
-      ]
+      "tasks": ["33"]
     },
     {
       "id": "15",
@@ -239,9 +397,7 @@
       "address": "Quận 1, TP.HCM, Việt Nam",
       "createdAt": "2024-08-01T00:00:00Z",
       "updatedAt": "2024-08-01T00:00:00Z",
-      "tasks": [
-        "35"
-      ]
+      "tasks": ["35"]
     },
     {
       "id": "16",
@@ -267,9 +423,7 @@
       "address": "Vinh, Nghệ An, Việt Nam",
       "createdAt": "2024-09-01T00:00:00Z",
       "updatedAt": "2024-09-01T00:00:00Z",
-      "tasks": [
-        "39"
-      ]
+      "tasks": ["39"]
     },
     {
       "id": "18",
@@ -282,9 +436,7 @@
       "address": "Quảng Nam, Việt Nam",
       "createdAt": "2024-09-15T00:00:00Z",
       "updatedAt": "2024-09-15T00:00:00Z",
-      "tasks": [
-        "40"
-      ]
+      "tasks": ["40"]
     },
     {
       "id": "19",
@@ -297,9 +449,7 @@
       "address": "Hải Dương, Việt Nam",
       "createdAt": "2024-10-01T00:00:00Z",
       "updatedAt": "2024-10-01T00:00:00Z",
-      "tasks": [
-        "41"
-      ]
+      "tasks": ["41"]
     },
     {
       "id": "20",
@@ -312,9 +462,7 @@
       "address": "Bình Thuận, Việt Nam",
       "createdAt": "2024-10-15T00:00:00Z",
       "updatedAt": "2024-10-15T00:00:00Z",
-      "tasks": [
-        "42"
-      ]
+      "tasks": ["42"]
     }
   ],
   "projects": [
@@ -325,11 +473,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759527850/tr1b2sr7p60sbbw9axwy.png",
       "ownerId": "1",
       "managerId": "15",
-      "memberIds": [
-        "3",
-        "6",
-        "18"
-      ],
+      "memberIds": ["3", "6", "18"],
       "createdAt": "2024-10-01T00:00:00Z",
       "updatedAt": "2024-10-01T00:00:00Z"
     },
@@ -340,11 +484,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1732541234/ai_chatbot_project.jpg",
       "ownerId": "3",
       "managerId": "5",
-      "memberIds": [
-        "3",
-        "5",
-        "19"
-      ],
+      "memberIds": ["3", "5", "19"],
       "createdAt": "2024-01-30T00:00:00Z",
       "updatedAt": "2024-01-30T00:00:00Z"
     },
@@ -355,11 +495,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192982/samples/city-skyline.jpg",
       "ownerId": "11",
       "managerId": "2",
-      "memberIds": [
-        "1",
-        "7",
-        "20"
-      ],
+      "memberIds": ["1", "7", "20"],
       "createdAt": "2024-06-01T00:00:00Z",
       "updatedAt": "2024-06-01T00:00:00Z"
     },
@@ -370,9 +506,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192983/samples/blockchain-voting.jpg",
       "ownerId": "12",
       "managerId": "9",
-      "memberIds": [
-        "3"
-      ],
+      "memberIds": ["3"],
       "createdAt": "2024-07-01T00:00:00Z",
       "updatedAt": "2024-07-01T00:00:00Z"
     },
@@ -383,10 +517,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192984/samples/ar-shopping.jpg",
       "ownerId": "13",
       "managerId": "6",
-      "memberIds": [
-        "8",
-        "9"
-      ],
+      "memberIds": ["8", "9"],
       "createdAt": "2024-08-01T00:00:00Z",
       "updatedAt": "2024-08-01T00:00:00Z"
     },
@@ -397,9 +528,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192985/samples/quantum-computer.jpg",
       "ownerId": "14",
       "managerId": "3",
-      "memberIds": [
-        "3"
-      ],
+      "memberIds": ["3"],
       "createdAt": "2024-09-01T00:00:00Z",
       "updatedAt": "2024-09-01T00:00:00Z"
     },
@@ -410,10 +539,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192986/samples/neural-network.jpg",
       "ownerId": "15",
       "managerId": "4",
-      "memberIds": [
-        "10",
-        "5"
-      ],
+      "memberIds": ["10", "5"],
       "createdAt": "2024-10-01T00:00:00Z",
       "updatedAt": "2024-10-01T00:00:00Z"
     },
@@ -424,10 +550,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759527850/onboarding_portal.png",
       "ownerId": "1",
       "managerId": "",
-      "memberIds": [
-        "3",
-        "5"
-      ],
+      "memberIds": ["3", "5"],
       "createdAt": "2025-02-01T00:00:00Z",
       "updatedAt": "2025-02-01T00:00:00Z"
     },
@@ -438,11 +561,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759526006/kylxo6nc7lnmiddqv26r.png",
       "ownerId": "1",
       "managerId": "15",
-      "memberIds": [
-        "11",
-        "13",
-        "1"
-      ],
+      "memberIds": ["11", "13", "1"],
       "createdAt": "2024-09-15T00:00:00Z",
       "updatedAt": "2024-09-15T00:00:00Z"
     },
@@ -453,10 +572,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/cld-sample-5.jpg",
       "ownerId": "2",
       "managerId": "16",
-      "memberIds": [
-        "12",
-        "1"
-      ],
+      "memberIds": ["12", "1"],
       "createdAt": "2024-08-20T00:00:00Z",
       "updatedAt": "2024-08-20T00:00:00Z"
     },
@@ -467,11 +583,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/cld-sample-4.jpg",
       "ownerId": "3",
       "managerId": "17",
-      "memberIds": [
-        "9",
-        "13",
-        "4"
-      ],
+      "memberIds": ["9", "13", "4"],
       "createdAt": "2024-07-10T00:00:00Z",
       "updatedAt": "2024-07-10T00:00:00Z"
     },
@@ -482,10 +594,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/cld-sample-4.jpg",
       "ownerId": "5",
       "managerId": "18",
-      "memberIds": [
-        "2",
-        "13"
-      ],
+      "memberIds": ["2", "13"],
       "createdAt": "2024-06-01T00:00:00Z",
       "updatedAt": "2024-06-01T00:00:00Z"
     },
@@ -496,10 +605,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192979/cld-sample-2.jpg",
       "ownerId": "7",
       "managerId": "11",
-      "memberIds": [
-        "6",
-        "10"
-      ],
+      "memberIds": ["6", "10"],
       "createdAt": "2024-05-15T00:00:00Z",
       "updatedAt": "2024-05-15T00:00:00Z"
     },
@@ -510,11 +616,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192978/cld-sample.jpg",
       "ownerId": "8",
       "managerId": "13",
-      "memberIds": [
-        "14",
-        "13",
-        "2"
-      ],
+      "memberIds": ["14", "13", "2"],
       "createdAt": "2024-04-01T00:00:00Z",
       "updatedAt": "2024-04-01T00:00:00Z"
     },
@@ -525,11 +627,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192975/samples/cup-on-a-table.jpg",
       "ownerId": "9",
       "managerId": "14",
-      "memberIds": [
-        "15",
-        "11",
-        "2"
-      ],
+      "memberIds": ["15", "11", "2"],
       "createdAt": "2024-03-10T00:00:00Z",
       "updatedAt": "2024-03-10T00:00:00Z"
     },
@@ -540,10 +638,7 @@
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192974/samples/coffee.jpg",
       "ownerId": "10",
       "managerId": "12",
-      "memberIds": [
-        "7",
-        "17"
-      ],
+      "memberIds": ["7", "17"],
       "createdAt": "2024-02-20T00:00:00Z",
       "updatedAt": "2024-02-20T00:00:00Z"
     },
@@ -557,39 +652,6 @@
       "createdAt": "2025-10-06T04:48:48.073Z",
       "updatedAt": "2025-10-06T04:48:48.073Z",
       "id": "pGznrr0"
-    },
-    {
-      "name": "Đặng Khánh An",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759935173/ktick1kvikejekci5xw1.jpg",
-      "description": "ádfasdfsdaf",
-      "ownerId": "1",
-      "managerId": "2",
-      "members": [
-        {
-          "userId": "9"
-        }
-      ],
-      "createdAt": "2025-10-08T14:52:58.374Z",
-      "updatedAt": "2025-10-08T14:52:58.374Z",
-      "id": "Uy1_Xo8"
-    },
-    {
-      "name": "Đặng Khánh An",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759935185/l9cphnhel1d1ji4rlffn.jpg",
-      "description": "ádfasdfasdfasdf",
-      "ownerId": "1",
-      "managerId": "2",
-      "members": [
-        {
-          "userId": "8"
-        },
-        {
-          "userId": "10"
-        }
-      ],
-      "createdAt": "2025-10-08T14:53:11.723Z",
-      "updatedAt": "2025-10-08T14:53:11.723Z",
-      "id": "EH8GnWS"
     }
   ],
   "tasks": [
@@ -601,17 +663,13 @@
       "assigneeId": "3",
       "status": "Done",
       "priority": "high",
-      "progress": "Hoàn thành",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-01",
       "deadline": "2024-10-05",
       "estimatedHours": 12,
       "timeSpentMinutes": 720,
       "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-05T00:00:00Z",
-      "actualElapsedMinutes": 5760,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-05T00:00:00Z"
     },
     {
       "id": "10",
@@ -621,16 +679,12 @@
       "assigneeId": "6",
       "status": "Done",
       "priority": "high",
-      "progress": "Hoàn thành",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-07-10",
       "deadline": "2024-07-15",
-      "estimatedHours": 120,
+      "estimatedHours": null,
       "createdAt": "2024-07-10T00:00:00Z",
-      "updatedAt": "2024-07-15T00:00:00Z",
-      "actualElapsedMinutes": 7200,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-07-15T00:00:00Z"
     },
     {
       "id": "11",
@@ -640,16 +694,12 @@
       "assigneeId": "3",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-07-16",
       "deadline": "2024-07-30",
-      "estimatedHours": 336,
+      "estimatedHours": null,
       "createdAt": "2024-07-16T00:00:00Z",
-      "updatedAt": "2024-07-16T00:00:00Z",
-      "actualElapsedMinutes": 647344,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-07-16T00:00:00Z"
     },
     {
       "id": "12",
@@ -659,16 +709,12 @@
       "assigneeId": "5",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Có rủi ro",
       "startDate": "2024-06-01",
       "deadline": "2024-06-15",
-      "estimatedHours": 336,
+      "estimatedHours": null,
       "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z",
-      "actualElapsedMinutes": 712144,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-06-01T00:00:00Z"
     },
     {
       "id": "13",
@@ -677,17 +723,13 @@
       "projectId": "11",
       "assigneeId": "1",
       "status": "In Progress",
-      "priority": "low",
-      "progress": "Hoàn thành",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-06-16",
       "deadline": "2024-06-30",
-      "estimatedHours": 336,
+      "estimatedHours": null,
       "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2025-10-08T13:52:21.484Z",
-      "actualElapsedMinutes": 690544,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-10-06T23:58:27.388Z"
     },
     {
       "id": "14",
@@ -697,16 +739,12 @@
       "assigneeId": "7",
       "status": "Done",
       "priority": "high",
-      "progress": "Hoàn thành",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-05-15",
       "deadline": "2024-05-25",
-      "estimatedHours": 240,
+      "estimatedHours": null,
       "createdAt": "2024-05-15T00:00:00Z",
-      "updatedAt": "2024-05-25T00:00:00Z",
-      "actualElapsedMinutes": 14400,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-05-25T00:00:00Z"
     },
     {
       "id": "15",
@@ -715,17 +753,12 @@
       "projectId": "12",
       "assigneeId": "3",
       "status": "In Progress",
-      "priority": "high",
+      "priority": "medium",
       "progress": "Trễ hẹn",
       "startDate": "2024-05-26",
       "deadline": "2024-06-10",
       "createdAt": "2024-05-26T00:00:00Z",
-      "updatedAt": "2024-05-26T00:00:00Z",
-      "estimatedHours": 360,
-      "actualElapsedMinutes": 720784,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-05-26T00:00:00Z"
     },
     {
       "id": "16",
@@ -735,16 +768,11 @@
       "assigneeId": "3",
       "status": "Done",
       "priority": "high",
-      "progress": "Hoàn thành",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-04-01",
       "deadline": "2024-04-10",
       "createdAt": "2024-04-01T00:00:00Z",
-      "updatedAt": "2024-04-10T00:00:00Z",
-      "estimatedHours": 216,
-      "actualElapsedMinutes": 12960,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-04-10T00:00:00Z"
     },
     {
       "id": "17",
@@ -753,17 +781,12 @@
       "projectId": "13",
       "assigneeId": "8",
       "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-04-11",
       "deadline": "2024-04-25",
       "createdAt": "2024-04-11T00:00:00Z",
-      "updatedAt": "2024-04-11T00:00:00Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 785584,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-04-11T00:00:00Z"
     },
     {
       "id": "18",
@@ -773,16 +796,11 @@
       "assigneeId": "9",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Có rủi ro",
       "startDate": "2024-03-10",
       "deadline": "2024-03-30",
       "createdAt": "2024-03-10T00:00:00Z",
-      "updatedAt": "2024-03-10T00:00:00Z",
-      "estimatedHours": 480,
-      "actualElapsedMinutes": 831664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-03-10T00:00:00Z"
     },
     {
       "id": "19",
@@ -792,16 +810,11 @@
       "assigneeId": "3",
       "status": "To do",
       "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-03-31",
       "deadline": "2024-04-15",
       "createdAt": "2024-03-10T00:00:00Z",
-      "updatedAt": "2024-03-10T00:00:00Z",
-      "estimatedHours": 360,
-      "actualElapsedMinutes": 801424,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-03-10T00:00:00Z"
     },
     {
       "id": "2",
@@ -811,17 +824,13 @@
       "assigneeId": "3",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-06",
       "deadline": "2024-10-12",
       "estimatedHours": 20,
       "timeSpentMinutes": 480,
       "createdAt": "2024-10-06T00:00:00Z",
-      "updatedAt": "2024-10-06T00:00:00Z",
-      "actualElapsedMinutes": 529264,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-06T00:00:00Z"
     },
     {
       "id": "20",
@@ -831,16 +840,11 @@
       "assigneeId": "10",
       "status": "Done",
       "priority": "high",
-      "progress": "Hoàn thành",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-02-20",
       "deadline": "2024-03-05",
       "createdAt": "2024-02-20T00:00:00Z",
-      "updatedAt": "2024-03-05T00:00:00Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 20160,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-03-05T00:00:00Z"
     },
     {
       "id": "21",
@@ -849,17 +853,12 @@
       "projectId": "15",
       "assigneeId": "5",
       "status": "In Progress",
-      "priority": "high",
+      "priority": "medium",
       "progress": "Trễ hẹn",
       "startDate": "2024-03-06",
       "deadline": "2024-03-20",
       "createdAt": "2024-03-06T00:00:00Z",
-      "updatedAt": "2024-03-06T00:00:00Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 837424,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-03-06T00:00:00Z"
     },
     {
       "id": "22",
@@ -869,16 +868,11 @@
       "assigneeId": "3",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-01-30",
       "deadline": "2024-02-20",
       "createdAt": "2024-01-30T00:00:00Z",
-      "updatedAt": "2024-01-30T00:00:00Z",
-      "estimatedHours": 504,
-      "actualElapsedMinutes": 889264,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-01-30T00:00:00Z"
     },
     {
       "id": "23",
@@ -887,17 +881,12 @@
       "projectId": "17",
       "assigneeId": "5",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-02-21",
       "deadline": "2024-03-10",
       "createdAt": "2024-01-30T00:00:00Z",
-      "updatedAt": "2024-01-30T00:00:00Z",
-      "estimatedHours": 432,
-      "actualElapsedMinutes": 857584,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-01-30T00:00:00Z"
     },
     {
       "id": "24",
@@ -907,16 +896,11 @@
       "assigneeId": "11",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-06-01",
       "deadline": "2024-06-30",
       "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z",
-      "estimatedHours": 696,
-      "actualElapsedMinutes": 712144,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-06-01T00:00:00Z"
     },
     {
       "id": "25",
@@ -925,17 +909,12 @@
       "projectId": "2",
       "assigneeId": "13",
       "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-06-15",
       "deadline": "2024-07-15",
       "createdAt": "2024-06-15T00:00:00Z",
-      "updatedAt": "2024-07-15T00:00:00Z",
-      "estimatedHours": 720,
-      "actualElapsedMinutes": 43200,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-07-15T00:00:00Z"
     },
     {
       "id": "26",
@@ -945,16 +924,11 @@
       "assigneeId": "12",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Có rủi ro",
       "startDate": "2024-07-01",
       "deadline": "2024-08-01",
       "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 668944,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-07-01T00:00:00Z"
     },
     {
       "id": "27",
@@ -964,16 +938,11 @@
       "assigneeId": "12",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-07-01",
       "deadline": "2024-08-15",
       "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 1080,
-      "actualElapsedMinutes": 668944,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-07-01T00:00:00Z"
     },
     {
       "id": "28",
@@ -983,16 +952,11 @@
       "assigneeId": "9",
       "status": "To do",
       "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-08-01",
       "deadline": "2024-09-01",
       "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 624304,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-07-01T00:00:00Z"
     },
     {
       "id": "29",
@@ -1001,17 +965,12 @@
       "projectId": "4",
       "assigneeId": "13",
       "status": "Pending",
-      "priority": "high",
-      "progress": "Tạm dừng",
+      "priority": "medium",
+      "progress": "Trễ hẹn",
       "startDate": "2024-08-15",
       "deadline": "2024-09-15",
       "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 604144,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
+      "updatedAt": "2024-07-01T00:00:00Z"
     },
     {
       "id": "3",
@@ -1020,18 +979,14 @@
       "projectId": "5",
       "assigneeId": "2",
       "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
+      "priority": "medium",
+      "progress": "Có rủi ro",
       "startDate": "2024-10-03",
       "deadline": "2024-10-10",
       "estimatedHours": 10,
       "timeSpentMinutes": 120,
       "createdAt": "2024-10-03T00:00:00Z",
-      "updatedAt": "2024-10-03T00:00:00Z",
-      "actualElapsedMinutes": 533584,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-03T00:00:00Z"
     },
     {
       "id": "30",
@@ -1041,16 +996,11 @@
       "assigneeId": "13",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-08-01",
       "deadline": "2024-09-15",
       "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-08-01T00:00:00Z",
-      "estimatedHours": 1080,
-      "actualElapsedMinutes": 624304,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-08-01T00:00:00Z"
     },
     {
       "id": "31",
@@ -1059,17 +1009,12 @@
       "projectId": "6",
       "assigneeId": "6",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-09-01",
       "deadline": "2024-10-15",
       "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-08-01T00:00:00Z",
-      "estimatedHours": 1056,
-      "actualElapsedMinutes": 579664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-08-01T00:00:00Z"
     },
     {
       "id": "32",
@@ -1078,17 +1023,12 @@
       "projectId": "6",
       "assigneeId": "10",
       "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
+      "priority": "low",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-08-15",
       "deadline": "2024-09-01",
       "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "estimatedHours": 408,
-      "actualElapsedMinutes": 24480,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-09-01T00:00:00Z"
     },
     {
       "id": "33",
@@ -1098,16 +1038,11 @@
       "assigneeId": "14",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-09-01",
       "deadline": "2024-10-30",
       "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "estimatedHours": 1416,
-      "actualElapsedMinutes": 579664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-09-01T00:00:00Z"
     },
     {
       "id": "34",
@@ -1116,17 +1051,12 @@
       "projectId": "7",
       "assigneeId": "13",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-01",
       "deadline": "2024-11-15",
       "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "estimatedHours": 1080,
-      "actualElapsedMinutes": 536464,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-09-01T00:00:00Z"
     },
     {
       "id": "35",
@@ -1136,16 +1066,11 @@
       "assigneeId": "15",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Có rủi ro",
       "startDate": "2024-10-01",
       "deadline": "2024-12-01",
       "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 1464,
-      "actualElapsedMinutes": 536464,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-01T00:00:00Z"
     },
     {
       "id": "36",
@@ -1154,17 +1079,12 @@
       "projectId": "8",
       "assigneeId": "11",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-11-01",
       "deadline": "2024-12-15",
       "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 1056,
-      "actualElapsedMinutes": 491824,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-01T00:00:00Z"
     },
     {
       "id": "37",
@@ -1173,17 +1093,12 @@
       "projectId": "9",
       "assigneeId": "7",
       "status": "Pending",
-      "priority": "high",
-      "progress": "Tạm dừng",
+      "priority": "low",
+      "progress": "Trễ hẹn",
       "startDate": "2024-11-15",
       "deadline": "2025-01-01",
       "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 1128,
-      "actualElapsedMinutes": 471664,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
+      "updatedAt": "2024-10-01T00:00:00Z"
     },
     {
       "id": "39",
@@ -1192,37 +1107,28 @@
       "projectId": "9",
       "assigneeId": "17",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-12",
       "deadline": "2024-10-25",
       "createdAt": "2024-10-11T00:00:00Z",
-      "updatedAt": "2024-10-11T00:00:00Z",
-      "estimatedHours": 312,
-      "actualElapsedMinutes": 520624,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-11T00:00:00Z"
     },
     {
       "name": "Xây dựng UIa",
       "assigneeId": "1",
-      "status": "Pending",
+      "status": "In Progress",
       "startDate": "2025-10-08",
       "deadline": "2025-10-16",
-      "priority": "medium",
+      "priority": "high",
       "estimatedHours": 1.5,
       "description": "ádf",
       "projectId": "2",
       "timeSpentMinutes": 0,
       "completedAt": null,
       "createdAt": "2025-10-06T10:26:26.060Z",
-      "updatedAt": "2025-10-08T13:29:08.677Z",
-      "id": "3Hir2Mz",
-      "progress": "Tạm dừng",
-      "actualElapsedMinutes": 784,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
+      "updatedAt": "2025-10-06T10:26:26.060Z",
+      "id": "3Hir2Mz"
     },
     {
       "id": "4",
@@ -1230,19 +1136,15 @@
       "description": "Phát triển tính năng giỏ hàng với add/remove items, quantity management và price calculation",
       "projectId": "3",
       "assigneeId": "1",
-      "status": "Done",
-      "priority": "low",
-      "progress": "Hoàn thành",
+      "status": "To do",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-13",
       "deadline": "2024-10-20",
       "estimatedHours": 8,
       "timeSpentMinutes": 0,
       "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2025-10-08T13:48:26.889Z",
-      "actualElapsedMinutes": 519184,
-      "completedAt": "2025-10-08T13:48:26.889Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-01T00:00:00Z"
     },
     {
       "id": "40",
@@ -1252,16 +1154,11 @@
       "assigneeId": "18",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Có rủi ro",
       "startDate": "2024-10-01",
       "deadline": "2024-10-30",
       "createdAt": "2024-09-25T00:00:00Z",
-      "updatedAt": "2024-09-25T00:00:00Z",
-      "estimatedHours": 696,
-      "actualElapsedMinutes": 536464,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-09-25T00:00:00Z"
     },
     {
       "id": "41",
@@ -1270,17 +1167,12 @@
       "projectId": "10",
       "assigneeId": "19",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-20",
       "deadline": "2024-11-05",
       "createdAt": "2024-10-18T00:00:00Z",
-      "updatedAt": "2024-10-18T00:00:00Z",
-      "estimatedHours": 384,
-      "actualElapsedMinutes": 509104,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-18T00:00:00Z"
     },
     {
       "id": "42",
@@ -1290,16 +1182,11 @@
       "assigneeId": "20",
       "status": "To do",
       "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-05",
       "deadline": "2024-10-28",
       "createdAt": "2024-10-04T00:00:00Z",
-      "updatedAt": "2024-10-04T00:00:00Z",
-      "estimatedHours": 552,
-      "actualElapsedMinutes": 530704,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-04T00:00:00Z"
     },
     {
       "id": "43",
@@ -1309,16 +1196,11 @@
       "assigneeId": "1",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-01-05",
       "deadline": "2025-01-15",
       "createdAt": "2025-01-05T00:00:00Z",
-      "updatedAt": "2025-01-05T00:00:00Z",
-      "estimatedHours": 240,
-      "actualElapsedMinutes": 398224,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-01-05T00:00:00Z"
     },
     {
       "id": "44",
@@ -1327,17 +1209,12 @@
       "projectId": "2",
       "assigneeId": "1",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Có rủi ro",
       "startDate": "2025-02-01",
       "deadline": "2025-02-14",
       "createdAt": "2025-02-01T00:00:00Z",
-      "updatedAt": "2025-02-01T00:00:00Z",
-      "estimatedHours": 312,
-      "actualElapsedMinutes": 359344,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-02-01T00:00:00Z"
     },
     {
       "id": "45",
@@ -1351,12 +1228,7 @@
       "startDate": "2025-03-01",
       "deadline": "2025-03-20",
       "createdAt": "2025-03-01T00:00:00Z",
-      "updatedAt": "2025-03-01T00:00:00Z",
-      "estimatedHours": 456,
-      "actualElapsedMinutes": 319024,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-03-01T00:00:00Z"
     },
     {
       "id": "46",
@@ -1364,18 +1236,13 @@
       "description": "Tạo môi trường sandbox để test tích hợp cổng thanh toán.",
       "projectId": "11",
       "assigneeId": "1",
-      "status": "Pending",
+      "status": "To do",
       "priority": "high",
-      "progress": "Tạm dừng",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-02-10",
       "deadline": "2025-02-28",
       "createdAt": "2025-02-10T00:00:00Z",
-      "updatedAt": "2025-10-08T13:37:49.719Z",
-      "estimatedHours": 432,
-      "actualElapsedMinutes": 346384,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
+      "updatedAt": "2025-02-10T00:00:00Z"
     },
     {
       "id": "47",
@@ -1384,17 +1251,12 @@
       "projectId": "2",
       "assigneeId": "1",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-03-10",
       "deadline": "2025-03-25",
       "createdAt": "2025-03-10T00:00:00Z",
-      "updatedAt": "2025-03-10T00:00:00Z",
-      "estimatedHours": 360,
-      "actualElapsedMinutes": 306064,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-03-10T00:00:00Z"
     },
     {
       "id": "48",
@@ -1404,16 +1266,11 @@
       "assigneeId": "1",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-04-01",
       "deadline": "2025-04-20",
       "createdAt": "2025-04-01T00:00:00Z",
-      "updatedAt": "2025-04-01T00:00:00Z",
-      "estimatedHours": 456,
-      "actualElapsedMinutes": 274384,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-04-01T00:00:00Z"
     },
     {
       "id": "49",
@@ -1422,17 +1279,12 @@
       "projectId": "11",
       "assigneeId": "1",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-04-15",
       "deadline": "2025-05-15",
       "createdAt": "2025-04-15T00:00:00Z",
-      "updatedAt": "2025-04-15T00:00:00Z",
-      "estimatedHours": 720,
-      "actualElapsedMinutes": 254224,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-04-15T00:00:00Z"
     },
     {
       "id": "5",
@@ -1442,16 +1294,11 @@
       "assigneeId": "4",
       "status": "To do",
       "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-21",
       "deadline": "2024-10-28",
       "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 168,
-      "actualElapsedMinutes": 507664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-10-01T00:00:00Z"
     },
     {
       "id": "50",
@@ -1460,17 +1307,12 @@
       "projectId": "2",
       "assigneeId": "1",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "priority": "low",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-05-01",
       "deadline": "2025-06-01",
       "createdAt": "2025-05-01T00:00:00Z",
-      "updatedAt": "2025-05-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 231184,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2025-05-01T00:00:00Z"
     },
     {
       "id": "6",
@@ -1479,17 +1321,12 @@
       "projectId": "3",
       "assigneeId": "1",
       "status": "Done",
-      "priority": "low",
-      "progress": "Hoàn thành",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-09-15",
       "deadline": "2024-09-17",
       "createdAt": "2024-09-15T00:00:00Z",
-      "updatedAt": "2025-10-08T13:48:17.592Z",
-      "estimatedHours": 48,
-      "actualElapsedMinutes": 2880,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": "2025-10-08T13:45:22.232Z",
-      "resumedAt": "2025-10-08T13:45:39.352Z"
+      "updatedAt": "2024-09-17T00:00:00Z"
     },
     {
       "id": "7",
@@ -1498,17 +1335,12 @@
       "projectId": "7",
       "assigneeId": "2",
       "status": "In Progress",
-      "priority": "high",
+      "priority": "medium",
       "progress": "Trễ hẹn",
       "startDate": "2024-09-20",
       "deadline": "2024-09-30",
       "createdAt": "2024-09-20T00:00:00Z",
-      "updatedAt": "2024-09-20T00:00:00Z",
-      "estimatedHours": 240,
-      "actualElapsedMinutes": 552304,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-09-20T00:00:00Z"
     },
     {
       "id": "8",
@@ -1518,16 +1350,11 @@
       "assigneeId": "2",
       "status": "Done",
       "priority": "high",
-      "progress": "Hoàn thành",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-08-20",
       "deadline": "2024-08-25",
       "createdAt": "2024-08-20T00:00:00Z",
-      "updatedAt": "2024-08-25T00:00:00Z",
-      "estimatedHours": 120,
-      "actualElapsedMinutes": 7200,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
+      "updatedAt": "2024-08-25T00:00:00Z"
     },
     {
       "id": "9",
@@ -1535,37 +1362,13 @@
       "description": "Phát triển dashboard hiển thị thông tin khách hàng với charts và analytics",
       "projectId": "11",
       "assigneeId": "1",
-      "status": "In Progress",
-      "priority": "low",
-      "progress": "Hoàn thành",
+      "status": "Pending",
+      "priority": "medium",
+      "progress": "Có rủi ro",
       "startDate": "2024-09-01",
       "deadline": "2024-09-15",
       "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2025-10-08T14:03:13.725Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 579664,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": "2025-10-08T14:03:13.725Z"
-    },
-    {
-      "name": "Xây dựng UI",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "startDate": "2025-10-09",
-      "deadline": "2025-10-10",
-      "priority": "medium",
-      "estimatedHours": 0.5,
-      "description": "Xây dựng UI",
-      "projectId": "1",
-      "timeSpentMinutes": 0,
-      "progress": "Đúng tiến độ",
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": "2025-10-08T14:41:34.507Z",
-      "createdAt": "2025-10-08T14:41:12.314Z",
-      "updatedAt": "2025-10-08T14:41:34.507Z",
-      "id": "fBYX7qQ"
+      "updatedAt": "2024-09-01T00:00:00Z"
     }
   ],
   "members": [
@@ -2222,63 +2025,68 @@
       "email": "linh@gmail.com",
       "role": "Frontend developer",
       "id": "hePo02P"
-    },
-    {
-      "projectId": "Uy1_Xo8",
-      "userId": "1",
-      "role": "Project owner",
-      "email": "an@gmail.com",
-      "joinedAt": "2025-10-08T14:52:58.457Z",
-      "id": "c4jyey7"
-    },
-    {
-      "projectId": "Uy1_Xo8",
-      "userId": "2",
-      "role": "Project manager",
-      "email": "linh@gmail.com",
-      "joinedAt": "2025-10-08T14:52:58.457Z",
-      "id": "THMSlxs"
-    },
-    {
-      "projectId": "Uy1_Xo8",
-      "userId": "9",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-08T14:52:58.457Z",
-      "id": "9TZ5eBL"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "1",
-      "role": "Project owner",
-      "email": "an@gmail.com",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "Yay1rcT"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "2",
-      "role": "Project manager",
-      "email": "linh@gmail.com",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "On_46JR"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "8",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "VBhOSv1"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "10",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "RMMEOHO"
     }
   ],
-  "requests": []
+  "requests": [
+    {
+      "type": "invite",
+      "senderId": "1",
+      "recipientId": "2",
+      "projectId": "1",
+      "payload": {
+        "role": "Frontend developer",
+        "email": "linh@gmail.com",
+        "userId": "2"
+      },
+      "status": "rejected",
+      "createdAt": "2025-10-06T19:44:00.761Z",
+      "id": 1,
+      "rejectedAt": "2025-10-06T19:44:48.100Z"
+    },
+    {
+      "type": "invite",
+      "senderId": "1",
+      "recipientId": "2",
+      "projectId": "1",
+      "payload": {
+        "role": "Frontend developer",
+        "email": "linh@gmail.com",
+        "userId": "2"
+      },
+      "status": "rejected",
+      "createdAt": "2025-10-06T19:48:27.190Z",
+      "id": 2,
+      "rejectedAt": "2025-10-06T19:48:39.987Z"
+    },
+    {
+      "type": "invite",
+      "senderId": "1",
+      "recipientId": "2",
+      "projectId": "1",
+      "payload": {
+        "role": "Frontend developer",
+        "email": "linh@gmail.com",
+        "userId": "2"
+      },
+      "status": "rejected",
+      "createdAt": "2025-10-06T19:50:43.172Z",
+      "id": 3,
+      "rejectedAt": "2025-10-06T19:50:47.863Z"
+    },
+    {
+      "type": "invite",
+      "senderId": "1",
+      "recipientId": "2",
+      "projectId": "1",
+      "payload": {
+        "role": "Frontend developer",
+        "email": "linh@gmail.com",
+        "userId": "2"
+      },
+      "status": "accepted",
+      "createdAt": "2025-10-06T19:51:09.470Z",
+      "id": 4,
+      "acceptedAt": "2025-10-06T19:54:22.829Z"
+    }
+  ]
 }

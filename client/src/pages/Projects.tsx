@@ -330,18 +330,10 @@ function Projects() {
 
                 return (
                     <Space size="small" wrap>
-                        <Button
-                            color='blue'
-                            variant='outlined'
-                            size='small'
-                            icon={<EyeOutlined />}
-                            onClick={() => handleViewProject(record)}
-                        >Chi tiết
-                        </Button>
                         <Tooltip title={!canManage ? 'Bạn không có quyền chỉnh sửa dự án' : ''}>
                             <Button
                                 color='gold'
-                                variant='outlined'
+                                variant='solid'
                                 size="small"
                                 icon={<EditOutlined />}
                                 onClick={() => canManage && handleEditProject(record)}
@@ -353,6 +345,8 @@ function Projects() {
 
                         <Tooltip title={!isOwner ? 'Chỉ chủ sở hữu mới có thể xóa dự án' : ''}>
                             <Button
+                            variant="solid"
+                            color="red"
                                 size="small"
                                 danger
                                 icon={<DeleteOutlined />}
@@ -362,6 +356,14 @@ function Projects() {
                                 Xóa
                             </Button>
                         </Tooltip>
+                        <Button
+                            variant="solid"
+                            color='primary'
+                            size='small'
+                            icon={<EyeOutlined />}
+                            onClick={() => handleViewProject(record)}
+                        >Chi tiết
+                        </Button>
                     </Space>
                 );
             },
