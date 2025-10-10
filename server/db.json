@@ -10,94 +10,7 @@
       "phone": "0123456789",
       "address": "Hà Nội, Việt Nam",
       "createdAt": "2024-01-01T00:00:00Z",
-      "updatedAt": "2025-10-02T14:57:19.637Z",
-      "sentRequests": [
-        {
-          "type": "invite",
-          "senderId": "1",
-          "recipientId": "2",
-          "projectId": "1",
-          "payload": {
-            "role": "Frontend developer",
-            "email": "linh@gmail.com",
-            "userId": "2"
-          },
-          "status": "rejected",
-          "createdAt": "2025-10-06T19:44:00.761Z",
-          "id": 1
-        },
-        {
-          "type": "invite",
-          "senderId": "1",
-          "recipientId": "2",
-          "projectId": "1",
-          "payload": {
-            "role": "Frontend developer",
-            "email": "linh@gmail.com",
-            "userId": "2"
-          },
-          "status": "pending",
-          "createdAt": "2025-10-06T19:48:27.190Z",
-          "id": 2
-        },
-        {
-          "type": "invite",
-          "senderId": "1",
-          "recipientId": "2",
-          "projectId": "1",
-          "payload": {
-            "role": "Frontend developer",
-            "email": "linh@gmail.com",
-            "userId": "2"
-          },
-          "status": "rejected",
-          "createdAt": "2025-10-06T19:50:43.172Z",
-          "id": 3
-        },
-        {
-          "type": "invite",
-          "senderId": "1",
-          "recipientId": "2",
-          "projectId": "1",
-          "payload": {
-            "role": "Frontend developer",
-            "email": "linh@gmail.com",
-            "userId": "2"
-          },
-          "status": "pending",
-          "createdAt": "2025-10-06T19:51:09.470Z",
-          "id": 4
-        },
-        {
-          "type": "invite",
-          "senderId": "1",
-          "recipientId": "2",
-          "projectId": "1",
-          "payload": {
-            "role": "Frontend developer",
-            "email": "linh@gmail.com",
-            "userId": "2"
-          },
-          "status": "rejected",
-          "createdAt": "2025-10-07T02:28:59.123Z",
-          "id": 5
-        }
-      ],
-      "tasks": [
-        "13",
-        "3Hir2Mz",
-        "4",
-        "43",
-        "44",
-        "45",
-        "46",
-        "47",
-        "48",
-        "49",
-        "50",
-        "6",
-        "9"
-      ]
+      "updatedAt": "2025-10-02T14:57:19.637Z"
     },
     {
       "id": "2",
@@ -109,12 +22,67 @@
       "phone": "0987654321",
       "address": "Hà Nội, Việt Nam",
       "createdAt": "2024-01-15T00:00:00Z",
-      "updatedAt": "2025-10-06T20:05:42.623Z",
-      "receivedRequests": [],
-      "tasks": [
-        "14",
-        "37"
-      ]
+      "updatedAt": "2025-10-06T20:05:42.623Z"
+    },
+    {
+      "id": "3",
+      "name": "Nguyễn Văn Minh",
+      "email": "minh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192973/samples/man-portrait.jpg",
+      "bio": "Backend developer chuyên về Node.js và microservices",
+      "phone": "0111222333",
+      "address": "TP.HCM, Việt Nam",
+      "createdAt": "2024-02-01T00:00:00Z",
+      "updatedAt": "2024-02-01T00:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Lê Thị Hạnh",
+      "email": "hanh@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192974/samples/woman-portrait.jpg",
+      "bio": "UI/UX Designer với 3 năm kinh nghiệm",
+      "phone": "0444555666",
+      "address": "Đà Nẵng, Việt Nam",
+      "createdAt": "2024-02-15T00:00:00Z",
+      "updatedAt": "2024-02-15T00:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Phạm Đức Tài",
+      "email": "tai@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192975/samples/developer.jpg",
+      "bio": "DevOps Engineer và Cloud Infrastructure specialist",
+      "phone": "0555666777",
+      "address": "Cần Thơ, Việt Nam",
+      "createdAt": "2024-03-01T00:00:00Z",
+      "updatedAt": "2024-03-01T00:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Trần Thị Mai",
+      "email": "mai@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192976/samples/tester.jpg",
+      "bio": "QA Tester với chuyên môn về automation testing",
+      "phone": "0666777888",
+      "address": "Hải Phòng, Việt Nam",
+      "createdAt": "2024-03-15T00:00:00Z",
+      "updatedAt": "2024-03-15T00:00:00Z"
+    },
+    {
+      "id": "7",
+      "name": "Hoàng Văn Nam",
+      "email": "namhv@gmail.com",
+      "password": "12345678",
+      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192977/samples/manager.jpg",
+      "bio": "Project Manager với 7 năm kinh nghiệm quản lý dự án IT",
+      "phone": "0777888999",
+      "address": "Hà Nội, Việt Nam",
+      "createdAt": "2024-04-01T00:00:00Z",
+      "updatedAt": "2024-04-01T00:00:00Z"
     },
     {
       "id": "8",
@@ -126,10 +94,7 @@
       "phone": "0333444555",
       "address": "Quảng Ninh, Việt Nam",
       "createdAt": "2024-04-15T00:00:00Z",
-      "updatedAt": "2024-04-15T00:00:00Z",
-      "tasks": [
-        "17"
-      ]
+      "updatedAt": "2024-04-15T00:00:00Z"
     },
     {
       "id": "9",
@@ -141,11 +106,7 @@
       "phone": "0222333444",
       "address": "Nghệ An, Việt Nam",
       "createdAt": "2024-05-01T00:00:00Z",
-      "updatedAt": "2024-05-01T00:00:00Z",
-      "tasks": [
-        "18",
-        "28"
-      ]
+      "updatedAt": "2024-05-01T00:00:00Z"
     },
     {
       "id": "10",
@@ -157,323 +118,49 @@
       "phone": "0111000999",
       "address": "Bình Dương, Việt Nam",
       "createdAt": "2024-05-15T00:00:00Z",
-      "updatedAt": "2024-05-15T00:00:00Z",
-      "tasks": [
-        "20",
-        "32"
-      ]
-    },
-    {
-      "id": "11",
-      "name": "Ngô Văn Tuấn",
-      "email": "tuan@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192978/samples/man-on-a-street.jpg",
-      "bio": "DevOps Engineer chuyên về container và cloud infrastructure",
-      "phone": "0999888777",
-      "address": "Đà Lạt, Việt Nam",
-      "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z",
-      "tasks": [
-        "24",
-        "36"
-      ]
-    },
-    {
-      "id": "12",
-      "name": "Phạm Thị Ngọc",
-      "email": "ngoc@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192977/samples/woman-in-the-woods.jpg",
-      "bio": "Business Analyst với kinh nghiệm phân tích yêu cầu và process optimization",
-      "phone": "0888777666",
-      "address": "Nha Trang, Việt Nam",
-      "createdAt": "2024-06-15T00:00:00Z",
-      "updatedAt": "2024-06-15T00:00:00Z",
-      "tasks": [
-        "26",
-        "27"
-      ]
-    },
-    {
-      "id": "13",
-      "name": "Lý Minh Khôi",
-      "email": "khoi@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192979/samples/people/boy-on-a-swing.jpg",
-      "bio": "Machine Learning Engineer chuyên về AI và data science",
-      "phone": "0777666555",
-      "address": "Thủ Đức, TP.HCM, Việt Nam",
-      "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "tasks": [
-        "25",
-        "29",
-        "30",
-        "34"
-      ]
-    },
-    {
-      "id": "14",
-      "name": "Trần Thị Mỹ Linh",
-      "email": "mylinh@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/samples/woman-on-a-balcony.jpg",
-      "bio": "Scrum Master và Agile Coach với 4 năm kinh nghiệm",
-      "phone": "0666555444",
-      "address": "Hội An, Quảng Nam, Việt Nam",
-      "createdAt": "2024-07-15T00:00:00Z",
-      "updatedAt": "2024-07-15T00:00:00Z",
-      "tasks": [
-        "33"
-      ]
-    },
-    {
-      "id": "15",
-      "name": "Hoàng Đức Minh",
-      "email": "ducminh@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192981/samples/man-in-suit.jpg",
-      "bio": "Technical Lead và Solution Architect với 8 năm kinh nghiệm",
-      "phone": "0555444333",
-      "address": "Quận 1, TP.HCM, Việt Nam",
-      "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-08-01T00:00:00Z",
-      "tasks": [
-        "35"
-      ]
-    },
-    {
-      "id": "16",
-      "name": "Nguyễn Văn Hòa",
-      "email": "hoa@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759529000/sample-person-1.jpg",
-      "bio": "Backend developer chuyên Node.js và GraphQL",
-      "phone": "0777000111",
-      "address": "Thái Bình, Việt Nam",
-      "createdAt": "2024-08-15T00:00:00Z",
-      "updatedAt": "2024-08-15T00:00:00Z",
-      "tasks": []
-    },
-    {
-      "id": "17",
-      "name": "Phan Thị Kiều",
-      "email": "kieu@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759529001/sample-person-2.jpg",
-      "bio": "Frontend engineer, chuyên React và performance optimizations",
-      "phone": "0888000222",
-      "address": "Vinh, Nghệ An, Việt Nam",
-      "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "tasks": [
-        "39"
-      ]
-    },
-    {
-      "id": "18",
-      "name": "Lâm Quốc Dũng",
-      "email": "dung@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759529002/sample-person-3.jpg",
-      "bio": "DevOps engineer, automation and CI/CD",
-      "phone": "0666000333",
-      "address": "Quảng Nam, Việt Nam",
-      "createdAt": "2024-09-15T00:00:00Z",
-      "updatedAt": "2024-09-15T00:00:00Z",
-      "tasks": [
-        "40"
-      ]
-    },
-    {
-      "id": "19",
-      "name": "Đỗ Thị Hằng",
-      "email": "hang@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759529003/sample-person-4.jpg",
-      "bio": "Product Designer with strong UX research background",
-      "phone": "0999000444",
-      "address": "Hải Dương, Việt Nam",
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "tasks": [
-        "41"
-      ]
-    },
-    {
-      "id": "20",
-      "name": "Võ Minh Trí",
-      "email": "tri@gmail.com",
-      "password": "12345678",
-      "avatar": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759529004/sample-person-5.jpg",
-      "bio": "QA Automation engineer, test frameworks and pipelines",
-      "phone": "0333000555",
-      "address": "Bình Thuận, Việt Nam",
-      "createdAt": "2024-10-15T00:00:00Z",
-      "updatedAt": "2024-10-15T00:00:00Z",
-      "tasks": [
-        "42"
-      ]
+      "updatedAt": "2024-05-15T00:00:00Z"
     }
   ],
   "projects": [
     {
-      "id": "1",
       "name": "E-Commerce Platform",
       "description": "Xây dựng nền tảng thương mại điện tử hiện đại với tích hợp thanh toán, quản lý kho và phân tích dữ liệu. Hỗ trợ đa nền tảng và responsive design.",
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759527850/tr1b2sr7p60sbbw9axwy.png",
+      "updatedAt": "2025-10-10T01:06:18.623Z",
+      "id": "1",
       "ownerId": "1",
-      "managerId": "15",
-      "memberIds": [
-        "3",
-        "6",
-        "18"
-      ],
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z"
-    },
-    {
-      "id": "10",
-      "name": "AI Chatbot Platform",
-      "description": "Nền tảng chatbot AI với natural language processing, multi-language support và integration với popular messaging platforms.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1732541234/ai_chatbot_project.jpg",
-      "ownerId": "3",
-      "managerId": "5",
-      "memberIds": [
-        "3",
-        "5",
-        "19"
-      ],
-      "createdAt": "2024-01-30T00:00:00Z",
-      "updatedAt": "2024-01-30T00:00:00Z"
-    },
-    {
-      "id": "11",
-      "name": "Smart City Dashboard",
-      "description": "Dashboard thông minh cho thành phố với traffic monitoring, environmental sensors và citizen services integration. Real-time analytics và predictive modeling.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192982/samples/city-skyline.jpg",
-      "ownerId": "11",
       "managerId": "2",
-      "memberIds": [
-        "1",
-        "7",
-        "20"
-      ],
-      "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z"
-    },
-    {
-      "id": "12",
-      "name": "Blockchain Voting System",
-      "description": "Hệ thống bỏ phiếu điện tử sử dụng blockchain để đảm bảo tính minh bạch và bảo mật. Smart contracts và decentralized verification.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192983/samples/blockchain-voting.jpg",
-      "ownerId": "12",
-      "managerId": "9",
-      "memberIds": [
-        "3"
-      ],
-      "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z"
-    },
-    {
-      "id": "13",
-      "name": "Augmented Reality Shopping",
-      "description": "Ứng dụng mua sắm AR cho phép khách hàng thử sản phẩm trước khi mua. 3D modeling, virtual try-on và social sharing features.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192984/samples/ar-shopping.jpg",
-      "ownerId": "13",
-      "managerId": "6",
-      "memberIds": [
-        "8",
-        "9"
-      ],
-      "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-08-01T00:00:00Z"
-    },
-    {
-      "id": "14",
-      "name": "Quantum Computing Simulator",
-      "description": "Simulator quantum computing để nghiên cứu và giáo dục. Quantum algorithms implementation và visualization tools for quantum circuits.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192985/samples/quantum-computer.jpg",
-      "ownerId": "14",
-      "managerId": "3",
-      "memberIds": [
-        "3"
-      ],
-      "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z"
-    },
-    {
-      "id": "15",
-      "name": "Neural Network Platform",
-      "description": "Platform phát triển và deploy neural networks với AutoML capabilities. Model training, hyperparameter tuning và production deployment.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192986/samples/neural-network.jpg",
-      "ownerId": "15",
-      "managerId": "4",
-      "memberIds": [
-        "10",
-        "5"
-      ],
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z"
-    },
-    {
-      "id": "17",
-      "name": "Client Onboarding Portal",
-      "description": "Cổng onboarding cho khách hàng với wizard, document upload và analytics cho bộ phận chăm sóc khách hàng.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759527850/onboarding_portal.png",
-      "ownerId": "1",
-      "managerId": "",
-      "memberIds": [
-        "3",
-        "5"
-      ],
-      "createdAt": "2025-02-01T00:00:00Z",
-      "updatedAt": "2025-02-01T00:00:00Z"
+      "createdAt": "2025-09-16T00:00:00Z"
     },
     {
       "id": "2",
       "name": "Task Management Mobile App",
       "description": "Ứng dụng di động quản lý công việc với tính năng đồng bộ đám mây, thông báo real-time và collaboration tools. Hỗ trợ cả iOS và Android.",
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759526006/kylxo6nc7lnmiddqv26r.png",
-      "ownerId": "1",
-      "managerId": "15",
-      "memberIds": [
-        "11",
-        "13",
-        "1"
-      ],
+      "ownerId": "2",
+      "managerId": "7",
       "createdAt": "2024-09-15T00:00:00Z",
       "updatedAt": "2024-09-15T00:00:00Z"
     },
     {
       "id": "3",
-      "name": "CRM System",
-      "description": "Hệ thống quản lý quan hệ khách hàng (CRM) với dashboard analytics, automated marketing và lead tracking. Tích hợp email marketing và report tools.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/cld-sample-5.jpg",
-      "ownerId": "2",
-      "managerId": "16",
-      "memberIds": [
-        "12",
-        "1"
-      ],
-      "createdAt": "2024-08-20T00:00:00Z",
-      "updatedAt": "2024-08-20T00:00:00Z"
-    },
-    {
-      "id": "4",
       "name": "Learning Management System",
       "description": "Hệ thống quản lý học tập trực tuyến với video streaming, quiz engine, progress tracking và certificate generation. Hỗ trợ multiple formats content.",
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/cld-sample-4.jpg",
       "ownerId": "3",
-      "managerId": "17",
-      "memberIds": [
-        "9",
-        "13",
-        "4"
-      ],
+      "managerId": "8",
       "createdAt": "2024-07-10T00:00:00Z",
       "updatedAt": "2024-07-10T00:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Healthcare Management System",
+      "description": "Hệ thống quản lý bệnh viện với electronic health records, appointment scheduling và telemedicine features. Đảm bảo HIPAA compliance.",
+      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192978/cld-sample.jpg",
+      "ownerId": "4",
+      "managerId": "9",
+      "createdAt": "2024-04-01T00:00:00Z",
+      "updatedAt": "2024-04-01T00:00:00Z"
     },
     {
       "id": "5",
@@ -481,122 +168,186 @@
       "description": "Dashboard quản lý thiết bị IoT với real-time monitoring, data visualization và alert system. Tích hợp với cloud services và machine learning.",
       "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192980/cld-sample-4.jpg",
       "ownerId": "5",
-      "managerId": "18",
-      "memberIds": [
-        "2",
-        "13"
-      ],
+      "managerId": "10",
       "createdAt": "2024-06-01T00:00:00Z",
       "updatedAt": "2024-06-01T00:00:00Z"
+    }
+  ],
+  "members": [
+    {
+      "id": "m1",
+      "projectId": "1",
+      "userId": "1",
+      "role": "Project owner",
+      "email": "an@gmail.com",
+      "joinedAt": "2024-10-01T00:00:00Z"
     },
     {
-      "id": "6",
-      "name": "Social Media Analytics Tool",
-      "description": "Công cụ phân tích mạng xã hội với sentiment analysis, competitor tracking và automated reporting. Hỗ trợ multiple platforms integration.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192979/cld-sample-2.jpg",
-      "ownerId": "7",
-      "managerId": "11",
-      "memberIds": [
-        "6",
-        "10"
-      ],
-      "createdAt": "2024-05-15T00:00:00Z",
-      "updatedAt": "2024-05-15T00:00:00Z"
+      "id": "m2",
+      "projectId": "1",
+      "userId": "7",
+      "role": "Backend developer",
+      "email": "namhv@gmail.com",
+      "joinedAt": "2024-10-01T00:00:00Z"
     },
     {
-      "id": "7",
-      "name": "Healthcare Management System",
-      "description": "Hệ thống quản lý bệnh viện với electronic health records, appointment scheduling và telemedicine features. Đảm bảo HIPAA compliance.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192978/cld-sample.jpg",
-      "ownerId": "8",
-      "managerId": "13",
-      "memberIds": [
-        "14",
-        "13",
-        "2"
-      ],
-      "createdAt": "2024-04-01T00:00:00Z",
-      "updatedAt": "2024-04-01T00:00:00Z"
+      "id": "m3",
+      "projectId": "1",
+      "userId": "2",
+      "role": "Project manager",
+      "email": "linh@gmail.com",
+      "joinedAt": "2024-10-02T00:00:00Z"
     },
     {
-      "id": "8",
-      "name": "Fintech Payment Gateway",
-      "description": "Cổng thanh toán fintech với blockchain integration, multi-currency support và fraud detection. Hỗ trợ APIs cho third-party integration.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192975/samples/cup-on-a-table.jpg",
-      "ownerId": "9",
-      "managerId": "14",
-      "memberIds": [
-        "15",
-        "11",
-        "2"
-      ],
-      "createdAt": "2024-03-10T00:00:00Z",
-      "updatedAt": "2024-03-10T00:00:00Z"
+      "id": "m4",
+      "projectId": "1",
+      "userId": "3",
+      "role": "Backend developer",
+      "email": "minh@gmail.com",
+      "joinedAt": "2024-10-02T00:00:00Z"
     },
     {
-      "id": "9",
-      "name": "Event Management Platform",
-      "description": "Nền tảng quản lý sự kiện với ticketing system, venue management và live streaming capabilities. Tích hợp payment và marketing tools.",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192974/samples/coffee.jpg",
-      "ownerId": "10",
-      "managerId": "12",
-      "memberIds": [
-        "7",
-        "17"
-      ],
-      "createdAt": "2024-02-20T00:00:00Z",
-      "updatedAt": "2024-02-20T00:00:00Z"
+      "id": "m5",
+      "projectId": "1",
+      "userId": "4",
+      "role": "Designer",
+      "email": "hanh@gmail.com",
+      "joinedAt": "2024-10-03T00:00:00Z"
     },
     {
-      "name": "Đặng Khánh An",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759726081/ixkkpjej6mdxlik64m3u.jpg",
-      "description": "ádfgasdfasdf",
-      "ownerId": "1",
-      "managerId": "3",
-      "memberIds": [],
-      "createdAt": "2025-10-06T04:48:48.073Z",
-      "updatedAt": "2025-10-06T04:48:48.073Z",
-      "id": "pGznrr0"
+      "id": "m6",
+      "projectId": "2",
+      "userId": "2",
+      "role": "Project owner",
+      "email": "linh@gmail.com",
+      "joinedAt": "2024-09-15T00:00:00Z"
     },
     {
-      "name": "Đặng Khánh An",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759935173/ktick1kvikejekci5xw1.jpg",
-      "description": "ádfasdfsdaf",
-      "ownerId": "1",
-      "managerId": "2",
-      "members": [
-        {
-          "userId": "9"
-        }
-      ],
-      "createdAt": "2025-10-08T14:52:58.374Z",
-      "updatedAt": "2025-10-08T14:52:58.374Z",
-      "id": "Uy1_Xo8"
+      "id": "m7",
+      "projectId": "2",
+      "userId": "7",
+      "role": "Project manager",
+      "email": "namhv@gmail.com",
+      "joinedAt": "2024-09-15T00:00:00Z"
     },
     {
-      "name": "Đặng Khánh An",
-      "imageUrl": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759935185/l9cphnhel1d1ji4rlffn.jpg",
-      "description": "ádfasdfasdfasdf",
-      "ownerId": "1",
-      "managerId": "2",
-      "members": [
-        {
-          "userId": "8"
-        },
-        {
-          "userId": "10"
-        }
-      ],
-      "createdAt": "2025-10-08T14:53:11.723Z",
-      "updatedAt": "2025-10-08T14:53:11.723Z",
-      "id": "EH8GnWS"
+      "id": "m8",
+      "projectId": "2",
+      "userId": "1",
+      "role": "Fullstack developer",
+      "email": "an@gmail.com",
+      "joinedAt": "2024-09-16T00:00:00Z"
+    },
+    {
+      "id": "m9",
+      "projectId": "2",
+      "userId": "6",
+      "role": "Tester",
+      "email": "mai@gmail.com",
+      "joinedAt": "2024-09-17T00:00:00Z"
+    },
+    {
+      "id": "m10",
+      "projectId": "3",
+      "userId": "3",
+      "role": "Project owner",
+      "email": "minh@gmail.com",
+      "joinedAt": "2024-07-10T00:00:00Z"
+    },
+    {
+      "id": "m11",
+      "projectId": "3",
+      "userId": "8",
+      "role": "Project manager",
+      "email": "thu@gmail.com",
+      "joinedAt": "2024-07-10T00:00:00Z"
+    },
+    {
+      "id": "m12",
+      "projectId": "3",
+      "userId": "2",
+      "role": "Frontend developer",
+      "email": "linh@gmail.com",
+      "joinedAt": "2024-07-11T00:00:00Z"
+    },
+    {
+      "id": "m13",
+      "projectId": "3",
+      "userId": "1",
+      "role": "Backend developer",
+      "email": "an@gmail.com",
+      "joinedAt": "2024-07-11T00:00:00Z"
+    },
+    {
+      "id": "m14",
+      "projectId": "4",
+      "userId": "4",
+      "role": "Project owner",
+      "email": "hanh@gmail.com",
+      "joinedAt": "2024-04-01T00:00:00Z"
+    },
+    {
+      "id": "m15",
+      "projectId": "4",
+      "userId": "9",
+      "role": "Project manager",
+      "email": "nam@gmail.com",
+      "joinedAt": "2024-04-01T00:00:00Z"
+    },
+    {
+      "id": "m16",
+      "projectId": "4",
+      "userId": "3",
+      "role": "Backend developer",
+      "email": "minh@gmail.com",
+      "joinedAt": "2024-04-02T00:00:00Z"
+    },
+    {
+      "id": "m17",
+      "projectId": "4",
+      "userId": "6",
+      "role": "Tester",
+      "email": "mai@gmail.com",
+      "joinedAt": "2024-04-02T00:00:00Z"
+    },
+    {
+      "id": "m18",
+      "projectId": "5",
+      "userId": "5",
+      "role": "Project owner",
+      "email": "tai@gmail.com",
+      "joinedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "id": "m19",
+      "projectId": "5",
+      "userId": "10",
+      "role": "Project manager",
+      "email": "huong@gmail.com",
+      "joinedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "id": "m20",
+      "projectId": "5",
+      "userId": "1",
+      "role": "Fullstack developer",
+      "email": "an@gmail.com",
+      "joinedAt": "2024-06-02T00:00:00Z"
+    },
+    {
+      "id": "m21",
+      "projectId": "5",
+      "userId": "9",
+      "role": "Backend developer",
+      "email": "nam@gmail.com",
+      "joinedAt": "2024-06-02T00:00:00Z"
     }
   ],
   "tasks": [
     {
       "id": "1",
       "name": "Thiết kế Database Schema",
-      "description": "https://res.cloudinary.com/dyqvxjcfp/image/upload/v1759192975/samples/dessert-on-a-plate.jpg",
+      "description": "Thiết kế cơ sở dữ liệu cho hệ thống e-commerce bao gồm users, products, orders, payments",
       "projectId": "1",
       "assigneeId": "3",
       "status": "Done",
@@ -608,1677 +359,288 @@
       "timeSpentMinutes": 720,
       "createdAt": "2024-10-01T00:00:00Z",
       "updatedAt": "2024-10-05T00:00:00Z",
-      "actualElapsedMinutes": 5760,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "10",
-      "name": "Design Course Module Structure",
-      "description": "Thiết kế cấu trúc module học tập với video, quiz và assignment tracking",
-      "projectId": "1",
-      "assigneeId": "6",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-07-10",
-      "deadline": "2024-07-15",
-      "estimatedHours": 120,
-      "createdAt": "2024-07-10T00:00:00Z",
-      "updatedAt": "2024-07-15T00:00:00Z",
-      "actualElapsedMinutes": 7200,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "11",
-      "name": "Implement Video Streaming",
-      "description": "Tích hợp video streaming với adaptive bitrate và subtitle support",
-      "projectId": "10",
-      "assigneeId": "3",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-07-16",
-      "deadline": "2024-07-30",
-      "estimatedHours": 336,
-      "createdAt": "2024-07-16T00:00:00Z",
-      "updatedAt": "2024-07-16T00:00:00Z",
-      "actualElapsedMinutes": 647344,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "12",
-      "name": "Setup IoT Device Integration",
-      "description": "Thiết lập kết nối và thu thập dữ liệu từ các thiết bị IoT sensors",
-      "projectId": "10",
-      "assigneeId": "5",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-06-01",
-      "deadline": "2024-06-15",
-      "estimatedHours": 336,
-      "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z",
-      "actualElapsedMinutes": 712144,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "13",
-      "name": "Develop Real-time Monitoring",
-      "description": "Xây dựng hệ thống monitoring real-time với alerts và notifications",
-      "projectId": "11",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "priority": "low",
-      "progress": "Hoàn thành",
-      "startDate": "2024-06-16",
-      "deadline": "2024-06-30",
-      "estimatedHours": 336,
-      "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2025-10-08T13:52:21.484Z",
-      "actualElapsedMinutes": 690544,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "14",
-      "name": "Social Media API Integration",
-      "description": "Tích hợp APIs từ Facebook, Twitter, Instagram và LinkedIn",
-      "projectId": "11",
-      "assigneeId": "7",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-05-15",
-      "deadline": "2024-05-25",
-      "estimatedHours": 240,
-      "createdAt": "2024-05-15T00:00:00Z",
-      "updatedAt": "2024-05-25T00:00:00Z",
-      "actualElapsedMinutes": 14400,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "15",
-      "name": "Implement Sentiment Analysis",
-      "description": "Phát triển engine phân tích sentiment với machine learning models",
-      "projectId": "12",
-      "assigneeId": "3",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-05-26",
-      "deadline": "2024-06-10",
-      "createdAt": "2024-05-26T00:00:00Z",
-      "updatedAt": "2024-05-26T00:00:00Z",
-      "estimatedHours": 360,
-      "actualElapsedMinutes": 720784,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "16",
-      "name": "Patient Records Database",
-      "description": "Thiết kế và implement database cho electronic health records",
-      "projectId": "12",
-      "assigneeId": "3",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-04-01",
-      "deadline": "2024-04-10",
-      "createdAt": "2024-04-01T00:00:00Z",
-      "updatedAt": "2024-04-10T00:00:00Z",
-      "estimatedHours": 216,
-      "actualElapsedMinutes": 12960,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "17",
-      "name": "Telemedicine Interface",
-      "description": "Phát triển giao diện video call cho telemedicine consultations",
-      "projectId": "13",
-      "assigneeId": "8",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-04-11",
-      "deadline": "2024-04-25",
-      "createdAt": "2024-04-11T00:00:00Z",
-      "updatedAt": "2024-04-11T00:00:00Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 785584,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "18",
-      "name": "Blockchain Payment Processing",
-      "description": "Implement blockchain-based payment processing với smart contracts",
-      "projectId": "13",
-      "assigneeId": "9",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-03-10",
-      "deadline": "2024-03-30",
-      "createdAt": "2024-03-10T00:00:00Z",
-      "updatedAt": "2024-03-10T00:00:00Z",
-      "estimatedHours": 480,
-      "actualElapsedMinutes": 831664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "19",
-      "name": "Fraud Detection System",
-      "description": "Xây dựng hệ thống phát hiện gian lận với AI và machine learning",
-      "projectId": "14",
-      "assigneeId": "3",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-03-31",
-      "deadline": "2024-04-15",
-      "createdAt": "2024-03-10T00:00:00Z",
-      "updatedAt": "2024-03-10T00:00:00Z",
-      "estimatedHours": 360,
-      "actualElapsedMinutes": 801424,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "completedAt": "2024-10-05T00:00:00Z"
     },
     {
       "id": "2",
-      "name": "Phát triển API Authentication",
-      "description": "Xây dựng hệ thống xác thực JWT với refresh token, password hashing và role-based access control",
-      "projectId": "14",
-      "assigneeId": "3",
+      "name": "Implement User Authentication",
+      "description": "Phát triển hệ thống đăng nhập/đăng ký với JWT và OAuth integration",
+      "projectId": "1",
+      "assigneeId": "1",
       "status": "In Progress",
       "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-10-06",
-      "deadline": "2024-10-12",
-      "estimatedHours": 20,
-      "timeSpentMinutes": 480,
-      "createdAt": "2024-10-06T00:00:00Z",
-      "updatedAt": "2024-10-06T00:00:00Z",
-      "actualElapsedMinutes": 529264,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "20",
-      "name": "Event Ticketing System",
-      "description": "Phát triển hệ thống bán vé với QR code generation và validation",
-      "projectId": "15",
-      "assigneeId": "10",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-02-20",
-      "deadline": "2024-03-05",
-      "createdAt": "2024-02-20T00:00:00Z",
-      "updatedAt": "2024-03-05T00:00:00Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 20160,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "21",
-      "name": "Live Streaming Integration",
-      "description": "Tích hợp live streaming cho events với multiple camera angles",
-      "projectId": "15",
-      "assigneeId": "5",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-03-06",
-      "deadline": "2024-03-20",
-      "createdAt": "2024-03-06T00:00:00Z",
-      "updatedAt": "2024-03-06T00:00:00Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 837424,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "22",
-      "name": "Natural Language Processing Engine",
-      "description": "Phát triển NLP engine với multiple language support và context understanding",
-      "projectId": "17",
-      "assigneeId": "3",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-01-30",
-      "deadline": "2024-02-20",
-      "createdAt": "2024-01-30T00:00:00Z",
-      "updatedAt": "2024-01-30T00:00:00Z",
-      "estimatedHours": 504,
-      "actualElapsedMinutes": 889264,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "23",
-      "name": "Chatbot Integration Platform",
-      "description": "Xây dựng platform tích hợp với Messenger, Telegram, WhatsApp",
-      "projectId": "17",
-      "assigneeId": "5",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-02-21",
-      "deadline": "2024-03-10",
-      "createdAt": "2024-01-30T00:00:00Z",
-      "updatedAt": "2024-01-30T00:00:00Z",
-      "estimatedHours": 432,
-      "actualElapsedMinutes": 857584,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "24",
-      "name": "Smart Traffic Monitoring",
-      "description": "Phát triển hệ thống giám sát giao thông thông minh với AI analytics",
-      "projectId": "2",
-      "assigneeId": "11",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-06-01",
-      "deadline": "2024-06-30",
-      "createdAt": "2024-06-01T00:00:00Z",
-      "updatedAt": "2024-06-01T00:00:00Z",
-      "estimatedHours": 696,
-      "actualElapsedMinutes": 712144,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "25",
-      "name": "Environmental Sensors Integration",
-      "description": "Tích hợp các sensors môi trường và xử lý dữ liệu real-time",
-      "projectId": "2",
-      "assigneeId": "13",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-06-15",
-      "deadline": "2024-07-15",
-      "createdAt": "2024-06-15T00:00:00Z",
-      "updatedAt": "2024-07-15T00:00:00Z",
-      "estimatedHours": 720,
-      "actualElapsedMinutes": 43200,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "26",
-      "name": "Citizen Services Portal",
-      "description": "Xây dựng portal dịch vụ công dân với tích hợp thanh toán online",
-      "projectId": "3",
-      "assigneeId": "12",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-07-01",
-      "deadline": "2024-08-01",
-      "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 668944,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "27",
-      "name": "Blockchain Smart Contracts",
-      "description": "Phát triển smart contracts cho hệ thống bỏ phiếu an toàn",
-      "projectId": "3",
-      "assigneeId": "12",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-07-01",
-      "deadline": "2024-08-15",
-      "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 1080,
-      "actualElapsedMinutes": 668944,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "28",
-      "name": "Voter Authentication System",
-      "description": "Hệ thống xác thực cử tri với biometric và digital identity",
-      "projectId": "4",
-      "assigneeId": "9",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-08-01",
-      "deadline": "2024-09-01",
-      "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 624304,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "29",
-      "name": "Vote Counting Algorithm",
-      "description": "Thuật toán đếm phiếu tự động với verification và audit trail",
-      "projectId": "4",
-      "assigneeId": "13",
-      "status": "Pending",
-      "priority": "high",
-      "progress": "Tạm dừng",
-      "startDate": "2024-08-15",
-      "deadline": "2024-09-15",
-      "createdAt": "2024-07-01T00:00:00Z",
-      "updatedAt": "2024-07-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 604144,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-10-03",
+      "deadline": "2024-10-15",
+      "estimatedHours": 24,
+      "timeSpentMinutes": 960,
+      "createdAt": "2024-10-03T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "3",
-      "name": "Thiết kế UI/UX Landing Page",
-      "description": "Thiết kế giao diện landing page với focus vào conversion rate và user experience",
-      "projectId": "5",
+      "name": "Design Product Catalog UI",
+      "description": "Thiết kế giao diện hiển thị danh sách sản phẩm với filter và search",
+      "projectId": "1",
       "assigneeId": "2",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-10-03",
-      "deadline": "2024-10-10",
-      "estimatedHours": 10,
-      "timeSpentMinutes": 120,
-      "createdAt": "2024-10-03T00:00:00Z",
-      "updatedAt": "2024-10-03T00:00:00Z",
-      "actualElapsedMinutes": 533584,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "30",
-      "name": "3D Product Modeling",
-      "description": "Tạo mô hình 3D cho sản phẩm với AR visualization",
-      "projectId": "5",
-      "assigneeId": "13",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-08-01",
-      "deadline": "2024-09-15",
-      "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-08-01T00:00:00Z",
-      "estimatedHours": 1080,
-      "actualElapsedMinutes": 624304,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "31",
-      "name": "Virtual Try-On Engine",
-      "description": "Công cụ thử áo quần ảo với face tracking và body measurement",
-      "projectId": "6",
-      "assigneeId": "6",
       "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-09-01",
-      "deadline": "2024-10-15",
-      "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-08-01T00:00:00Z",
-      "estimatedHours": 1056,
-      "actualElapsedMinutes": 579664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "32",
-      "name": "Social Sharing Integration",
-      "description": "Tích hợp chia sẻ lên các nền tảng xã hội với AR filters",
-      "projectId": "6",
-      "assigneeId": "10",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-08-15",
-      "deadline": "2024-09-01",
-      "createdAt": "2024-08-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "estimatedHours": 408,
-      "actualElapsedMinutes": 24480,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "33",
-      "name": "Quantum Circuit Designer",
-      "description": "Công cụ thiết kế mạch quantum với drag-and-drop interface",
-      "projectId": "7",
-      "assigneeId": "14",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-09-01",
-      "deadline": "2024-10-30",
-      "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "estimatedHours": 1416,
-      "actualElapsedMinutes": 579664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "34",
-      "name": "Quantum Algorithm Library",
-      "description": "Thư viện các thuật toán quantum phổ biến và educational examples",
-      "projectId": "7",
-      "assigneeId": "13",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-10-01",
-      "deadline": "2024-11-15",
-      "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2024-09-01T00:00:00Z",
-      "estimatedHours": 1080,
-      "actualElapsedMinutes": 536464,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "35",
-      "name": "AutoML Pipeline",
-      "description": "Hệ thống tự động tối ưu và train neural networks",
-      "projectId": "8",
-      "assigneeId": "15",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-10-01",
-      "deadline": "2024-12-01",
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 1464,
-      "actualElapsedMinutes": 536464,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "36",
-      "name": "Model Deployment Engine",
-      "description": "Công cụ deploy models lên cloud với auto-scaling và monitoring",
-      "projectId": "8",
-      "assigneeId": "11",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-11-01",
-      "deadline": "2024-12-15",
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 1056,
-      "actualElapsedMinutes": 491824,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "37",
-      "name": "Performance Analytics Dashboard",
-      "description": "Dashboard theo dõi hiệu suất models với real-time metrics",
-      "projectId": "9",
-      "assigneeId": "7",
-      "status": "Pending",
-      "priority": "high",
-      "progress": "Tạm dừng",
-      "startDate": "2024-11-15",
-      "deadline": "2025-01-01",
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 1128,
-      "actualElapsedMinutes": 471664,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
-    },
-    {
-      "id": "39",
-      "name": "Mobile UI Polish",
-      "description": "Cải thiện responsive và animations cho app di động",
-      "projectId": "9",
-      "assigneeId": "17",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-10-12",
-      "deadline": "2024-10-25",
-      "createdAt": "2024-10-11T00:00:00Z",
-      "updatedAt": "2024-10-11T00:00:00Z",
-      "estimatedHours": 312,
-      "actualElapsedMinutes": 520624,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "name": "Xây dựng UIa",
-      "assigneeId": "1",
-      "status": "Pending",
-      "startDate": "2025-10-08",
-      "deadline": "2025-10-16",
       "priority": "medium",
-      "estimatedHours": 1.5,
-      "description": "ádf",
-      "projectId": "2",
-      "timeSpentMinutes": 0,
-      "completedAt": null,
-      "createdAt": "2025-10-06T10:26:26.060Z",
-      "updatedAt": "2025-10-08T13:29:08.677Z",
-      "id": "3Hir2Mz",
-      "progress": "Tạm dừng",
-      "actualElapsedMinutes": 784,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-10-10",
+      "deadline": "2024-10-20",
+      "estimatedHours": 16,
+      "createdAt": "2024-10-08T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "4",
-      "name": "Implement Shopping Cart",
-      "description": "Phát triển tính năng giỏ hàng với add/remove items, quantity management và price calculation",
-      "projectId": "3",
-      "assigneeId": "1",
-      "status": "Done",
-      "priority": "low",
-      "progress": "Hoàn thành",
-      "startDate": "2024-10-13",
-      "deadline": "2024-10-20",
-      "estimatedHours": 8,
-      "timeSpentMinutes": 0,
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2025-10-08T13:48:26.889Z",
-      "actualElapsedMinutes": 519184,
-      "completedAt": "2025-10-08T13:48:26.889Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "40",
-      "name": "CI/CD Pipeline Harden",
-      "description": "Thêm tích hợp security scans và performance checks",
+      "name": "Shopping Cart Implementation",
+      "description": "Phát triển chức năng giỏ hàng với add/remove items và quantity management",
       "projectId": "1",
-      "assigneeId": "18",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-10-01",
-      "deadline": "2024-10-30",
-      "createdAt": "2024-09-25T00:00:00Z",
-      "updatedAt": "2024-09-25T00:00:00Z",
-      "estimatedHours": 696,
-      "actualElapsedMinutes": 536464,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "41",
-      "name": "UX Research: Onboarding Flow",
-      "description": "Nghiên cứu người dùng và thử nghiệm A/B cho onboarding",
-      "projectId": "10",
-      "assigneeId": "19",
+      "assigneeId": "2",
       "status": "To do",
       "priority": "high",
-      "progress": "Chưa bắt đầu",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-10-15",
+      "deadline": "2024-10-25",
+      "estimatedHours": 20,
+      "createdAt": "2024-10-08T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Payment Integration",
+      "description": "Tích hợp cổng thanh toán VNPay và MoMo cho đơn hàng",
+      "projectId": "1",
+      "assigneeId": "3",
+      "status": "To do",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2024-10-20",
       "deadline": "2024-11-05",
-      "createdAt": "2024-10-18T00:00:00Z",
-      "updatedAt": "2024-10-18T00:00:00Z",
-      "estimatedHours": 384,
-      "actualElapsedMinutes": 509104,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "42",
-      "name": "End-to-end Test Suite",
-      "description": "Viết các test e2e cho critical flows",
-      "projectId": "11",
-      "assigneeId": "20",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-10-05",
-      "deadline": "2024-10-28",
-      "createdAt": "2024-10-04T00:00:00Z",
-      "updatedAt": "2024-10-04T00:00:00Z",
-      "estimatedHours": 552,
-      "actualElapsedMinutes": 530704,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "43",
-      "name": "User profile endpoints",
-      "description": "Thiết kế và implement các endpoint quản lý profile người dùng.",
-      "projectId": "11",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2025-01-05",
-      "deadline": "2025-01-15",
-      "createdAt": "2025-01-05T00:00:00Z",
-      "updatedAt": "2025-01-05T00:00:00Z",
-      "estimatedHours": 240,
-      "actualElapsedMinutes": 398224,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "44",
-      "name": "Analytics dashboard design",
-      "description": "Thiết kế giao diện dashboard cho phân tích social media.",
-      "projectId": "2",
-      "assigneeId": "1",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2025-02-01",
-      "deadline": "2025-02-14",
-      "createdAt": "2025-02-01T00:00:00Z",
-      "updatedAt": "2025-02-01T00:00:00Z",
-      "estimatedHours": 312,
-      "actualElapsedMinutes": 359344,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "45",
-      "name": "Data migration scripts",
-      "description": "Viết script chuyển dữ liệu legacy sang schema mới.",
-      "projectId": "3",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2025-03-01",
-      "deadline": "2025-03-20",
-      "createdAt": "2025-03-01T00:00:00Z",
-      "updatedAt": "2025-03-01T00:00:00Z",
-      "estimatedHours": 456,
-      "actualElapsedMinutes": 319024,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "46",
-      "name": "Payment gateway sandbox",
-      "description": "Tạo môi trường sandbox để test tích hợp cổng thanh toán.",
-      "projectId": "11",
-      "assigneeId": "1",
-      "status": "Pending",
-      "priority": "high",
-      "progress": "Tạm dừng",
-      "startDate": "2025-02-10",
-      "deadline": "2025-02-28",
-      "createdAt": "2025-02-10T00:00:00Z",
-      "updatedAt": "2025-10-08T13:37:49.719Z",
-      "estimatedHours": 432,
-      "actualElapsedMinutes": 346384,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": null
-    },
-    {
-      "id": "47",
-      "name": "Event RSVP feature",
-      "description": "Phát triển feature đăng ký tham dự sự kiện và gửi thông báo.",
-      "projectId": "2",
-      "assigneeId": "1",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2025-03-10",
-      "deadline": "2025-03-25",
-      "createdAt": "2025-03-10T00:00:00Z",
-      "updatedAt": "2025-03-10T00:00:00Z",
-      "estimatedHours": 360,
-      "actualElapsedMinutes": 306064,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "48",
-      "name": "Smart contracts testing",
-      "description": "Viết test cho smart contracts trong dự án blockchain voting.",
-      "projectId": "3",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2025-04-01",
-      "deadline": "2025-04-20",
-      "createdAt": "2025-04-01T00:00:00Z",
-      "updatedAt": "2025-04-01T00:00:00Z",
-      "estimatedHours": 456,
-      "actualElapsedMinutes": 274384,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "49",
-      "name": "AR asset optimization",
-      "description": "Optimize 3D assets for AR shopping app to reduce bundle size and improve FPS.",
-      "projectId": "11",
-      "assigneeId": "1",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2025-04-15",
-      "deadline": "2025-05-15",
-      "createdAt": "2025-04-15T00:00:00Z",
-      "updatedAt": "2025-04-15T00:00:00Z",
-      "estimatedHours": 720,
-      "actualElapsedMinutes": 254224,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "5",
-      "name": "Testing Payment Integration",
-      "description": "Kiểm tra tích hợp với các cổng thanh toán: VNPay, MoMo, ZaloPay và test cases",
-      "projectId": "4",
-      "assigneeId": "4",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2024-10-21",
-      "deadline": "2024-10-28",
-      "createdAt": "2024-10-01T00:00:00Z",
-      "updatedAt": "2024-10-01T00:00:00Z",
-      "estimatedHours": 168,
-      "actualElapsedMinutes": 507664,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "50",
-      "name": "Quantum simulation UI",
-      "description": "Prototype UI components for quantum circuit simulator.",
-      "projectId": "2",
-      "assigneeId": "1",
-      "status": "To do",
-      "priority": "high",
-      "progress": "Chưa bắt đầu",
-      "startDate": "2025-05-01",
-      "deadline": "2025-06-01",
-      "createdAt": "2025-05-01T00:00:00Z",
-      "updatedAt": "2025-05-01T00:00:00Z",
-      "estimatedHours": 744,
-      "actualElapsedMinutes": 231184,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
+      "estimatedHours": 32,
+      "createdAt": "2024-10-08T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "6",
-      "name": "Setup React Native Environment",
-      "description": "Cài đặt và cấu hình môi trường phát triển React Native cho iOS và Android",
-      "projectId": "3",
+      "name": "Task Creation Feature",
+      "description": "Phát triển tính năng tạo task mới với assignment và deadline",
+      "projectId": "2",
       "assigneeId": "1",
       "status": "Done",
-      "priority": "low",
+      "priority": "high",
       "progress": "Hoàn thành",
       "startDate": "2024-09-15",
-      "deadline": "2024-09-17",
+      "deadline": "2024-09-25",
+      "estimatedHours": 18,
+      "timeSpentMinutes": 1080,
       "createdAt": "2024-09-15T00:00:00Z",
-      "updatedAt": "2025-10-08T13:48:17.592Z",
-      "estimatedHours": 48,
-      "actualElapsedMinutes": 2880,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": "2025-10-08T13:45:22.232Z",
-      "resumedAt": "2025-10-08T13:45:39.352Z"
+      "updatedAt": "2024-09-25T00:00:00Z",
+      "completedAt": "2024-09-25T00:00:00Z"
     },
     {
       "id": "7",
-      "name": "Develop Task Creation Flow",
-      "description": "Xây dựng flow tạo task với form validation, date picker và category selection",
-      "projectId": "7",
-      "assigneeId": "2",
-      "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
-      "startDate": "2024-09-20",
-      "deadline": "2024-09-30",
-      "createdAt": "2024-09-20T00:00:00Z",
-      "updatedAt": "2024-09-20T00:00:00Z",
-      "estimatedHours": 240,
-      "actualElapsedMinutes": 552304,
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "8",
-      "name": "Research CRM Requirements",
-      "description": "Nghiên cứu và phân tích yêu cầu chi tiết cho hệ thống CRM từ stakeholders",
-      "projectId": "8",
-      "assigneeId": "2",
-      "status": "Done",
-      "priority": "high",
-      "progress": "Hoàn thành",
-      "startDate": "2024-08-20",
-      "deadline": "2024-08-25",
-      "createdAt": "2024-08-20T00:00:00Z",
-      "updatedAt": "2024-08-25T00:00:00Z",
-      "estimatedHours": 120,
-      "actualElapsedMinutes": 7200,
-      "completedAt": "2025-10-08T13:25:39.014Z",
-      "pausedAt": null,
-      "resumedAt": null
-    },
-    {
-      "id": "9",
-      "name": "Build Customer Dashboard",
-      "description": "Phát triển dashboard hiển thị thông tin khách hàng với charts và analytics",
-      "projectId": "11",
+      "name": "Real-time Notifications",
+      "description": "Implement push notifications cho task updates và deadlines",
+      "projectId": "2",
       "assigneeId": "1",
       "status": "In Progress",
-      "priority": "low",
-      "progress": "Hoàn thành",
-      "startDate": "2024-09-01",
-      "deadline": "2024-09-15",
-      "createdAt": "2024-09-01T00:00:00Z",
-      "updatedAt": "2025-10-08T14:03:13.725Z",
-      "estimatedHours": 336,
-      "actualElapsedMinutes": 579664,
-      "completedAt": null,
-      "pausedAt": "2025-10-08T13:39:46.169Z",
-      "resumedAt": "2025-10-08T14:03:13.725Z"
-    },
-    {
-      "name": "Xây dựng UI",
-      "assigneeId": "1",
-      "status": "In Progress",
-      "startDate": "2025-10-09",
-      "deadline": "2025-10-10",
       "priority": "medium",
-      "estimatedHours": 0.5,
-      "description": "Xây dựng UI",
-      "projectId": "1",
-      "timeSpentMinutes": 0,
       "progress": "Đúng tiến độ",
-      "completedAt": null,
-      "pausedAt": null,
-      "resumedAt": "2025-10-08T14:41:34.507Z",
-      "createdAt": "2025-10-08T14:41:12.314Z",
-      "updatedAt": "2025-10-08T14:41:34.507Z",
-      "id": "fBYX7qQ"
-    }
-  ],
-  "members": [
-    {
-      "id": "1",
-      "projectId": "1",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "3",
-      "projectId": "1",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Frontend developer"
-    },
-    {
-      "id": "4",
-      "projectId": "1",
-      "userId": "4",
-      "email": "mai@gmail.com",
-      "role": "Tester"
-    },
-    {
-      "id": "5",
-      "projectId": "2",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "6",
-      "projectId": "2",
-      "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Fullstack developer"
-    },
-    {
-      "id": "7",
-      "projectId": "2",
-      "userId": "5",
-      "email": "duc@gmail.com",
-      "role": "Frontend developer"
+      "startDate": "2024-09-20",
+      "deadline": "2024-10-15",
+      "estimatedHours": 25,
+      "timeSpentMinutes": 1200,
+      "createdAt": "2024-09-20T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "8",
-      "projectId": "3",
-      "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Project owner"
+      "name": "Mobile App Testing",
+      "description": "Test toàn diện app trên iOS và Android với automation testing",
+      "projectId": "2",
+      "assigneeId": "6",
+      "status": "Pending",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-10-01",
+      "deadline": "2024-10-20",
+      "estimatedHours": 30,
+      "timeSpentMinutes": 600,
+      "createdAt": "2024-10-01T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "9",
+      "name": "Video Streaming Module",
+      "description": "Phát triển module streaming video với adaptive bitrate",
       "projectId": "3",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Backend developer"
+      "assigneeId": "1",
+      "status": "In Progress",
+      "priority": "high",
+      "progress": "Có rủi ro",
+      "startDate": "2024-07-15",
+      "deadline": "2024-08-15",
+      "estimatedHours": 40,
+      "timeSpentMinutes": 1800,
+      "createdAt": "2024-07-15T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "10",
+      "name": "Quiz Engine Development",
+      "description": "Xây dựng hệ thống quiz với multiple choice và tự luận",
       "projectId": "3",
-      "userId": "7",
-      "email": "huy@gmail.com",
-      "role": "Designer"
+      "assigneeId": "3",
+      "status": "To do",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-08-01",
+      "deadline": "2024-08-30",
+      "estimatedHours": 35,
+      "createdAt": "2024-08-01T00:00:00Z",
+      "updatedAt": "2024-08-01T00:00:00Z"
     },
     {
       "id": "11",
-      "projectId": "4",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Project owner"
+      "name": "Student Dashboard UI",
+      "description": "Thiết kế dashboard cho học viên với progress tracking",
+      "projectId": "3",
+      "assigneeId": "2",
+      "status": "Done",
+      "priority": "medium",
+      "progress": "Hoàn thành",
+      "startDate": "2024-07-20",
+      "deadline": "2024-08-10",
+      "estimatedHours": 22,
+      "timeSpentMinutes": 1320,
+      "createdAt": "2024-07-20T00:00:00Z",
+      "updatedAt": "2024-08-10T00:00:00Z",
+      "completedAt": "2024-08-10T00:00:00Z"
     },
     {
       "id": "12",
+      "name": "Patient Records System",
+      "description": "Phát triển hệ thống quản lý hồ sơ bệnh nhân với HIPAA compliance",
       "projectId": "4",
-      "userId": "4",
-      "email": "mai@gmail.com",
-      "role": "Tester"
+      "assigneeId": "3",
+      "status": "In Progress",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-04-10",
+      "deadline": "2024-05-15",
+      "estimatedHours": 50,
+      "timeSpentMinutes": 2400,
+      "createdAt": "2024-04-10T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "13",
+      "name": "Appointment Scheduling",
+      "description": "Hệ thống đặt lịch khám với calendar integration và notifications",
       "projectId": "4",
-      "userId": "6",
-      "email": "lan@gmail.com",
-      "role": "Designer"
+      "assigneeId": "4",
+      "status": "To do",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-05-01",
+      "deadline": "2024-06-01",
+      "estimatedHours": 28,
+      "createdAt": "2024-05-01T00:00:00Z",
+      "updatedAt": "2024-05-01T00:00:00Z"
     },
     {
       "id": "14",
-      "projectId": "5",
-      "userId": "5",
-      "email": "duc@gmail.com",
-      "role": "Project owner"
+      "name": "Security Testing",
+      "description": "Kiểm tra bảo mật toàn diện cho healthcare system",
+      "projectId": "4",
+      "assigneeId": "6",
+      "status": "Pending",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-05-15",
+      "deadline": "2024-06-15",
+      "estimatedHours": 35,
+      "timeSpentMinutes": 900,
+      "createdAt": "2024-05-15T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "15",
+      "name": "IoT Device Integration",
+      "description": "Tích hợp các thiết bị IoT sensors với dashboard",
       "projectId": "5",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Fullstack developer"
+      "assigneeId": "5",
+      "status": "In Progress",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-06-05",
+      "deadline": "2024-07-05",
+      "estimatedHours": 45,
+      "timeSpentMinutes": 2100,
+      "createdAt": "2024-06-05T00:00:00Z",
+      "updatedAt": "2024-10-08T00:00:00Z"
     },
     {
       "id": "16",
+      "name": "Real-time Analytics",
+      "description": "Phát triển dashboard analytics với real-time data visualization",
       "projectId": "5",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Backend developer"
+      "assigneeId": "1",
+      "status": "To do",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-07-01",
+      "deadline": "2024-08-01",
+      "estimatedHours": 38,
+      "createdAt": "2024-07-01T00:00:00Z",
+      "updatedAt": "2024-07-01T00:00:00Z"
     },
     {
       "id": "17",
-      "projectId": "6",
-      "userId": "7",
-      "email": "huy@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "18",
-      "projectId": "6",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "19",
-      "projectId": "6",
-      "userId": "6",
-      "email": "lan@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "20",
-      "projectId": "7",
-      "userId": "8",
-      "email": "thu@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "21",
-      "projectId": "7",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "22",
-      "projectId": "7",
-      "userId": "4",
-      "email": "mai@gmail.com",
-      "role": "Tester"
-    },
-    {
-      "id": "23",
-      "projectId": "7",
-      "userId": "9",
-      "email": "nam@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "24",
-      "projectId": "8",
-      "userId": "9",
-      "email": "nam@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "25",
-      "projectId": "8",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "26",
-      "projectId": "8",
-      "userId": "4",
-      "email": "mai@gmail.com",
-      "role": "Tester"
-    },
-    {
-      "id": "27",
-      "projectId": "9",
-      "userId": "10",
-      "email": "huong@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "28",
-      "projectId": "9",
-      "userId": "5",
-      "email": "duc@gmail.com",
-      "role": "Frontend developer"
-    },
-    {
-      "id": "29",
-      "projectId": "9",
-      "userId": "6",
-      "email": "lan@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "30",
-      "projectId": "10",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "31",
-      "projectId": "10",
-      "userId": "5",
-      "email": "duc@gmail.com",
-      "role": "Frontend developer"
-    },
-    {
-      "id": "32",
-      "projectId": "10",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "33",
-      "projectId": "11",
-      "userId": "11",
-      "email": "tuan@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "34",
-      "projectId": "11",
-      "userId": "12",
-      "email": "ngoc@gmail.com",
-      "role": "Business Analyst"
-    },
-    {
-      "id": "35",
-      "projectId": "11",
-      "userId": "13",
-      "email": "khoi@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "36",
-      "projectId": "11",
-      "userId": "7",
-      "email": "huy@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "37",
-      "projectId": "11",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Fullstack developer"
-    },
-    {
-      "id": "38",
-      "projectId": "12",
-      "userId": "12",
-      "email": "ngoc@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "39",
-      "projectId": "12",
-      "userId": "9",
-      "email": "nam@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "40",
-      "projectId": "12",
-      "userId": "13",
-      "email": "khoi@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "41",
-      "projectId": "12",
-      "userId": "4",
-      "email": "mai@gmail.com",
-      "role": "Tester"
-    },
-    {
-      "id": "42",
-      "projectId": "13",
-      "userId": "13",
-      "email": "khoi@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "43",
-      "projectId": "13",
-      "userId": "6",
-      "email": "lan@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "44",
-      "projectId": "13",
-      "userId": "10",
-      "email": "huong@gmail.com",
-      "role": "Frontend developer"
-    },
-    {
-      "id": "45",
-      "projectId": "13",
-      "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Frontend developer"
-    },
-    {
-      "id": "46",
-      "projectId": "14",
-      "userId": "14",
-      "email": "mylinh@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "47",
-      "projectId": "14",
-      "userId": "13",
-      "email": "khoi@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "48",
-      "projectId": "14",
-      "userId": "15",
-      "email": "ducminh@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "49",
-      "projectId": "15",
-      "userId": "15",
-      "email": "ducminh@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "id": "50",
-      "projectId": "15",
-      "userId": "11",
-      "email": "tuan@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "51",
-      "projectId": "15",
-      "userId": "7",
-      "email": "huy@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "52",
-      "projectId": "15",
-      "userId": "13",
-      "email": "khoi@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "53",
-      "projectId": "1",
-      "userId": "11",
-      "email": "tuan@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "54",
-      "projectId": "1",
-      "userId": "15",
-      "email": "ducminh@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "55",
-      "projectId": "2",
-      "userId": "14",
-      "email": "mylinh@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "56",
-      "projectId": "3",
-      "userId": "12",
-      "email": "ngoc@gmail.com",
-      "role": "Designer"
-    },
-    {
-      "id": "57",
-      "projectId": "1",
-      "userId": "16",
-      "email": "hoa@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "58",
-      "projectId": "1",
-      "userId": "15",
-      "email": "ducminh@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "59",
-      "projectId": "2",
-      "userId": "17",
-      "email": "kieu@gmail.com",
-      "role": "Frontend developer"
-    },
-    {
-      "id": "60",
+      "name": "ML-based Anomaly Detection",
+      "description": "Implement machine learning để detect anomalies trong IoT data",
       "projectId": "5",
-      "userId": "18",
-      "email": "dung@gmail.com",
-      "role": "DevOps"
-    },
-    {
-      "id": "61",
-      "projectId": "11",
-      "userId": "19",
-      "email": "hang@gmail.com",
-      "role": "Product Designer"
-    },
-    {
-      "id": "62",
-      "projectId": "3",
-      "userId": "20",
-      "email": "tri@gmail.com",
-      "role": "QA Automation"
-    },
-    {
-      "id": "63",
-      "projectId": "8",
-      "userId": "16",
-      "email": "hoa@gmail.com",
-      "role": "Backend developer"
-    },
-    {
-      "id": "64",
-      "projectId": "6",
-      "userId": "18",
-      "email": "dung@gmail.com",
-      "role": "CI/CD Engineer"
-    },
-    {
-      "id": "65",
-      "projectId": "2",
-      "userId": "20",
-      "email": "tri@gmail.com",
-      "role": "QA Automation"
-    },
-    {
-      "id": "66",
-      "projectId": "4",
-      "userId": "19",
-      "email": "hang@gmail.com",
-      "role": "UX Researcher"
-    },
-    {
-      "id": "67",
-      "projectId": "2",
-      "userId": "15",
-      "email": "ducminh@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "68",
-      "projectId": "3",
-      "userId": "16",
-      "email": "hoa@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "69",
-      "projectId": "4",
-      "userId": "17",
-      "email": "kieu@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "70",
-      "projectId": "5",
-      "userId": "18",
-      "email": "dung@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "71",
-      "projectId": "6",
-      "userId": "11",
-      "email": "tuan@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "72",
-      "projectId": "7",
-      "userId": "13",
-      "email": "khoi@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "73",
-      "projectId": "8",
-      "userId": "14",
-      "email": "mylinh@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "74",
-      "projectId": "9",
-      "userId": "12",
-      "email": "ngoc@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "75",
-      "projectId": "10",
-      "userId": "5",
-      "email": "duc@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "76",
-      "projectId": "11",
-      "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "77",
-      "projectId": "12",
-      "userId": "9",
-      "email": "nam@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "78",
-      "projectId": "13",
-      "userId": "6",
-      "email": "lan@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "79",
-      "projectId": "14",
-      "userId": "3",
-      "email": "anh@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "80",
-      "projectId": "15",
-      "userId": "4",
-      "email": "mai@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "81",
-      "projectId": "4",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "82",
-      "projectId": "6",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "83",
-      "projectId": "7",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "84",
-      "projectId": "8",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "85",
-      "projectId": "9",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "86",
-      "projectId": "12",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "87",
-      "projectId": "13",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "88",
-      "projectId": "14",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "89",
-      "projectId": "15",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project manager"
-    },
-    {
-      "id": "91",
-      "projectId": "17",
-      "userId": "1",
-      "email": "an@gmail.com",
-      "role": "Project owner"
-    },
-    {
-      "projectId": "pGznrr0",
-      "userId": "1",
-      "role": "Project owner",
-      "email": "an@gmail.com",
-      "joinedAt": "2025-10-06T04:48:48.169Z",
-      "id": "E4yTnbN"
-    },
-    {
-      "projectId": "pGznrr0",
-      "userId": "3",
-      "role": "Project manager",
-      "email": "anh@gmail.com",
-      "joinedAt": "2025-10-06T04:48:48.169Z",
-      "id": "roGty4y"
-    },
-    {
-      "projectId": "pGznrr0",
-      "userId": "5",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-06T04:48:48.169Z",
-      "id": "PVrSxUF"
-    },
-    {
-      "projectId": "1",
-      "userId": "2",
-      "email": "linh@gmail.com",
-      "role": "Frontend developer",
-      "id": "hePo02P"
-    },
-    {
-      "projectId": "Uy1_Xo8",
-      "userId": "1",
-      "role": "Project owner",
-      "email": "an@gmail.com",
-      "joinedAt": "2025-10-08T14:52:58.457Z",
-      "id": "c4jyey7"
-    },
-    {
-      "projectId": "Uy1_Xo8",
-      "userId": "2",
-      "role": "Project manager",
-      "email": "linh@gmail.com",
-      "joinedAt": "2025-10-08T14:52:58.457Z",
-      "id": "THMSlxs"
-    },
-    {
-      "projectId": "Uy1_Xo8",
-      "userId": "9",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-08T14:52:58.457Z",
-      "id": "9TZ5eBL"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "1",
-      "role": "Project owner",
-      "email": "an@gmail.com",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "Yay1rcT"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "2",
-      "role": "Project manager",
-      "email": "linh@gmail.com",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "On_46JR"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "8",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "VBhOSv1"
-    },
-    {
-      "projectId": "EH8GnWS",
-      "userId": "10",
-      "role": "Fullstack developer",
-      "email": "",
-      "joinedAt": "2025-10-08T14:53:11.810Z",
-      "id": "RMMEOHO"
+      "assigneeId": "9",
+      "status": "To do",
+      "priority": "low",
+      "progress": "Đúng tiến độ",
+      "startDate": "2024-08-01",
+      "deadline": "2024-09-15",
+      "estimatedHours": 42,
+      "createdAt": "2024-08-01T00:00:00Z",
+      "updatedAt": "2024-08-01T00:00:00Z"
     }
   ],
-  "requests": []
+  "requests": [
+    {
+      "id": "1",
+      "type": "invite",
+      "senderId": "1",
+      "recipientId": "8",
+      "projectId": "1",
+      "payload": {
+        "role": "Tester",
+        "email": "thu@gmail.com",
+        "userId": "8"
+      },
+      "status": "pending",
+      "createdAt": "2025-10-09T00:10:21.910Z"
+    },
+    {
+      "id": "2",
+      "type": "invite",
+      "senderId": "2",
+      "recipientId": "5",
+      "projectId": "2",
+      "payload": {
+        "role": "Backend developer",
+        "email": "tai@gmail.com",
+        "userId": "5"
+      },
+      "status": "pending",
+      "createdAt": "2025-10-08T15:30:00.000Z"
+    }
+  ]
 }

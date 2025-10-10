@@ -12,10 +12,12 @@ import {
     Tag,
     Select,
     Collapse,
-    Button
+    Button,
+    Badge,
+    Divider
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { SearchOutlined } from '@ant-design/icons';
+import { EditOutlined, SearchOutlined, FilterOutlined, ClearOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
@@ -99,7 +101,14 @@ const PersonalTasks: React.FC = () => {
     const [statusModalVisible, setStatusModalVisible] = useState(false);
     const [editingTask, setEditingTask] = useState<Task | undefined>();
     const [searchText, setSearchText] = useState('');
-    const [sortBy, setSortBy] = useState<'deadline' | 'priority'>('deadline');
+    const [sortBy, setSortBy] = useState<'deadline' | 'priority' | 'createdAt' | 'name'>('deadline');
+
+    // Filter states
+    const [filterStatus, setFilterStatus] = useState<TaskStatusType | undefined>(undefined);
+    const [filterPriority, setFilterPriority] = useState<TaskPriorityType | undefined>(undefined);
+    const [filterProgress, setFilterProgress] = useState<TaskProgressType | undefined>(undefined);
+    const [filterProject, setFilterProject] = useState<string | undefined>(undefined);
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     console.log(tasks);
     useEffect(() => {
         if (user?.id) {
@@ -125,16 +134,70 @@ const PersonalTasks: React.FC = () => {
         }
     };
 
-    const filteredTasks = tasks.filter(task =>
-        task.name.toLowerCase().includes(searchText.toLowerCase())
-    ).sort((a, b) => {
-        if (sortBy === 'deadline') {
-            return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
-        } else {
-            const priorityOrder = { [TaskPriority.HIGH]: 3, [TaskPriority.MEDIUM]: 2, [TaskPriority.LOW]: 1 };
-            return priorityOrder[b.priority] - priorityOrder[a.priority];
-        }
-    });
+    const handleResetFilters = () => {
+        setSearchText('');
+        setFilterStatus(undefined);
+        setFilterPriority(undefined);
+        setFilterProgress(undefined);
+        setFilterProject(undefined);
+        setSortBy('deadline');
+        setSortOrder('asc');
+    };
+
+    const getActiveFiltersCount = () => {
+        let count = 0;
+        if (searchText) count++;
+        if (filterStatus) count++;
+        if (filterPriority) count++;
+        if (filterProgress) count++;
+        if (filterProject) count++;
+        return count;
+    };
+
+
+
+    const filteredTasks = tasks
+        .filter(task => {
+            // Text search filter
+            const matchesSearch = searchText === '' ||
+                task.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                (task.description && task.description.toLowerCase().includes(searchText.toLowerCase()));
+
+            // Status filter
+            const matchesStatus = !filterStatus || task.status === filterStatus;
+
+            // Priority filter
+            const matchesPriority = !filterPriority || task.priority === filterPriority;
+
+            // Progress filter
+            const matchesProgress = !filterProgress || task.progress === filterProgress;
+
+            // Project filter
+            const matchesProject = !filterProject || task.projectId === filterProject;
+
+            return matchesSearch && matchesStatus && matchesPriority && matchesProgress && matchesProject;
+        })
+        .sort((a, b) => {
+            let comparison = 0;
+            switch (sortBy) {
+                case 'deadline':
+                    comparison = new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+                    break;
+                case 'priority':
+                    const priorityOrder = { [TaskPriority.HIGH]: 3, [TaskPriority.MEDIUM]: 2, [TaskPriority.LOW]: 1 };
+                    comparison = priorityOrder[b.priority] - priorityOrder[a.priority];
+                    break;
+                case 'createdAt':
+                    comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                    break;
+                case 'name':
+                    comparison = a.name.localeCompare(b.name);
+                    break;
+                default:
+                    comparison = 0;
+            }
+            return sortOrder === 'asc' ? comparison : -comparison;
+        });
 
     useEffect(() => {
         if (user?.id) {
@@ -196,7 +259,7 @@ const PersonalTasks: React.FC = () => {
             key: 'status',
             width: '10%',
             className: 'table-col-status',
-            render: (status) => <span>{status}</span>,
+            render: (status) => <span>{status}<EditOutlined style={{ color: "#999" }} /></span>,
         },
         {
             dataIndex: 'startDate',
@@ -259,26 +322,156 @@ const PersonalTasks: React.FC = () => {
                         <Title level={3} style={{ margin: 0 }}>Danh sách nhiệm vụ</Title>
                     </Col>
                     <Col>
-                        <Space>
-                            <Select
-                                value={sortBy}
-                                onChange={setSortBy}
-                                style={{ width: 200 }}
-                                placeholder="Sắp xếp theo"
-                            >
-                                <Option value="deadline">Sắp xếp theo hạn chót</Option>
-                                <Option value="priority">Sắp xếp theo độ ưu tiên</Option>
-                            </Select>
-                            <Input
-                                placeholder="Tìm kiếm nhiệm vụ"
-                                prefix={<SearchOutlined />}
-                                value={searchText}
-                                onChange={(e) => setSearchText(e.target.value)}
-                                style={{ width: 250 }}
-                            />
-                        </Space>
+                        <Input
+                            placeholder="Tìm kiếm nhiệm vụ"
+                            prefix={<SearchOutlined />}
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            style={{ width: 300 }}
+                        />
                     </Col>
                 </Row>
+
+                {/* Advanced Filters */}
+                <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
+                    <Row gutter={[16, 16]} align="middle">
+                        <Col xs={24} sm={12} md={6} lg={3}>
+                            <div style={{ marginBottom: 8 }}>
+                                <Badge count={getActiveFiltersCount()} offset={[10, 0]}>
+                                    <FilterOutlined /> Bộ lọc
+                                </Badge>
+                            </div>
+                        </Col>
+
+                        <Col xs={24} sm={12} md={6} lg={4}>
+                            <Select
+                                placeholder="Trạng thái"
+                                style={{ width: '100%' }}
+                                value={filterStatus}
+                                onChange={setFilterStatus}
+                                allowClear
+                            >
+                                <Select.Option value={TaskStatus.TODO}>To do</Select.Option>
+                                <Select.Option value={TaskStatus.IN_PROGRESS}>In Progress</Select.Option>
+                                <Select.Option value={TaskStatus.PENDING}>Pending</Select.Option>
+                                <Select.Option value={TaskStatus.DONE}>Done</Select.Option>
+                            </Select>
+                        </Col>
+
+                        <Col xs={24} sm={12} md={6} lg={4}>
+                            <Select
+                                placeholder="Độ ưu tiên"
+                                style={{ width: '100%' }}
+                                value={filterPriority}
+                                onChange={setFilterPriority}
+                                allowClear
+                            >
+                                <Select.Option value={TaskPriority.HIGH}>Cao</Select.Option>
+                                <Select.Option value={TaskPriority.MEDIUM}>Trung bình</Select.Option>
+                                <Select.Option value={TaskPriority.LOW}>Thấp</Select.Option>
+                            </Select>
+                        </Col>
+
+                        <Col xs={24} sm={12} md={6} lg={4}>
+                            <Select
+                                placeholder="Tiến độ"
+                                style={{ width: '100%' }}
+                                value={filterProgress}
+                                onChange={setFilterProgress}
+                                allowClear
+                            >
+                                <Select.Option value={TaskProgress.ON_TRACK}>Đúng tiến độ</Select.Option>
+                                <Select.Option value={TaskProgress.AT_RISK}>Có rủi ro</Select.Option>
+                                <Select.Option value={TaskProgress.DELAYED}>Trễ hẹn</Select.Option>
+                                <Select.Option value={TaskProgress.DONE}>Hoàn thành</Select.Option>
+                            </Select>
+                        </Col>
+
+                        <Col xs={24} sm={12} md={6} lg={4}>
+                            <Select
+                                placeholder="Dự án"
+                                style={{ width: '100%' }}
+                                value={filterProject}
+                                onChange={setFilterProject}
+                                allowClear
+                            >
+                                {projects.map(project => (
+                                    <Select.Option key={project.id} value={project.id}>
+                                        {project.name}
+                                    </Select.Option>
+                                ))}
+                            </Select>
+                        </Col>
+
+                        <Col xs={24} sm={12} md={6} lg={5}>
+                            <Space>
+                                <Select
+                                    placeholder="Sắp xếp"
+                                    style={{ width: 140 }}
+                                    value={`${sortBy}-${sortOrder}`}
+                                    onChange={(value) => {
+                                        const [field, order] = value.split('-');
+                                        setSortBy(field as 'deadline' | 'priority' | 'createdAt' | 'name');
+                                        setSortOrder(order as 'asc' | 'desc');
+                                    }}
+                                >
+                                    <Select.Option value="deadline-asc">Hạn chót sớm</Select.Option>
+                                    <Select.Option value="deadline-desc">Hạn chót muộn</Select.Option>
+                                    <Select.Option value="priority-desc">Ưu tiên cao</Select.Option>
+                                    <Select.Option value="priority-asc">Ưu tiên thấp</Select.Option>
+                                    <Select.Option value="name-asc">Tên A-Z</Select.Option>
+                                    <Select.Option value="name-desc">Tên Z-A</Select.Option>
+                                    <Select.Option value="createdAt-desc">Mới nhất</Select.Option>
+                                    <Select.Option value="createdAt-asc">Cũ nhất</Select.Option>
+                                </Select>
+
+                                <Button
+                                    icon={<ClearOutlined />}
+                                    onClick={handleResetFilters}
+                                    title="Xóa tất cả bộ lọc"
+                                >
+                                    Reset
+                                </Button>
+                            </Space>
+                        </Col>
+                    </Row>
+
+                    {/* Filter Summary */}
+                    {getActiveFiltersCount() > 0 && (
+                        <>
+                            <Divider style={{ margin: '12px 0' }} />
+                            <div style={{ fontSize: '12px', color: '#666' }}>
+                                <Space wrap>
+                                    {searchText && (
+                                        <Tag closable onClose={() => setSearchText('')}>
+                                            Tìm kiếm: "{searchText}"
+                                        </Tag>
+                                    )}
+                                    {filterStatus && (
+                                        <Tag closable onClose={() => setFilterStatus(undefined)}>
+                                            Trạng thái: {filterStatus}
+                                        </Tag>
+                                    )}
+                                    {filterPriority && (
+                                        <Tag closable onClose={() => setFilterPriority(undefined)}>
+                                            Độ ưu tiên: {getPriorityText(filterPriority)}
+                                        </Tag>
+                                    )}
+                                    {filterProgress && (
+                                        <Tag closable onClose={() => setFilterProgress(undefined)}>
+                                            Tiến độ: {filterProgress}
+                                        </Tag>
+                                    )}
+                                    {filterProject && (
+                                        <Tag closable onClose={() => setFilterProject(undefined)}>
+                                            Dự án: {projects.find(p => p.id === filterProject)?.name}
+                                        </Tag>
+                                    )}
+                                </Space>
+                            </div>
+                        </>
+                    )}
+                </Card>
 
                 {error && (
                     <Alert

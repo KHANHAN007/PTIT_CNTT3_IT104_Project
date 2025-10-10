@@ -20,7 +20,7 @@ export const AuthRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const location = useLocation();
 
     if (isAuthenticated) {
-        const from = (location.state as any)?.from?.pathname || '/profile';
+        const from = (location.state as any)?.from?.pathname || '/projects';
         return <Navigate to={from} replace />;
     }
 

@@ -117,10 +117,17 @@ export const projectsService = {
     },
 
     async updateProject(projectId: string, projectData: UpdateProjectRequest): Promise<Project> {
+        // Get current project data first to preserve all existing fields
+        const currentRes = await api.get(`/projects/${projectId}`);
+        const currentProject = currentRes.data;
+
+        // Merge with new data, preserving existing fields
         const updateData = {
-            ...projectData,
+            ...currentProject, // Keep all existing fields
+            ...projectData,    // Override with new data
             updatedAt: new Date().toISOString()
         };
+
         const res = await api.put(`/projects/${projectId}`, updateData);
         return res.data;
     },

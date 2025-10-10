@@ -30,7 +30,7 @@ function Login() {
     const onFinish = async (values: LoginForm) => {
         try {
             await dispatch(login(values)).unwrap();
-            navigate('/profile');
+            navigate('/projects');
         } catch (error) {
             console.error("Login failed:", error);
         }

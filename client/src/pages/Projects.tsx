@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchProjects, createProject, updateProject, deleteProject } from '../store/projectsSlice';
 import { fetchAllUsers } from '../store/usersSlice';
 import { fetchMembersForProjectsAsync } from '../store/membersSlice';
-import type { Project } from '../types';
+import type { Project, MemberRoleType } from '../types';
 import { getRoleDisplayName, getRoleColor, MemberRole } from '../types';
 import type { ColumnsType } from 'antd/es/table';
 import {
@@ -20,12 +20,16 @@ import {
     Tooltip,
     Row,
     Col,
+    Select,
+    DatePicker,
+    Badge,
+    Divider,
 } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, TeamOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, TeamOutlined, FilterOutlined, ClearOutlined, SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
 import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../components/ImageUpload';
-import { Select } from 'antd';
+import dayjs from 'dayjs';
 
 
 function Projects() {
@@ -44,6 +48,15 @@ function Projects() {
     const [form] = Form.useForm();
     const [managerId, setManagerId] = useState<string | undefined>(undefined);
     const [memberIds, setMemberIds] = useState<string[]>([]);
+
+    // Filter states
+    const [filterOwner, setFilterOwner] = useState<string | undefined>(undefined);
+    const [filterManager, setFilterManager] = useState<string | undefined>(undefined);
+    const [filterRole, setFilterRole] = useState<MemberRoleType | undefined>(undefined);
+    const [filterDateRange, setFilterDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
+    const [sortBy, setSortBy] = useState<'name' | 'createdAt' | 'updatedAt'>('updatedAt');
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+
     const pageSize = 10;
 
     useEffect(() => {
@@ -102,6 +115,9 @@ function Projects() {
             description: project.description,
             imageUrl: project.imageUrl,
         });
+        // For editing, we don't change manager/members, so reset these states
+        setManagerId(project.managerId);
+        setMemberIds([]);
         setIsProjectModalVisible(true);
     };
 
@@ -113,32 +129,40 @@ function Projects() {
     const handleProjectModalOk = async () => {
         try {
             const values = await form.validateFields();
-            if (!managerId) {
-                message.error('Vui lòng chọn quản lý dự án (manager)');
-                return;
-            }
-            if (!users.find(u => u.id === managerId)) {
-                message.error('Quản lý dự án không hợp lệ');
-                return;
-            }
-            const ownerId = user!.id;
-            const invalidMembers = memberIds.filter(id => id === ownerId || id === managerId);
-            if (invalidMembers.length > 0) {
-                message.error('Danh sách thành viên không được chứa chủ dự án hoặc quản lý');
-                return;
-            }
-
-            const projectData = {
-                ...values,
-                ownerId: ownerId,
-                managerId: managerId,
-                members: memberIds.map(id => ({ userId: id })),
-            };
 
             if (editingProject) {
-                await dispatch(updateProject({ id: editingProject.id, projectData: values })).unwrap();
+                // For editing, we only need the basic project fields
+                const updateData = {
+                    name: values.name,
+                    description: values.description,
+                    imageUrl: values.imageUrl
+                };
+                await dispatch(updateProject({ id: editingProject.id, projectData: updateData })).unwrap();
                 message.success('Cập nhật dự án thành công!');
             } else {
+                // For creating new project, validate manager and members
+                if (!managerId) {
+                    message.error('Vui lòng chọn quản lý dự án (manager)');
+                    return;
+                }
+                if (!users.find(u => u.id === managerId)) {
+                    message.error('Quản lý dự án không hợp lệ');
+                    return;
+                }
+                const ownerId = user!.id;
+                const invalidMembers = memberIds.filter(id => id === ownerId || id === managerId);
+                if (invalidMembers.length > 0) {
+                    message.error('Danh sách thành viên không được chứa chủ dự án hoặc quản lý');
+                    return;
+                }
+
+                const projectData = {
+                    ...values,
+                    ownerId: ownerId,
+                    managerId: managerId,
+                    members: memberIds.map(id => ({ userId: id })),
+                };
+
                 await dispatch(createProject(projectData)).unwrap();
                 message.success('Tạo dự án thành công!');
             }
@@ -163,10 +187,68 @@ function Projects() {
         }
     };
 
-    const filteredProjects = getUserProjects().filter(project =>
-        project.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const handleResetFilters = () => {
+        setSearchText('');
+        setFilterOwner(undefined);
+        setFilterManager(undefined);
+        setFilterRole(undefined);
+        setFilterDateRange(null);
+        setSortBy('updatedAt');
+        setSortOrder('desc');
+        setCurrentPage(1);
+    };
+
+    const getActiveFiltersCount = () => {
+        let count = 0;
+        if (searchText) count++;
+        if (filterOwner) count++;
+        if (filterManager) count++;
+        if (filterRole) count++;
+        if (filterDateRange) count++;
+        return count;
+    };
+
+    const filteredProjects = getUserProjects()
+        .filter(project => {
+            // Text search filter
+            const matchesSearch = searchText === '' ||
+                project.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                project.description.toLowerCase().includes(searchText.toLowerCase());
+
+            // Owner filter
+            const matchesOwner = !filterOwner || project.ownerId === filterOwner;
+
+            // Manager filter
+            const matchesManager = !filterManager || project.managerId === filterManager;
+
+            // Role filter - check if current user has specific role in this project
+            const matchesRole = !filterRole || getUserRoleInProject(project.id) === filterRole;
+
+            // Date range filter
+            const matchesDateRange = !filterDateRange || (
+                new Date(project.createdAt) >= filterDateRange[0].toDate() &&
+                new Date(project.createdAt) <= filterDateRange[1].toDate()
+            );
+
+            return matchesSearch && matchesOwner && matchesManager && matchesRole && matchesDateRange;
+        })
+        .sort((a, b) => {
+            let comparison = 0;
+            switch (sortBy) {
+                case 'name':
+                    comparison = a.name.localeCompare(b.name);
+                    break;
+                case 'createdAt':
+                    comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                    break;
+                case 'updatedAt':
+                    comparison = new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+                    break;
+                default:
+                    comparison = 0;
+            }
+            return sortOrder === 'asc' ? comparison : -comparison;
+        });
 
     const startIndex = (currentPage - 1) * pageSize;
     const paginatedProjects = filteredProjects.slice(startIndex, startIndex + pageSize);
@@ -345,8 +427,8 @@ function Projects() {
 
                         <Tooltip title={!isOwner ? 'Chỉ chủ sở hữu mới có thể xóa dự án' : ''}>
                             <Button
-                            variant="solid"
-                            color="red"
+                                variant="solid"
+                                color="red"
                                 size="small"
                                 danger
                                 icon={<DeleteOutlined />}
@@ -399,8 +481,177 @@ function Projects() {
                             value={searchText}
                             onChange={(e) => setSearchText(e.target.value)}
                         />
-
                     </div>
+
+                    {/* Advanced Filters */}
+                    <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
+                        <Row gutter={[16, 16]} align="middle">
+                            <Col xs={24} sm={12} md={6} lg={4}>
+                                <div style={{ marginBottom: 8 }}>
+                                    <Badge count={getActiveFiltersCount()} offset={[10, 0]}>
+                                        <FilterOutlined /> Bộ lọc
+                                    </Badge>
+                                </div>
+                            </Col>
+
+                            <Col xs={24} sm={12} md={6} lg={4}>
+                                <Select
+                                    placeholder="Chủ sở hữu"
+                                    style={{ width: '100%' }}
+                                    value={filterOwner}
+                                    onChange={setFilterOwner}
+                                    allowClear
+                                >
+                                    {users.map(user => (
+                                        <Select.Option key={user.id} value={user.id}>
+                                            {user.name}
+                                        </Select.Option>
+                                    ))}
+                                </Select>
+                            </Col>
+
+                            <Col xs={24} sm={12} md={6} lg={4}>
+                                <Select
+                                    placeholder="Quản lý"
+                                    style={{ width: '100%' }}
+                                    value={filterManager}
+                                    onChange={setFilterManager}
+                                    allowClear
+                                >
+                                    {users.map(user => (
+                                        <Select.Option key={user.id} value={user.id}>
+                                            {user.name}
+                                        </Select.Option>
+                                    ))}
+                                </Select>
+                            </Col>
+
+                            <Col xs={24} sm={12} md={6} lg={4}>
+                                <Select
+                                    placeholder="Vai trò của bạn"
+                                    style={{ width: '100%' }}
+                                    value={filterRole}
+                                    onChange={setFilterRole}
+                                    allowClear
+                                >
+                                    <Select.Option value={MemberRole.PROJECT_OWNER}>
+                                        {getRoleDisplayName(MemberRole.PROJECT_OWNER)}
+                                    </Select.Option>
+                                    <Select.Option value={MemberRole.PROJECT_MANAGER}>
+                                        {getRoleDisplayName(MemberRole.PROJECT_MANAGER)}
+                                    </Select.Option>
+                                    <Select.Option value={MemberRole.FRONTEND_DEVELOPER}>
+                                        {getRoleDisplayName(MemberRole.FRONTEND_DEVELOPER)}
+                                    </Select.Option>
+                                    <Select.Option value={MemberRole.BACKEND_DEVELOPER}>
+                                        {getRoleDisplayName(MemberRole.BACKEND_DEVELOPER)}
+                                    </Select.Option>
+                                    <Select.Option value={MemberRole.FULLSTACK_DEVELOPER}>
+                                        {getRoleDisplayName(MemberRole.FULLSTACK_DEVELOPER)}
+                                    </Select.Option>
+                                    <Select.Option value={MemberRole.DESIGNER}>
+                                        {getRoleDisplayName(MemberRole.DESIGNER)}
+                                    </Select.Option>
+                                    <Select.Option value={MemberRole.TESTER}>
+                                        {getRoleDisplayName(MemberRole.TESTER)}
+                                    </Select.Option>
+                                </Select>
+                            </Col>
+
+                            <Col xs={24} sm={12} md={6} lg={4}>
+                                <DatePicker.RangePicker
+                                    placeholder={['Từ ngày', 'Đến ngày']}
+                                    style={{ width: '100%' }}
+                                    value={filterDateRange}
+                                    onChange={(dates) => {
+                                        if (dates && dates[0] && dates[1]) {
+                                            setFilterDateRange([dates[0], dates[1]]);
+                                        } else {
+                                            setFilterDateRange(null);
+                                        }
+                                    }}
+                                />
+                            </Col>
+
+                            <Col xs={24} sm={12} md={6} lg={4}>
+                                <Space>
+                                    <Select
+                                        placeholder="Sắp xếp"
+                                        style={{ width: 120 }}
+                                        value={`${sortBy}-${sortOrder}`}
+                                        onChange={(value) => {
+                                            const [field, order] = value.split('-');
+                                            setSortBy(field as 'name' | 'createdAt' | 'updatedAt');
+                                            setSortOrder(order as 'asc' | 'desc');
+                                        }}
+                                    >
+                                        <Select.Option value="name-asc">
+                                            Tên A-Z
+                                        </Select.Option>
+                                        <Select.Option value="name-desc">
+                                            Tên Z-A
+                                        </Select.Option>
+                                        <Select.Option value="createdAt-desc">
+                                            Mới nhất
+                                        </Select.Option>
+                                        <Select.Option value="createdAt-asc">
+                                            Cũ nhất
+                                        </Select.Option>
+                                        <Select.Option value="updatedAt-desc">
+                                            Cập nhật mới
+                                        </Select.Option>
+                                        <Select.Option value="updatedAt-asc">
+                                            Cập nhật cũ
+                                        </Select.Option>
+                                    </Select>
+
+                                    <Button
+                                        icon={<ClearOutlined />}
+                                        onClick={handleResetFilters}
+                                        title="Xóa tất cả bộ lọc"
+                                    >
+                                        Reset
+                                    </Button>
+                                </Space>
+                            </Col>
+                        </Row>
+
+                        {/* Filter Summary */}
+                        {getActiveFiltersCount() > 0 && (
+                            <>
+                                <Divider style={{ margin: '12px 0' }} />
+                                <div style={{ fontSize: '12px', color: '#666' }}>
+                                    <Space wrap>
+                                        {searchText && (
+                                            <Tag closable onClose={() => setSearchText('')}>
+                                                Tìm kiếm: "{searchText}"
+                                            </Tag>
+                                        )}
+                                        {filterOwner && (
+                                            <Tag closable onClose={() => setFilterOwner(undefined)}>
+                                                Chủ sở hữu: {users.find(u => u.id === filterOwner)?.name}
+                                            </Tag>
+                                        )}
+                                        {filterManager && (
+                                            <Tag closable onClose={() => setFilterManager(undefined)}>
+                                                Quản lý: {users.find(u => u.id === filterManager)?.name}
+                                            </Tag>
+                                        )}
+                                        {filterRole && (
+                                            <Tag closable onClose={() => setFilterRole(undefined)}>
+                                                Vai trò: {getRoleDisplayName(filterRole)}
+                                            </Tag>
+                                        )}
+                                        {filterDateRange && (
+                                            <Tag closable onClose={() => setFilterDateRange(null)}>
+                                                Ngày: {filterDateRange[0].format('DD/MM/YYYY')} → {filterDateRange[1].format('DD/MM/YYYY')}
+                                            </Tag>
+                                        )}
+                                    </Space>
+                                </div>
+                            </>
+                        )}
+                    </Card>
                 </div>
 
                 {error && (
@@ -472,7 +723,18 @@ function Projects() {
                         name="name"
                         rules={[
                             { required: true, message: 'Tên dự án không được để trống' },
-                            { min: 3, max: 100, message: 'Tên dự án phải có độ dài từ 3-100 ký tự' }
+                            { min: 3, max: 100, message: 'Tên dự án phải có độ dài từ 3-100 ký tự' },
+                            {
+                                validator: async (_, value) => {
+                                    if (!value) return Promise.resolve();
+                                    const normalized = value.trim().toLowerCase();
+                                    const exists = projects.some(p => p.name.trim().toLowerCase() === normalized && p.id !== editingProject?.id);
+                                    if (exists) {
+                                        return Promise.reject(new Error('Tên dự án đã tồn tại'));
+                                    }
+                                    return Promise.resolve();
+                                }
+                            }
                         ]}
                     >
                         <Input placeholder="Nhập tên dự án" />
@@ -492,48 +754,58 @@ function Projects() {
 
                         <Col xs={24} md={16}>
                             <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-                                <div style={{ flex: 1, width: '100%' }}>
-                                    <Form.Item label="Quản lý dự án (Manager)" style={{ marginBottom: 8 }}>
-                                        <Select
-                                            style={{ width: '100%' }}
-                                            placeholder="Chọn quản lý dự án"
-                                            value={managerId}
-                                            onChange={(val) => {
-                                                setManagerId(val);
-                                                setMemberIds(prev => prev.filter(id => id !== val));
-                                            }}
-                                            allowClear
-                                        >
-                                            {users.map(u => (
-                                                <Select.Option key={u.id} value={u.id}>{u.name} ({u.email})</Select.Option>
-                                            ))}
-                                        </Select>
-                                    </Form.Item>
-                                </div>
-
-                                <div style={{ flex: 1, width: '100%' }}>
-                                    <Form.Item label="Thêm thành viên">
-                                        <Select
-                                            style={{ width: '100%' }}
-                                            mode="multiple"
-                                            placeholder="Chọn thành viên"
-                                            value={memberIds}
-                                            onChange={(vals) => setMemberIds(vals)}
-                                            optionFilterProp="children"
-                                            maxTagCount={5}
-                                        >
-                                            {users.map(u => (
-                                                <Select.Option
-                                                    key={u.id}
-                                                    value={u.id}
-                                                    disabled={u.id === user?.id || u.id === managerId}
+                                {!editingProject && (
+                                    <>
+                                        <div style={{ flex: 1, width: '100%' }}>
+                                            <Form.Item label="Quản lý dự án (Manager)" style={{ marginBottom: 8 }}>
+                                                <Select
+                                                    style={{ width: '100%' }}
+                                                    placeholder="Chọn quản lý dự án"
+                                                    value={managerId}
+                                                    onChange={(val) => {
+                                                        setManagerId(val);
+                                                        setMemberIds(prev => prev.filter(id => id !== val));
+                                                    }}
+                                                    allowClear
                                                 >
-                                                    {u.name} ({u.email})
-                                                </Select.Option>
-                                            ))}
-                                        </Select>
-                                    </Form.Item>
-                                </div>
+                                                    {users.map(u => (
+                                                        <Select.Option key={u.id} value={u.id}>{u.name} ({u.email})</Select.Option>
+                                                    ))}
+                                                </Select>
+                                            </Form.Item>
+                                        </div>
+
+                                        <div style={{ flex: 1, width: '100%' }}>
+                                            <Form.Item label="Thêm thành viên">
+                                                <Select
+                                                    style={{ width: '100%' }}
+                                                    mode="multiple"
+                                                    placeholder="Chọn thành viên"
+                                                    value={memberIds}
+                                                    onChange={(vals) => setMemberIds(vals)}
+                                                    optionFilterProp="children"
+                                                    maxTagCount={5}
+                                                >
+                                                    {users.map(u => (
+                                                        <Select.Option
+                                                            key={u.id}
+                                                            value={u.id}
+                                                            disabled={u.id === user?.id || u.id === managerId}
+                                                        >
+                                                            {u.name} ({u.email})
+                                                        </Select.Option>
+                                                    ))}
+                                                </Select>
+                                            </Form.Item>
+                                        </div>
+                                    </>
+                                )}
+
+                                {editingProject && (
+                                    <div style={{ padding: '20px', textAlign: 'center', color: '#666', width: '100%' }}>
+                                        <p>Để thay đổi quản lý và thành viên dự án, vui lòng vào trang chi tiết dự án.</p>
+                                    </div>
+                                )}
                             </div>
                         </Col>
                     </Row>
