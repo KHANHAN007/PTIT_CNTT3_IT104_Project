@@ -42,163 +42,9 @@
               "priority": "medium"
             }
           },
-          "status": "rejected",
+          "status": "pending",
           "createdAt": "2025-10-11T01:20:07.718Z",
           "id": "f8bbIn8"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi nhận task",
-          "senderId": "1",
-          "recipientId": "2",
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            }
-          },
-          "status": "rejected",
-          "createdAt": "2025-10-11T05:11:52.670Z",
-          "id": "sAsOMqf"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi đã hoàn thành",
-          "senderId": "1",
-          "recipientId": "7",
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "rejected",
-          "createdAt": "2025-10-11T05:25:34.067Z",
-          "id": "G99ujnf"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Yêu cầu cập nhập tiến độ\n",
-          "senderId": "1",
-          "recipientId": [
-            "2",
-            "7"
-          ],
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T05:30:13.254Z",
-          "id": "dN1XEVr"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: a",
-          "senderId": "1",
-          "recipientId": [
-            "2",
-            "7"
-          ],
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T06:08:40.610Z",
-          "id": "HLpcwDq"
         }
       ],
       "receivedRequests": [
@@ -248,163 +94,7 @@
       "phone": "0987654321",
       "address": "Hà Nội, Việt Nam",
       "createdAt": "2024-01-15T00:00:00Z",
-      "updatedAt": "2025-10-06T20:05:42.623Z",
-      "receivedRequests": [
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi nhận task",
-          "senderId": "1",
-          "recipientId": "2",
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            }
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T05:11:52.670Z",
-          "id": "sAsOMqf"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi đã hoàn thành",
-          "senderId": "1",
-          "recipientId": "2",
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T05:25:34.065Z",
-          "id": "VKohnCG"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Yêu cầu cập nhập tiến độ\n",
-          "senderId": "1",
-          "recipientId": [
-            "2",
-            "7"
-          ],
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T05:30:13.254Z",
-          "id": "dN1XEVr"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: a",
-          "senderId": "1",
-          "recipientId": [
-            "2",
-            "7"
-          ],
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T06:08:40.610Z",
-          "id": "HLpcwDq"
-        }
-      ]
+      "updatedAt": "2025-10-06T20:05:42.623Z"
     },
     {
       "id": "3",
@@ -464,91 +154,7 @@
       "phone": "0777888999",
       "address": "Hà Nội, Việt Nam",
       "createdAt": "2024-04-01T00:00:00Z",
-      "updatedAt": "2024-04-01T00:00:00Z",
-      "receivedRequests": [
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Yêu cầu cập nhập tiến độ\n",
-          "senderId": "1",
-          "recipientId": [
-            "2",
-            "7"
-          ],
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T05:30:13.254Z",
-          "id": "dN1XEVr"
-        },
-        {
-          "projectId": "2",
-          "type": "task_update",
-          "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: a",
-          "senderId": "1",
-          "recipientId": [
-            "2",
-            "7"
-          ],
-          "metadata": {
-            "taskId": "23",
-            "originalTask": {
-              "id": "23",
-              "name": "User Onboarding Flow",
-              "description": "Thiết kế và implement user onboarding experience",
-              "projectId": "2",
-              "assigneeId": "1",
-              "status": "To do",
-              "priority": "low",
-              "progress": "Đúng tiến độ",
-              "startDate": "2025-11-01",
-              "deadline": "2025-11-20",
-              "estimatedHours": 15,
-              "timeSpentMinutes": 0,
-              "createdAt": "2025-10-11T00:00:00Z",
-              "updatedAt": "2025-10-11T00:00:00Z",
-              "completedAt": null
-            },
-            "requestedChanges": {
-              "status": "In Progress",
-              "priority": "low"
-            },
-            "recipients": [
-              "2",
-              "7"
-            ]
-          },
-          "status": "pending",
-          "createdAt": "2025-10-11T06:08:40.610Z",
-          "id": "HLpcwDq"
-        }
-      ]
+      "updatedAt": "2024-04-01T00:00:00Z"
     },
     {
       "id": "8",
@@ -817,15 +423,15 @@
       "projectId": "1",
       "assigneeId": "3",
       "status": "Done",
-      "priority": "low",
+      "priority": "high",
       "progress": "Hoàn thành",
       "startDate": "2025-10-05",
       "deadline": "2025-10-10",
       "estimatedHours": 12,
       "timeSpentMinutes": 720,
       "createdAt": "2025-10-05T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:04.556Z",
-      "completedAt": null
+      "updatedAt": "2025-10-10T00:00:00Z",
+      "completedAt": "2025-10-10T00:00:00Z"
     },
     {
       "id": "2",
@@ -834,14 +440,14 @@
       "projectId": "1",
       "assigneeId": "1",
       "status": "In Progress",
-      "priority": "medium",
+      "priority": "high",
       "progress": "Có rủi ro",
       "startDate": "2025-10-08",
       "deadline": "2025-10-18",
       "estimatedHours": 24,
-      "timeSpentMinutes": 1217,
+      "timeSpentMinutes": 1051,
       "createdAt": "2025-10-08T00:00:00Z",
-      "updatedAt": "2025-10-11T06:33:48.673Z",
+      "updatedAt": "2025-10-11T02:16:29.938Z",
       "completedAt": null
     },
     {
@@ -851,14 +457,13 @@
       "projectId": "1",
       "assigneeId": "2",
       "status": "To do",
-      "priority": "low",
+      "priority": "medium",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-12",
       "deadline": "2025-10-22",
       "estimatedHours": 16,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:04.614Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "4",
@@ -867,14 +472,13 @@
       "projectId": "1",
       "assigneeId": "2",
       "status": "To do",
-      "priority": "low",
+      "priority": "high",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-15",
       "deadline": "2025-10-25",
       "estimatedHours": 20,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:04.674Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "5",
@@ -883,14 +487,13 @@
       "projectId": "1",
       "assigneeId": "3",
       "status": "To do",
-      "priority": "low",
+      "priority": "high",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-20",
       "deadline": "2025-11-05",
       "estimatedHours": 32,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:05.182Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "6",
@@ -899,15 +502,15 @@
       "projectId": "2",
       "assigneeId": "1",
       "status": "Done",
-      "priority": "low",
+      "priority": "high",
       "progress": "Hoàn thành",
       "startDate": "2025-10-01",
       "deadline": "2025-10-09",
       "estimatedHours": 18,
       "timeSpentMinutes": 1080,
       "createdAt": "2025-10-01T00:00:00Z",
-      "updatedAt": "2025-10-11T03:29:25.084Z",
-      "completedAt": null
+      "updatedAt": "2025-10-09T00:00:00Z",
+      "completedAt": "2025-10-09T00:00:00Z"
     },
     {
       "id": "7",
@@ -921,9 +524,9 @@
       "startDate": "2025-10-05",
       "deadline": "2025-10-20",
       "estimatedHours": 25,
-      "timeSpentMinutes": 1922,
+      "timeSpentMinutes": 1803,
       "createdAt": "2025-10-05T00:00:00Z",
-      "updatedAt": "2025-10-11T06:33:48.673Z",
+      "updatedAt": "2025-10-11T02:14:50.735Z",
       "completedAt": null
     },
     {
@@ -931,18 +534,16 @@
       "name": "Mobile App Testing",
       "description": "Test toàn diện app trên iOS và Android với automation testing",
       "projectId": "2",
-      "assigneeId": "1",
+      "assigneeId": "6",
       "status": "Pending",
-      "priority": "low",
-      "progress": "Tạm dừng",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-10-08",
       "deadline": "2025-10-25",
       "estimatedHours": 30,
       "timeSpentMinutes": 600,
-      "pausedAt": "2025-10-11T14:30:00.000Z",
       "createdAt": "2025-10-08T00:00:00Z",
-      "updatedAt": "2025-10-11T03:29:25.003Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "9",
@@ -951,14 +552,14 @@
       "projectId": "3",
       "assigneeId": "1",
       "status": "In Progress",
-      "priority": "medium",
+      "priority": "high",
       "progress": "Trễ hẹn",
       "startDate": "2025-10-01",
       "deadline": "2025-10-25",
       "estimatedHours": 40,
-      "timeSpentMinutes": 2818,
+      "timeSpentMinutes": 2703,
       "createdAt": "2025-10-01T00:00:00Z",
-      "updatedAt": "2025-10-11T06:33:48.674Z",
+      "updatedAt": "2025-10-11T02:14:50.736Z",
       "completedAt": null
     },
     {
@@ -968,14 +569,13 @@
       "projectId": "3",
       "assigneeId": "3",
       "status": "To do",
-      "priority": "low",
+      "priority": "medium",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-15",
       "deadline": "2025-11-10",
       "estimatedHours": 35,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:33:09.880Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "11",
@@ -984,15 +584,15 @@
       "projectId": "3",
       "assigneeId": "2",
       "status": "Done",
-      "priority": "low",
+      "priority": "medium",
       "progress": "Hoàn thành",
       "startDate": "2025-09-25",
       "deadline": "2025-10-08",
       "estimatedHours": 22,
       "timeSpentMinutes": 1320,
       "createdAt": "2025-09-25T00:00:00Z",
-      "updatedAt": "2025-10-11T03:33:09.960Z",
-      "completedAt": null
+      "updatedAt": "2025-10-08T00:00:00Z",
+      "completedAt": "2025-10-08T00:00:00Z"
     },
     {
       "id": "12",
@@ -1001,15 +601,14 @@
       "projectId": "4",
       "assigneeId": "3",
       "status": "In Progress",
-      "priority": "low",
-      "progress": "Có rủi ro",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-10-01",
       "deadline": "2025-11-15",
       "estimatedHours": 50,
-      "timeSpentMinutes": 2404,
+      "timeSpentMinutes": 2400,
       "createdAt": "2025-10-01T00:00:00Z",
-      "updatedAt": "2025-10-11T04:24:16.302Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "13",
@@ -1018,32 +617,29 @@
       "projectId": "4",
       "assigneeId": "4",
       "status": "To do",
-      "priority": "low",
+      "priority": "medium",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-20",
       "deadline": "2025-11-20",
       "estimatedHours": 28,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T04:18:40.917Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "14",
       "name": "Security Testing",
       "description": "Kiểm tra bảo mật toàn diện cho healthcare system",
       "projectId": "4",
-      "assigneeId": "1",
+      "assigneeId": "6",
       "status": "Pending",
-      "priority": "medium",
-      "progress": "Tạm dừng",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-10-09",
       "deadline": "2025-10-13",
       "estimatedHours": 35,
       "timeSpentMinutes": 900,
-      "pausedAt": "2025-10-11T09:45:00.000Z",
       "createdAt": "2025-10-09T00:00:00Z",
-      "updatedAt": "2025-10-11T04:18:40.792Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "15",
@@ -1052,15 +648,14 @@
       "projectId": "5",
       "assigneeId": "5",
       "status": "In Progress",
-      "priority": "low",
-      "progress": "Có rủi ro",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-10-05",
       "deadline": "2025-11-05",
       "estimatedHours": 45,
-      "timeSpentMinutes": 2101,
+      "timeSpentMinutes": 2100,
       "createdAt": "2025-10-05T00:00:00Z",
-      "updatedAt": "2025-10-11T03:35:12.830Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "16",
@@ -1069,14 +664,13 @@
       "projectId": "5",
       "assigneeId": "1",
       "status": "To do",
-      "priority": "low",
+      "priority": "medium",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-25",
       "deadline": "2025-11-25",
       "estimatedHours": 38,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:29:25.082Z",
-      "completedAt": null
+      "updatedAt": "2025-10-11T00:00:00Z"
     },
     {
       "id": "17",
@@ -1100,14 +694,14 @@
       "projectId": "1",
       "assigneeId": "1",
       "status": "In Progress",
-      "priority": "low",
+      "priority": "medium",
       "progress": "Có rủi ro",
       "startDate": "2025-10-09",
       "deadline": "2025-10-20",
       "estimatedHours": 16,
-      "timeSpentMinutes": 667,
+      "timeSpentMinutes": 500,
       "createdAt": "2025-10-09T00:00:00Z",
-      "updatedAt": "2025-10-11T06:33:48.674Z",
+      "updatedAt": "2025-10-11T02:14:50.732Z",
       "completedAt": null
     },
     {
@@ -1117,14 +711,14 @@
       "projectId": "1",
       "assigneeId": "3",
       "status": "In Progress",
-      "priority": "high",
+      "priority": "medium",
       "progress": "Trễ hẹn",
       "startDate": "2025-10-10",
       "deadline": "2025-10-12",
       "estimatedHours": 8,
-      "timeSpentMinutes": 768,
+      "timeSpentMinutes": 726,
       "createdAt": "2025-10-10T00:00:00Z",
-      "updatedAt": "2025-10-11T05:01:38.665Z",
+      "updatedAt": "2025-10-11T02:14:50.733Z",
       "completedAt": null
     },
     {
@@ -1134,14 +728,14 @@
       "projectId": "1",
       "assigneeId": "3",
       "status": "To do",
-      "priority": "low",
+      "priority": "high",
       "progress": "Đúng tiến độ",
       "startDate": "2025-10-15",
       "deadline": "2025-12-01",
       "estimatedHours": 40,
       "timeSpentMinutes": 0,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:05.129Z",
+      "updatedAt": "2025-10-11T00:00:00Z",
       "completedAt": null
     },
     {
@@ -1151,15 +745,14 @@
       "projectId": "1",
       "assigneeId": "2",
       "status": "Pending",
-      "priority": "low",
-      "progress": "Tạm dừng",
+      "priority": "medium",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-10-09",
       "deadline": "2025-10-30",
       "estimatedHours": 12,
       "timeSpentMinutes": 180,
-      "pausedAt": "2025-10-10T16:20:00.000Z",
       "createdAt": "2025-10-09T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:05.130Z",
+      "updatedAt": "2025-10-11T00:00:00Z",
       "completedAt": null
     },
     {
@@ -1169,14 +762,14 @@
       "projectId": "2",
       "assigneeId": "2",
       "status": "In Progress",
-      "priority": "high",
-      "progress": "Trễ hẹn",
+      "priority": "medium",
+      "progress": "Có rủi ro",
       "startDate": "2025-10-05",
       "deadline": "2025-10-15",
       "estimatedHours": 20,
-      "timeSpentMinutes": 2454,
+      "timeSpentMinutes": 2400,
       "createdAt": "2025-10-05T00:00:00Z",
-      "updatedAt": "2025-10-11T05:53:05.913Z",
+      "updatedAt": "2025-10-11T00:00:00Z",
       "completedAt": null
     },
     {
@@ -1185,15 +778,15 @@
       "description": "Thiết kế và implement user onboarding experience",
       "projectId": "2",
       "assigneeId": "1",
-      "status": "In Progress",
+      "status": "To do",
       "priority": "low",
       "progress": "Đúng tiến độ",
       "startDate": "2025-11-01",
       "deadline": "2025-11-20",
       "estimatedHours": 15,
-      "timeSpentMinutes": 15,
+      "timeSpentMinutes": 0,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T06:33:48.675Z",
+      "updatedAt": "2025-10-11T00:00:00Z",
       "completedAt": null
     },
     {
@@ -1203,14 +796,14 @@
       "projectId": "3",
       "assigneeId": "3",
       "status": "In Progress",
-      "priority": "medium",
-      "progress": "Có rủi ro",
+      "priority": "high",
+      "progress": "Đúng tiến độ",
       "startDate": "2025-10-08",
       "deadline": "2025-10-14",
       "estimatedHours": 6,
-      "timeSpentMinutes": 245,
+      "timeSpentMinutes": 240,
       "createdAt": "2025-10-08T00:00:00Z",
-      "updatedAt": "2025-10-11T04:24:16.302Z",
+      "updatedAt": "2025-10-11T00:00:00Z",
       "completedAt": null
     },
     {
@@ -1220,14 +813,14 @@
       "projectId": "2",
       "assigneeId": "1",
       "status": "In Progress",
-      "priority": "high",
+      "priority": "low",
       "progress": "Trễ hẹn",
       "startDate": "2025-10-10",
       "deadline": "2025-10-11",
       "estimatedHours": 4,
-      "timeSpentMinutes": 421,
+      "timeSpentMinutes": 303,
       "createdAt": "2025-10-10T00:00:00Z",
-      "updatedAt": "2025-10-11T06:33:48.675Z",
+      "updatedAt": "2025-10-11T02:14:50.737Z",
       "completedAt": null
     },
     {
@@ -1237,14 +830,14 @@
       "projectId": "1",
       "assigneeId": "4",
       "status": "To do",
-      "priority": "low",
+      "priority": "high",
       "progress": "Đúng tiến độ",
       "startDate": "2025-11-15",
       "deadline": "2025-12-20",
       "estimatedHours": 2,
       "timeSpentMinutes": 0,
       "createdAt": "2025-10-11T00:00:00Z",
-      "updatedAt": "2025-10-11T03:32:05.130Z",
+      "updatedAt": "2025-10-11T00:00:00Z",
       "completedAt": null
     }
   ],
@@ -1260,9 +853,8 @@
         "email": "thu@gmail.com",
         "userId": "8"
       },
-      "status": "rejected",
-      "createdAt": "2025-10-09T00:10:21.910Z",
-      "rejectedAt": "2025-10-11T03:39:21.312Z"
+      "status": "pending",
+      "createdAt": "2025-10-09T00:10:21.910Z"
     },
     {
       "id": "2",
@@ -1308,207 +900,9 @@
           "priority": "medium"
         }
       },
-      "status": "rejected",
+      "status": "pending",
       "createdAt": "2025-10-11T01:20:07.718Z",
-      "id": "f8bbIn8",
-      "rejectedAt": "2025-10-11T03:39:19.656Z"
-    },
-    {
-      "projectId": "2",
-      "type": "task_update",
-      "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi nhận task",
-      "senderId": "1",
-      "recipientId": "2",
-      "metadata": {
-        "taskId": "23",
-        "originalTask": {
-          "id": "23",
-          "name": "User Onboarding Flow",
-          "description": "Thiết kế và implement user onboarding experience",
-          "projectId": "2",
-          "assigneeId": "1",
-          "status": "To do",
-          "priority": "low",
-          "progress": "Đúng tiến độ",
-          "startDate": "2025-11-01",
-          "deadline": "2025-11-20",
-          "estimatedHours": 15,
-          "timeSpentMinutes": 0,
-          "createdAt": "2025-10-11T00:00:00Z",
-          "updatedAt": "2025-10-11T00:00:00Z",
-          "completedAt": null
-        },
-        "requestedChanges": {
-          "status": "In Progress",
-          "priority": "low"
-        }
-      },
-      "status": "rejected",
-      "createdAt": "2025-10-11T05:11:52.670Z",
-      "id": "sAsOMqf",
-      "rejectedAt": "2025-10-11T05:21:36.656Z"
-    },
-    {
-      "projectId": "2",
-      "type": "task_update",
-      "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi đã hoàn thành",
-      "senderId": "1",
-      "recipientId": "2",
-      "metadata": {
-        "taskId": "23",
-        "originalTask": {
-          "id": "23",
-          "name": "User Onboarding Flow",
-          "description": "Thiết kế và implement user onboarding experience",
-          "projectId": "2",
-          "assigneeId": "1",
-          "status": "To do",
-          "priority": "low",
-          "progress": "Đúng tiến độ",
-          "startDate": "2025-11-01",
-          "deadline": "2025-11-20",
-          "estimatedHours": 15,
-          "timeSpentMinutes": 0,
-          "createdAt": "2025-10-11T00:00:00Z",
-          "updatedAt": "2025-10-11T00:00:00Z",
-          "completedAt": null
-        },
-        "requestedChanges": {
-          "status": "In Progress",
-          "priority": "low"
-        },
-        "recipients": [
-          "2",
-          "7"
-        ]
-      },
-      "status": "rejected",
-      "createdAt": "2025-10-11T05:25:34.065Z",
-      "id": "VKohnCG",
-      "rejectedAt": "2025-10-11T05:27:44.135Z"
-    },
-    {
-      "projectId": "2",
-      "type": "task_update",
-      "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Tôi đã hoàn thành",
-      "senderId": "1",
-      "recipientId": "7",
-      "metadata": {
-        "taskId": "23",
-        "originalTask": {
-          "id": "23",
-          "name": "User Onboarding Flow",
-          "description": "Thiết kế và implement user onboarding experience",
-          "projectId": "2",
-          "assigneeId": "1",
-          "status": "To do",
-          "priority": "low",
-          "progress": "Đúng tiến độ",
-          "startDate": "2025-11-01",
-          "deadline": "2025-11-20",
-          "estimatedHours": 15,
-          "timeSpentMinutes": 0,
-          "createdAt": "2025-10-11T00:00:00Z",
-          "updatedAt": "2025-10-11T00:00:00Z",
-          "completedAt": null
-        },
-        "requestedChanges": {
-          "status": "In Progress",
-          "priority": "low"
-        },
-        "recipients": [
-          "2",
-          "7"
-        ]
-      },
-      "status": "rejected",
-      "createdAt": "2025-10-11T05:25:34.067Z",
-      "id": "G99ujnf",
-      "rejectedAt": "2025-10-11T05:27:47.242Z"
-    },
-    {
-      "projectId": "2",
-      "type": "task_update",
-      "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: Yêu cầu cập nhập tiến độ\n",
-      "senderId": "1",
-      "recipientId": [
-        "2",
-        "7"
-      ],
-      "metadata": {
-        "taskId": "23",
-        "originalTask": {
-          "id": "23",
-          "name": "User Onboarding Flow",
-          "description": "Thiết kế và implement user onboarding experience",
-          "projectId": "2",
-          "assigneeId": "1",
-          "status": "To do",
-          "priority": "low",
-          "progress": "Đúng tiến độ",
-          "startDate": "2025-11-01",
-          "deadline": "2025-11-20",
-          "estimatedHours": 15,
-          "timeSpentMinutes": 0,
-          "createdAt": "2025-10-11T00:00:00Z",
-          "updatedAt": "2025-10-11T00:00:00Z",
-          "completedAt": null
-        },
-        "requestedChanges": {
-          "status": "In Progress",
-          "priority": "low"
-        },
-        "recipients": [
-          "2",
-          "7"
-        ]
-      },
-      "status": "accepted",
-      "createdAt": "2025-10-11T05:30:13.254Z",
-      "id": "dN1XEVr",
-      "acceptedAt": "2025-10-11T05:53:53.349Z"
-    },
-    {
-      "projectId": "2",
-      "type": "task_update",
-      "content": "Yêu cầu cập nhật task \"User Onboarding Flow\" - trạng thái từ \"To do\" thành \"In Progress\". Lý do: a",
-      "senderId": "1",
-      "recipientId": [
-        "2",
-        "7"
-      ],
-      "metadata": {
-        "taskId": "23",
-        "originalTask": {
-          "id": "23",
-          "name": "User Onboarding Flow",
-          "description": "Thiết kế và implement user onboarding experience",
-          "projectId": "2",
-          "assigneeId": "1",
-          "status": "To do",
-          "priority": "low",
-          "progress": "Đúng tiến độ",
-          "startDate": "2025-11-01",
-          "deadline": "2025-11-20",
-          "estimatedHours": 15,
-          "timeSpentMinutes": 0,
-          "createdAt": "2025-10-11T00:00:00Z",
-          "updatedAt": "2025-10-11T00:00:00Z",
-          "completedAt": null
-        },
-        "requestedChanges": {
-          "status": "In Progress",
-          "priority": "low"
-        },
-        "recipients": [
-          "2",
-          "7"
-        ]
-      },
-      "status": "accepted",
-      "createdAt": "2025-10-11T06:08:40.610Z",
-      "id": "HLpcwDq",
-      "acceptedAt": "2025-10-11T06:08:56.559Z"
+      "id": "f8bbIn8"
     }
   ]
 }

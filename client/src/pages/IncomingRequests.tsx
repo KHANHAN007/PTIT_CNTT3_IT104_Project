@@ -3,12 +3,13 @@ import { GlobalAlertContext } from '../components/Layout';
 import { useContext } from 'react';
 import { userService } from '../services/userService';
 import { projectsService } from '../services/projectsService';
+import { tasksService } from '../services/tasksService';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 import { UserOutlined } from '@ant-design/icons';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import { fetchRequestsForUser, rejectRequest, acceptAndAddMember, deleteRequest } from '../store/requestsSlice';
+import { fetchRequestsForUser, rejectRequest, acceptRequest, acceptAndAddMember, deleteRequest } from '../store/requestsSlice';
 import {
     Card,
     Avatar,
@@ -30,17 +31,27 @@ const IncomingRequests: React.FC = () => {
     const sentRequests = useAppSelector((s) => s.requests.sentRequests);
     const { users = [] } = useAppSelector((s) => s.users);
     const { projects = [] } = useAppSelector((s) => s.projects);
+    const { loading } = useAppSelector((s) => s.requests);
 
     const [localUserMap, setLocalUserMap] = useState<Record<string, any>>({});
     const [expandedPendingKeys, setExpandedPendingKeys] = useState<React.Key[]>([]);
     const [expandedHistoryKeys, setExpandedHistoryKeys] = useState<React.Key[]>([]);
     const [collapsingRows, setCollapsingRows] = useState<Record<string, boolean>>({});
+    const [processingRequests, setProcessingRequests] = useState<Set<string>>(new Set());
 
     useEffect(() => {
         if (user) {
             dispatch(fetchRequestsForUser(user.id));
         }
     }, [user, dispatch]);
+
+    // Debug: Log requests để xem dữ liệu
+    useEffect(() => {
+        if (receivedRequests.length > 0 || sentRequests.length > 0) {
+            console.log('Received Requests:', receivedRequests);
+            console.log('Sent Requests:', sentRequests);
+        }
+    }, [receivedRequests, sentRequests]);
     useEffect(() => {
         const expandedRows = document.querySelectorAll(".ant-table-expanded-row");
         expandedRows.forEach((row) => {
@@ -58,12 +69,24 @@ const IncomingRequests: React.FC = () => {
         const missingProjectIds = new Set<string>();
 
         for (const r of allRequests) {
+            // Check senderId
             if (r.senderId && !users.find((u: any) => u.id === r.senderId) && !localUserMap[r.senderId]) {
                 missingUserIds.add(r.senderId);
             }
+            // Check recipientId (important for task_update requests)
+            if (r.recipientId) {
+                const recipientIds = Array.isArray(r.recipientId) ? r.recipientId : [r.recipientId];
+                for (const id of recipientIds) {
+                    if (!users.find((u: any) => u.id === id) && !localUserMap[id]) {
+                        missingUserIds.add(id);
+                    }
+                }
+            }
+            // Check payload userId
             if (r.payload && r.payload.userId && !users.find((u: any) => u.id === r.payload.userId) && !localUserMap[r.payload.userId]) {
                 missingUserIds.add(r.payload.userId);
             }
+            // Check projectId
             if (r.projectId && !projects.find((p: any) => p.id === r.projectId) && !localProjectMap[r.projectId]) {
                 missingProjectIds.add(r.projectId);
             }
@@ -71,14 +94,28 @@ const IncomingRequests: React.FC = () => {
 
         if (missingUserIds.size === 0 && missingProjectIds.size === 0) return;
 
+        console.log('Loading missing data:', { missingUserIds: Array.from(missingUserIds), missingProjectIds: Array.from(missingProjectIds) });
+
         (async () => {
             try {
                 if (missingUserIds.size > 0) {
                     const ids = Array.from(missingUserIds);
-                    const results = await Promise.all(ids.map(id => userService.getUserById(id).catch(() => null)));
+                    console.log('Fetching users with IDs:', ids);
+                    const results = await Promise.all(ids.map(id => userService.getUserById(id).catch((err) => {
+                        console.error(`Failed to fetch user ${id}:`, err);
+                        return null;
+                    })));
                     const nextUsers: Record<string, any> = {};
-                    results.forEach((u, i) => { if (u) nextUsers[ids[i]] = u; });
-                    if (Object.keys(nextUsers).length > 0) setLocalUserMap(prev => ({ ...prev, ...nextUsers }));
+                    results.forEach((u, i) => {
+                        if (u) {
+                            nextUsers[ids[i]] = u;
+                            console.log(`Successfully loaded user ${ids[i]}:`, u.name);
+                        }
+                    });
+                    if (Object.keys(nextUsers).length > 0) {
+                        console.log('Adding users to localUserMap:', nextUsers);
+                        setLocalUserMap(prev => ({ ...prev, ...nextUsers }));
+                    }
                 }
 
                 if (missingProjectIds.size > 0) {
@@ -96,7 +133,11 @@ const IncomingRequests: React.FC = () => {
 
     const resolveUser = (id?: string): any => {
         if (!id) return null;
-        return users.find((u: any) => u.id === id) || localUserMap[id] || null;
+        const foundUser = users.find((u: any) => u.id === id) || localUserMap[id];
+        if (!foundUser) {
+            console.log(`User not found for ID: ${id}`, { users, localUserMap });
+        }
+        return foundUser || null;
     };
 
     const resolveProject = (id?: string): any => {
@@ -105,16 +146,44 @@ const IncomingRequests: React.FC = () => {
     };
 
     const onAccept = async (request: any) => {
+        setProcessingRequests(prev => new Set(prev.add(request.id)));
         try {
-            const payload = request.payload || {};
-            const memberData = {
-                projectId: request.projectId || payload.projectId || '',
-                userId: payload.userId || request.senderId || '',
-                email: payload.email || request.senderId || '',
-                role: payload.role || 'Member',
-            };
+            if (request.type === 'invite') {
+                const payload = request.payload || {};
+                const memberData = {
+                    projectId: request.projectId || payload.projectId || '',
+                    userId: payload.userId || request.senderId || '',
+                    email: payload.email || request.senderId || '',
+                    role: payload.role || 'Member',
+                };
 
-            await dispatch(acceptAndAddMember({ requestId: request.id, memberData })).unwrap();
+                await dispatch(acceptAndAddMember({ requestId: request.id, memberData })).unwrap();
+            } else if (request.type === 'task_update') {
+                // Accept request trước
+                await dispatch(acceptRequest({ id: request.id })).unwrap();
+
+                // Sau đó cập nhật task với những thay đổi được yêu cầu
+                if (request.metadata?.taskId && request.metadata?.requestedChanges) {
+                    const taskId = request.metadata.taskId;
+                    const changes = request.metadata.requestedChanges;
+
+                    try {
+                        // Cập nhật task sử dụng service
+                        await tasksService.updateTask(taskId, changes);
+
+                        console.log('Task updated successfully:', taskId, changes);
+                    } catch (taskUpdateError) {
+                        console.error('Error updating task:', taskUpdateError);
+                        if (showAlert) {
+                            showAlert({ type: 'warning', message: 'Chú ý', description: 'Yêu cầu đã được chấp nhận nhưng cập nhật task thất bại!' });
+                        }
+                    }
+                }
+            } else {
+                // Xử lý các loại request khác
+                await dispatch(acceptRequest({ id: request.id })).unwrap();
+            }
+
             if (showAlert) {
                 showAlert({ type: 'success', message: 'Thành công', description: 'Yêu cầu đã được chấp nhận!' });
             }
@@ -124,6 +193,12 @@ const IncomingRequests: React.FC = () => {
                 showAlert({ type: 'error', message: 'Lỗi', description: 'Chấp nhận yêu cầu thất bại!' });
             }
             console.error(err);
+        } finally {
+            setProcessingRequests(prev => {
+                const next = new Set(prev);
+                next.delete(request.id);
+                return next;
+            });
         }
     };
     const onCancelRequest = async (id: string) => {
@@ -142,6 +217,7 @@ const IncomingRequests: React.FC = () => {
         }
     };
     const onReject = async (id: string) => {
+        setProcessingRequests(prev => new Set(prev.add(id)));
         try {
             await dispatch(rejectRequest({ id })).unwrap();
             if (showAlert) {
@@ -153,6 +229,12 @@ const IncomingRequests: React.FC = () => {
                 showAlert({ type: 'error', message: 'Lỗi', description: 'Từ chối yêu cầu thất bại!' });
             }
             console.error(err);
+        } finally {
+            setProcessingRequests(prev => {
+                const next = new Set(prev);
+                next.delete(id);
+                return next;
+            });
         }
     };
 
@@ -162,7 +244,14 @@ const IncomingRequests: React.FC = () => {
 
     const expandedRowRender = (item: any): React.ReactNode => {
         const sender = resolveUser(item.senderId);
-        const recipient = resolveUser(item.recipientId);
+        // Nếu recipientId là mảng, lấy danh sách user
+        let recipients: any[] = [];
+        if (Array.isArray(item.recipientId)) {
+            recipients = item.recipientId.map((id: string) => resolveUser(id)).filter(Boolean);
+        } else if (item.recipientId) {
+            const r = resolveUser(item.recipientId);
+            if (r) recipients = [r];
+        }
         const project = resolveProject(item.projectId);
         const p = item.payload || {};
         const payloadUser = resolveUser(p.userId);
@@ -182,13 +271,59 @@ const IncomingRequests: React.FC = () => {
                 >
                     <Descriptions.Item label="Dự án">{project?.name || '—'}</Descriptions.Item>
                     {isSentTab ? (
-                        <Descriptions.Item label="Người nhận">{recipient ? <span><Avatar size={20} src={recipient.avatar} style={{ marginRight: 6 }} />{recipient.name} <span style={{ color: '#888', fontSize: 12 }}>({recipient.email})</span></span> : item.recipientId}</Descriptions.Item>
+                        <Descriptions.Item label="Người nhận">
+                            <div style={{ display: 'flex', gap: 12 }}>
+                                {recipients.length > 0 ? recipients.map((r, idx) => (
+                                    <span key={r.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                        <Avatar size={20} src={r.avatar} style={{ marginRight: 6 }} />
+                                        {r.name}
+                                        <span style={{ color: '#888', fontSize: 12 }}>({r.email})</span>
+                                        {idx < recipients.length - 1 && <span style={{ margin: '0 4px' }}>|</span>}
+                                    </span>
+                                )) : item.recipientId}
+                            </div>
+                        </Descriptions.Item>
                     ) : (
                         <Descriptions.Item label="Gửi bởi">{sender ? <span><Avatar size={20} src={sender.avatar} style={{ marginRight: 6 }} />{sender.name} <span style={{ color: '#888', fontSize: 12 }}>({sender.email})</span></span> : item.senderId}</Descriptions.Item>
                     )}
-                    <Descriptions.Item label="Vai trò">{p.role || '—'}</Descriptions.Item>
-                    <Descriptions.Item label="Email">{p.email || '—'}</Descriptions.Item>
-                    <Descriptions.Item label="Người dùng">{payloadUser ? <span><Avatar size={20} src={payloadUser.avatar} style={{ marginRight: 6 }} />{payloadUser.name} <span style={{ color: '#888', fontSize: 12 }}>({payloadUser.email})</span></span> : (p.userId || '—')}</Descriptions.Item>
+                    {item.type === 'invite' && (
+                        <>
+                            <Descriptions.Item label="Vai trò">{p.role || '—'}</Descriptions.Item>
+                            <Descriptions.Item label="Email">{p.email || '—'}</Descriptions.Item>
+                            <Descriptions.Item label="Người dùng">{payloadUser ? <span><Avatar size={20} src={payloadUser.avatar} style={{ marginRight: 6 }} />{payloadUser.name} <span style={{ color: '#888', fontSize: 12 }}>({payloadUser.email})</span></span> : (p.userId || '—')}</Descriptions.Item>
+                        </>
+                    )}
+                    {item.type === 'task_update' && item.metadata && (
+                        <>
+                            <Descriptions.Item label="Nhiệm vụ">{item.metadata.originalTask?.name || '—'}</Descriptions.Item>
+                            <Descriptions.Item label="Thay đổi yêu cầu">
+                                <div style={{ fontSize: 12 }}>
+                                    {item.metadata.requestedChanges?.status && (
+                                        <div>• Trạng thái: {item.metadata.requestedChanges.status}</div>
+                                    )}
+                                    {item.metadata.requestedChanges?.priority && (
+                                        <div>• Độ ưu tiên: {item.metadata.requestedChanges.priority}</div>
+                                    )}
+                                    {item.metadata.requestedChanges?.progress && (
+                                        <div>• Tiến độ: {item.metadata.requestedChanges.progress}</div>
+                                    )}
+                                </div>
+                            </Descriptions.Item>
+                        </>
+                    )}
+                    {item.content && (
+                        <Descriptions.Item label="Nội dung" span={2}>
+                            <div style={{
+                                background: '#f8f9fa',
+                                padding: 8,
+                                borderRadius: 4,
+                                fontSize: 12,
+                                border: '1px solid #e9ecef'
+                            }}>
+                                {item.content}
+                            </div>
+                        </Descriptions.Item>
+                    )}
                     <Descriptions.Item label={
                         item.status === 'accepted'
                             ? 'Thời gian đồng ý'
@@ -211,11 +346,18 @@ const IncomingRequests: React.FC = () => {
                                 {isSentTab ? (
                                     <Popconfirm
                                         title="Bạn chắc chắn muốn hủy yêu cầu này?"
-                                        onConfirm={() => onReject(item.id)}
+                                        onConfirm={() => onCancelRequest(item.id)}
                                         okText="Hủy yêu cầu"
                                         cancelText="Đóng"
                                     >
-                                        <Button danger size="small" onClick={() => onCancelRequest(item.id)}>Hủy yêu cầu</Button>
+                                        <Button
+                                            danger
+                                            size="small"
+                                            loading={processingRequests.has(item.id)}
+                                            disabled={processingRequests.has(item.id)}
+                                        >
+                                            Hủy yêu cầu
+                                        </Button>
                                     </Popconfirm>
                                 ) : (
                                     <>
@@ -225,7 +367,14 @@ const IncomingRequests: React.FC = () => {
                                             okText="Chấp nhận"
                                             cancelText="Hủy"
                                         >
-                                            <Button type="primary" size="small">Chấp nhận</Button>
+                                            <Button
+                                                type="primary"
+                                                size="small"
+                                                loading={processingRequests.has(item.id)}
+                                                disabled={processingRequests.has(item.id)}
+                                            >
+                                                Chấp nhận
+                                            </Button>
                                         </Popconfirm>
                                         <Popconfirm
                                             title="Bạn chắc chắn muốn từ chối yêu cầu này?"
@@ -233,7 +382,14 @@ const IncomingRequests: React.FC = () => {
                                             okText="Từ chối"
                                             cancelText="Hủy"
                                         >
-                                            <Button danger size="small">Từ chối</Button>
+                                            <Button
+                                                danger
+                                                size="small"
+                                                loading={processingRequests.has(item.id)}
+                                                disabled={processingRequests.has(item.id)}
+                                            >
+                                                Từ chối
+                                            </Button>
                                         </Popconfirm>
                                     </>
                                 )}
@@ -253,17 +409,28 @@ const IncomingRequests: React.FC = () => {
             key: 'type',
             render: (_: any, record: any): React.ReactNode => {
                 let typeLabel = '';
+                let color = 'purple';
                 switch (record.type) {
                     case 'invite':
-                        typeLabel = 'Thêm thành viên vào project';
+                        typeLabel = '🤝 Mời thành viên vào dự án';
+                        color = 'blue';
                         break;
                     case 'progress_update':
-                        typeLabel = 'Yêu cầu cập nhật tiến độ';
+                        typeLabel = '📈 Cập nhật tiến độ';
+                        color = 'cyan';
+                        break;
+                    case 'task_update':
+                        typeLabel = '📝 Cập nhật nhiệm vụ';
+                        color = 'orange';
+                        break;
+                    case 'edit':
+                        typeLabel = '✏️ Chỉnh sửa dự án';
+                        color = 'green';
                         break;
                     default:
-                        typeLabel = record.type || 'Khác';
+                        typeLabel = record.type || '❓ Khác';
+                        color = 'default';
                 }
-                const color = record.type === 'progress_update' ? 'cyan' : 'purple';
                 return <span style={{ color, fontWeight: 500 }}>{typeLabel}</span>;
             },
         },
@@ -275,15 +442,26 @@ const IncomingRequests: React.FC = () => {
             key: tab === 'sent' ? 'recipient' : 'sender',
             render: (_: any, record: any): React.ReactNode => {
                 if (tab === 'sent') {
-                    const recipient = resolveUser(record.recipientId);
+                    let recipients: any[] = [];
+                    if (Array.isArray(record.recipientId)) {
+                        recipients = record.recipientId.map((id: string) => resolveUser(id)).filter(Boolean);
+                    } else if (record.recipientId) {
+                        const r = resolveUser(record.recipientId);
+                        if (r) recipients = [r];
+                    }
                     return (
                         <div style={{ textAlign: 'center', width: '100%' }}>
                             <div style={{ display: 'inline-flex', gap: 12, alignItems: 'center' }}>
-                                <Avatar size={32} src={recipient?.avatar} icon={!recipient?.avatar && <UserOutlined />} />
-                                <div>
-                                    <div style={{ fontWeight: 500 }}>{recipient?.name || record.recipientId}</div>
-                                    <div style={{ fontSize: 12, color: '#888' }}>{recipient?.email || ''}</div>
-                                </div>
+                                {recipients.length > 0 ? recipients.map((r, idx) => (
+                                    <span key={r.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                        <Avatar size={32} src={r.avatar} icon={!r.avatar && <UserOutlined />} />
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                            <div style={{ fontWeight: 500 }}>{r.name}</div>
+                                            <div style={{ fontSize: 12, color: '#888' }}>{r.email}</div>
+                                        </div>
+                                        {idx < recipients.length - 1 && <span style={{ margin: '0 4px' }}>|</span>}
+                                    </span>
+                                )) : record.recipientId}
                             </div>
                         </div>
                     );
@@ -295,8 +473,12 @@ const IncomingRequests: React.FC = () => {
                             <div style={{ display: 'inline-flex', gap: 12, alignItems: 'center' }}>
                                 <Avatar size={32} src={sender?.avatar} icon={!sender?.avatar && <UserOutlined />} />
                                 <div>
-                                    <div style={{ fontWeight: 500 }}>{isMe ? 'Bạn' : sender?.name || record.senderId}</div>
-                                    <div style={{ fontSize: 12, color: '#888' }}>{sender?.email || ''}</div>
+                                    <div style={{ fontWeight: 500 }}>
+                                        {isMe ? 'Bạn' : sender?.name || `User ${record.senderId}` || 'Đang tải...'}
+                                    </div>
+                                    <div style={{ fontSize: 12, color: '#888' }}>
+                                        {sender?.email || record.senderId || ''}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -332,17 +514,28 @@ const IncomingRequests: React.FC = () => {
                 key: 'type',
                 render: (_: any, record: any): React.ReactNode => {
                     let typeLabel = '';
+                    let color = 'purple';
                     switch (record.type) {
                         case 'invite':
-                            typeLabel = 'Thêm thành viên vào project';
+                            typeLabel = '🤝 Mời thành viên vào dự án';
+                            color = 'blue';
                             break;
                         case 'progress_update':
-                            typeLabel = 'Yêu cầu cập nhật tiến độ';
+                            typeLabel = '📈 Cập nhật tiến độ';
+                            color = 'cyan';
+                            break;
+                        case 'task_update':
+                            typeLabel = '📝 Cập nhật nhiệm vụ';
+                            color = 'orange';
+                            break;
+                        case 'edit':
+                            typeLabel = '✏️ Chỉnh sửa dự án';
+                            color = 'green';
                             break;
                         default:
-                            typeLabel = record.type || 'Khác';
+                            typeLabel = record.type || '❓ Khác';
+                            color = 'default';
                     }
-                    const color = record.type === 'progress_update' ? 'cyan' : 'purple';
                     return <span style={{ color, fontWeight: 500 }}>{typeLabel}</span>;
                 },
             },
@@ -353,15 +546,27 @@ const IncomingRequests: React.FC = () => {
                 align: 'center' as const,
                 key: 'recipient',
                 render: (_: any, record: any): React.ReactNode => {
-                    const recipient = resolveUser(record.recipientId);
+                    let recipients: any[] = [];
+                    if (Array.isArray(record.recipientId)) {
+                        recipients = record.recipientId.map((id: string) => resolveUser(id)).filter(Boolean);
+                    } else if (record.recipientId) {
+                        const r = resolveUser(record.recipientId);
+                        if (r) recipients = [r];
+                    }
+
                     return (
                         <div style={{ textAlign: 'center', width: '100%' }}>
-                            <div style={{ display: 'inline-flex', gap: 12, alignItems: 'center' }}>
-                                <Avatar size={32} src={recipient?.avatar} icon={!recipient?.avatar && <UserOutlined />} />
-                                <div>
-                                    <div style={{ fontWeight: 500 }}>{recipient?.name || record.recipientId}</div>
-                                    <div style={{ fontSize: 12, color: '#888' }}>{recipient?.email || ''}</div>
-                                </div>
+                            <div style={{ display: 'inline-flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                                {recipients.length > 0 ? recipients.map((r, idx) => (
+                                    <div key={r.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                        <Avatar size={32} src={r.avatar} icon={!r.avatar && <UserOutlined />} />
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                            <div style={{ fontWeight: 500 }}>{r.name}</div>
+                                            <div style={{ fontSize: 12, color: '#888' }}>{r.email}</div>
+                                        </div>
+                                        {idx < recipients.length - 1 && <span style={{ margin: '0 4px' }}>|</span>}
+                                    </div>
+                                )) : record.recipientId}
                             </div>
                         </div>
                     );
@@ -393,17 +598,28 @@ const IncomingRequests: React.FC = () => {
                 key: 'type',
                 render: (_: any, record: any): React.ReactNode => {
                     let typeLabel = '';
+                    let color = 'purple';
                     switch (record.type) {
                         case 'invite':
-                            typeLabel = 'Thêm thành viên vào project';
+                            typeLabel = '🤝 Mời thành viên vào dự án';
+                            color = 'blue';
                             break;
                         case 'progress_update':
-                            typeLabel = 'Yêu cầu cập nhật tiến độ';
+                            typeLabel = '📈 Cập nhật tiến độ';
+                            color = 'cyan';
+                            break;
+                        case 'task_update':
+                            typeLabel = '📝 Cập nhật nhiệm vụ';
+                            color = 'orange';
+                            break;
+                        case 'edit':
+                            typeLabel = '✏️ Chỉnh sửa dự án';
+                            color = 'green';
                             break;
                         default:
-                            typeLabel = record.type || 'Khác';
+                            typeLabel = record.type || '❓ Khác';
+                            color = 'default';
                     }
-                    const color = record.type === 'progress_update' ? 'cyan' : 'purple';
                     return <span style={{ color, fontWeight: 500 }}>{typeLabel}</span>;
                 },
             },
@@ -502,13 +718,35 @@ const IncomingRequests: React.FC = () => {
 
     return (
         <div>
-            <div style={{ marginBottom: 16, display: 'flex', gap: 12 }}>
-                <Button type={tab === 'received' ? 'primary' : 'default'} onClick={() => setTab('received')}>
-                    Yêu cầu đến
-                </Button>
-                <Button type={tab === 'sent' ? 'primary' : 'default'} onClick={() => setTab('sent')}>
-                    Yêu cầu đã gửi
-                </Button>
+            <div style={{
+                marginBottom: 16,
+                display: 'flex',
+                gap: 12,
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+            }}>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    <Button
+                        type={tab === 'received' ? 'primary' : 'default'}
+                        onClick={() => setTab('received')}
+                        size="large"
+                    >
+                        📨 Yêu cầu đến ({receivedRequests.length})
+                    </Button>
+                    <Button
+                        type={tab === 'sent' ? 'primary' : 'default'}
+                        onClick={() => setTab('sent')}
+                        size="large"
+                    >
+                        📤 Yêu cầu đã gửi ({sentRequests.length})
+                    </Button>
+                </div>
+                {loading && (
+                    <div style={{ fontSize: 12, color: '#666' }}>
+                        🔄 Đang tải...
+                    </div>
+                )}
             </div>
             <Card>
                 <div style={{ marginBottom: 18 }}>
@@ -519,7 +757,13 @@ const IncomingRequests: React.FC = () => {
                     dataSource={pending}
                     columns={pendingColumns}
                     rowKey={record => record.id}
-                    pagination={false}
+                    pagination={{
+                        pageSize: 10,
+                        showSizeChanger: false,
+                        showQuickJumper: false,
+                        showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} yêu cầu`,
+                        hideOnSinglePage: true
+                    }}
                     bordered={true}
                     expandIconColumnIndex={0}
                     expandable={{
@@ -531,6 +775,13 @@ const IncomingRequests: React.FC = () => {
                             const idx = pending.findIndex((r: any) => r.id === record.id);
                             return <span className="custom-id-cell">{idx + 1}</span>;
                         },
+                    }}
+                    scroll={{ x: 800 }}
+                    loading={loading}
+                    locale={{
+                        emptyText: pending.length === 0 && !loading ?
+                            `📝 Không có yêu cầu ${tab === 'received' ? 'đến' : 'đã gửi'} nào đang chờ xử lý` :
+                            undefined
                     }}
                     components={{
                         header: {
@@ -559,7 +810,13 @@ const IncomingRequests: React.FC = () => {
                     dataSource={history}
                     columns={historyColumns}
                     rowKey={record => record.id}
-                    pagination={false}
+                    pagination={{
+                        pageSize: 10,
+                        showSizeChanger: true,
+                        showQuickJumper: true,
+                        showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} yêu cầu`,
+                        pageSizeOptions: ['10', '20', '50']
+                    }}
                     bordered={true}
                     expandIconColumnIndex={0}
                     expandable={{
@@ -571,6 +828,13 @@ const IncomingRequests: React.FC = () => {
                             const idx = history.findIndex((r: any) => r.id === record.id);
                             return <span className="custom-id-cell">{idx + 1}</span>;
                         },
+                    }}
+                    scroll={{ x: 800 }}
+                    loading={loading}
+                    locale={{
+                        emptyText: history.length === 0 && !loading ?
+                            `📜 Không có lịch sử yêu cầu ${tab === 'received' ? 'đến' : 'đã gửi'} nào` :
+                            undefined
                     }}
                     components={{
                         header: {

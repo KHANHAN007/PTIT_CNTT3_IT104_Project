@@ -63,6 +63,20 @@ export const deleteRequest = createAsyncThunk(
     }
 );
 
+export const createRequest = createAsyncThunk(
+    'requests/create',
+    async (requestData: {
+        projectId: string;
+        type: string;
+        content: string;
+        senderId: string;
+        recipientId: string | string[];
+        metadata?: any;
+    }) => {
+        return await requestsService.createRequest(requestData);
+    }
+);
+
 const requestsSlice = createSlice({
     name: 'requests',
     initialState,
@@ -102,7 +116,14 @@ const requestsSlice = createSlice({
                 state.sentRequests = state.sentRequests.filter(r => r.id !== action.meta.arg);
                 state.receivedRequests = state.receivedRequests.filter(r => r.id !== action.meta.arg);
             })
-            .addCase(deleteRequest.rejected, (state, action) => { state.loading = false; state.error = action.error.message || 'Xoá yêu cầu thất bại'; });
+            .addCase(deleteRequest.rejected, (state, action) => { state.loading = false; state.error = action.error.message || 'Xoá yêu cầu thất bại'; })
+
+            .addCase(createRequest.pending, (state) => { state.loading = true; state.error = null; })
+            .addCase(createRequest.fulfilled, (state, action: PayloadAction<IncomingRequest>) => {
+                state.loading = false;
+                state.sentRequests.push(action.payload);
+            })
+            .addCase(createRequest.rejected, (state, action) => { state.loading = false; state.error = action.error.message || 'Tạo yêu cầu thất bại'; });
     }
 });
 

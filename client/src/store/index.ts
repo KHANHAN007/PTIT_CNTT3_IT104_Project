@@ -6,6 +6,7 @@ import membersReducer from './membersSlice';
 import usersReducer from './usersSlice';
 import requestsReducer from './requestsSlice';
 
+
 export const store = configureStore({
     reducer: {
         auth: authReducer,
@@ -14,8 +15,8 @@ export const store = configureStore({
         members: membersReducer,
         users: usersReducer,
         requests: requestsReducer,
-    }
-})
+    },
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

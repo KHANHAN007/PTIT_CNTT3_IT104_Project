@@ -4,10 +4,19 @@ import type { IncomingRequest } from '../types';
 export const requestsService = {
     async getRequestsForUser(userId: string): Promise<{ sentRequests: IncomingRequest[]; receivedRequests: IncomingRequest[] }> {
         const sentRes = await api.get(`/requests?senderId=${userId}`);
-        const receivedRes = await api.get(`/requests?recipientId=${userId}`);
+        // Lấy tất cả requests và filter những cái có userId trong recipientId
+        const allRequestsRes = await api.get('/requests');
+        const receivedRequests = allRequestsRes.data.filter((req: IncomingRequest) => {
+            if (Array.isArray(req.recipientId)) {
+                return req.recipientId.includes(userId);
+            } else {
+                return req.recipientId === userId;
+            }
+        });
+
         return {
             sentRequests: sentRes.data,
-            receivedRequests: receivedRes.data,
+            receivedRequests: receivedRequests,
         };
     },
 
@@ -27,15 +36,23 @@ export const requestsService = {
             } catch (err) {
             }
         }
-        if (createdRequest.recipientId) {
-            try {
-                const recipientRes = await api.get(`/users/${createdRequest.recipientId}`);
-                const recipient = recipientRes.data;
-                const receivedRequests = Array.isArray(recipient.receivedRequests) ? recipient.receivedRequests : [];
-                await api.patch(`/users/${createdRequest.recipientId}`, {
-                    receivedRequests: [...receivedRequests, createdRequest]
-                });
-            } catch (err) {
+
+        // Xử lý recipientId có thể là string hoặc mảng string
+        const recipientIds = Array.isArray(createdRequest.recipientId)
+            ? createdRequest.recipientId
+            : [createdRequest.recipientId];
+
+        for (const recipientId of recipientIds) {
+            if (recipientId) {
+                try {
+                    const recipientRes = await api.get(`/users/${recipientId}`);
+                    const recipient = recipientRes.data;
+                    const receivedRequests = Array.isArray(recipient.receivedRequests) ? recipient.receivedRequests : [];
+                    await api.patch(`/users/${recipientId}`, {
+                        receivedRequests: [...receivedRequests, createdRequest]
+                    });
+                } catch (err) {
+                }
             }
         }
         return createdRequest;
@@ -67,6 +84,6 @@ export const requestsService = {
                 await api.patch(`/users/${request.senderId}`, { sentRequests: updatedSentRequests });
             }
         }
-        await api.delete(`/requests/id=${id}`);
+        await api.delete(`/requests/${id}`);
     }
 };

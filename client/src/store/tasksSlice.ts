@@ -14,7 +14,8 @@ export const fetchTasksByProjectAsync = createAsyncThunk(
 export const fetchTasksByUserAsync = createAsyncThunk(
     'tasks/fetchTasksByUser',
     async (userId: string) => {
-        return await tasksService.getUserTasks(userId);
+        const tasks = await tasksService.getUserTasks(userId);
+        return { userId, tasks };
     }
 );
 
@@ -104,7 +105,14 @@ const tasksSlice = createSlice({
             })
             .addCase(fetchTasksByProjectAsync.fulfilled, (state, action: PayloadAction<Task[]>) => {
                 state.loading = false;
-                state.tasks = action.payload;
+                const projectTasks = action.payload;
+                if (projectTasks.length > 0) {
+                    const projectId = projectTasks[0].projectId;
+                    // Xóa tasks cũ của project này
+                    state.tasks = state.tasks.filter(task => task.projectId !== projectId);
+                    // Thêm tất cả tasks của project
+                    state.tasks.push(...projectTasks);
+                }
             })
             .addCase(fetchTasksByProjectAsync.rejected, (state, action) => {
                 state.loading = false;
@@ -114,9 +122,21 @@ const tasksSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchTasksByUserAsync.fulfilled, (state, action: PayloadAction<Task[]>) => {
+            .addCase(fetchTasksByUserAsync.fulfilled, (state, action: PayloadAction<{ userId: string; tasks: Task[] }>) => {
                 state.loading = false;
-                state.tasks = action.payload;
+                const { userId, tasks } = action.payload;
+                const validTasks = tasks.filter(task => task.assigneeId === userId);
+                if (validTasks.length !== tasks.length) {
+                    console.warn(`[TasksSlice] ${tasks.length - validTasks.length} invalid tasks removed for user ${userId}`);
+                }
+                const hasProjectTasks = state.tasks.some(task => task.assigneeId !== userId);
+                if (hasProjectTasks) {
+                    console.info(`[TasksSlice] Project context detected, merging user tasks instead of overwriting`);
+                    const nonUserTasks = state.tasks.filter(task => task.assigneeId !== userId);
+                    state.tasks = [...nonUserTasks, ...validTasks];
+                } else {
+                    state.tasks = validTasks;
+                }
             })
             .addCase(fetchTasksByUserAsync.rejected, (state, action) => {
                 state.loading = false;
@@ -144,9 +164,14 @@ const tasksSlice = createSlice({
             })
             .addCase(updateTaskAsync.fulfilled, (state, action: PayloadAction<Task>) => {
                 state.loading = false;
-                const index = state.tasks.findIndex(t => t.id === action.payload.id);
+                const updatedTask = action.payload;
+                const index = state.tasks.findIndex(t => t.id === updatedTask.id);
+
                 if (index !== -1) {
-                    state.tasks[index] = action.payload;
+                    state.tasks[index] = updatedTask;
+                } else {
+                    // Task không có trong state hiện tại, có thể là task mới được assign
+                    state.tasks.push(updatedTask);
                 }
                 state.errorForm = null;
             })
@@ -173,9 +198,11 @@ const tasksSlice = createSlice({
             })
             .addCase(updateTaskStatusAsync.fulfilled, (state, action: PayloadAction<Task>) => {
                 state.loading = false;
-                const index = state.tasks.findIndex(t => t.id === action.payload.id);
+                const updatedTask = action.payload;
+                const index = state.tasks.findIndex(t => t.id === updatedTask.id);
+
                 if (index !== -1) {
-                    state.tasks[index] = action.payload;
+                    state.tasks[index] = updatedTask;
                 }
             })
             .addCase(updateTaskStatusAsync.rejected, (state, action) => {

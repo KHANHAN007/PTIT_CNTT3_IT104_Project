@@ -4,4 +4,5 @@ export { tasksService } from './tasksService';
 export { membersService } from './memberService';
 export { cloudinaryService } from './cloudinaryService';
 export { userService } from './userService';
+export { passiveTimeService } from './passiveTimeService';
 export { api } from './api';

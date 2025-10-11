@@ -25,7 +25,7 @@ import {
     Badge,
     Divider,
 } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, TeamOutlined, FilterOutlined, ClearOutlined, SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, TeamOutlined, FilterOutlined, ClearOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
 import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../components/ImageUpload';
@@ -485,99 +485,135 @@ function Projects() {
 
                     {/* Advanced Filters */}
                     <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
-                        <Row gutter={[16, 16]} align="middle">
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <div style={{ marginBottom: 8 }}>
-                                    <Badge count={getActiveFiltersCount()} offset={[10, 0]}>
-                                        <FilterOutlined /> Bộ lọc
-                                    </Badge>
+                        <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '16px',
+                            alignItems: 'center'
+                        }}>
+                            {/* Filter Badge */}
+                            <div style={{
+                                minWidth: '120px',
+                                flexShrink: 0
+                            }}>
+                                <Badge count={getActiveFiltersCount()} offset={[10, 0]}>
+                                    <FilterOutlined /> Bộ lọc
+                                </Badge>
+                            </div>
+
+                            {/* Filter Controls */}
+                            <div style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                gap: '16px',
+                                flex: 1,
+                                minWidth: 0, 
+                                justifyContent:'end'
+                            }}>
+                                <div style={{
+                                    minWidth: '200px',
+                                    flex: '1 1 200px',
+                                    maxWidth: '250px'
+                                }}>
+                                    <Select
+                                        placeholder="Chủ sở hữu"
+                                        style={{ width: '100%' }}
+                                        value={filterOwner}
+                                        onChange={setFilterOwner}
+                                        allowClear
+                                    >
+                                        {users.map(user => (
+                                            <Select.Option key={user.id} value={user.id}>
+                                                {user.name}
+                                            </Select.Option>
+                                        ))}
+                                    </Select>
                                 </div>
-                            </Col>
 
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <Select
-                                    placeholder="Chủ sở hữu"
-                                    style={{ width: '100%' }}
-                                    value={filterOwner}
-                                    onChange={setFilterOwner}
-                                    allowClear
-                                >
-                                    {users.map(user => (
-                                        <Select.Option key={user.id} value={user.id}>
-                                            {user.name}
+                                <div style={{
+                                    minWidth: '200px',
+                                    flex: '1 1 200px',
+                                    maxWidth: '250px'
+                                }}>
+                                    <Select
+                                        placeholder="Quản lý"
+                                        style={{ width: '100%' }}
+                                        value={filterManager}
+                                        onChange={setFilterManager}
+                                        allowClear
+                                    >
+                                        {users.map(user => (
+                                            <Select.Option key={user.id} value={user.id}>
+                                                {user.name}
+                                            </Select.Option>
+                                        ))}
+                                    </Select>
+                                </div>
+
+                                <div style={{
+                                    minWidth: '200px',
+                                    flex: '1 1 200px',
+                                    maxWidth: '280px'
+                                }}>
+                                    <Select
+                                        placeholder="Vai trò của bạn"
+                                        style={{ width: '100%' }}
+                                        value={filterRole}
+                                        onChange={setFilterRole}
+                                        allowClear
+                                    >
+                                        <Select.Option value={MemberRole.PROJECT_OWNER}>
+                                            {getRoleDisplayName(MemberRole.PROJECT_OWNER)}
                                         </Select.Option>
-                                    ))}
-                                </Select>
-                            </Col>
-
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <Select
-                                    placeholder="Quản lý"
-                                    style={{ width: '100%' }}
-                                    value={filterManager}
-                                    onChange={setFilterManager}
-                                    allowClear
-                                >
-                                    {users.map(user => (
-                                        <Select.Option key={user.id} value={user.id}>
-                                            {user.name}
+                                        <Select.Option value={MemberRole.PROJECT_MANAGER}>
+                                            {getRoleDisplayName(MemberRole.PROJECT_MANAGER)}
                                         </Select.Option>
-                                    ))}
-                                </Select>
-                            </Col>
+                                        <Select.Option value={MemberRole.FRONTEND_DEVELOPER}>
+                                            {getRoleDisplayName(MemberRole.FRONTEND_DEVELOPER)}
+                                        </Select.Option>
+                                        <Select.Option value={MemberRole.BACKEND_DEVELOPER}>
+                                            {getRoleDisplayName(MemberRole.BACKEND_DEVELOPER)}
+                                        </Select.Option>
+                                        <Select.Option value={MemberRole.FULLSTACK_DEVELOPER}>
+                                            {getRoleDisplayName(MemberRole.FULLSTACK_DEVELOPER)}
+                                        </Select.Option>
+                                        <Select.Option value={MemberRole.DESIGNER}>
+                                            {getRoleDisplayName(MemberRole.DESIGNER)}
+                                        </Select.Option>
+                                        <Select.Option value={MemberRole.TESTER}>
+                                            {getRoleDisplayName(MemberRole.TESTER)}
+                                        </Select.Option>
+                                    </Select>
+                                </div>
 
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <Select
-                                    placeholder="Vai trò của bạn"
-                                    style={{ width: '100%' }}
-                                    value={filterRole}
-                                    onChange={setFilterRole}
-                                    allowClear
-                                >
-                                    <Select.Option value={MemberRole.PROJECT_OWNER}>
-                                        {getRoleDisplayName(MemberRole.PROJECT_OWNER)}
-                                    </Select.Option>
-                                    <Select.Option value={MemberRole.PROJECT_MANAGER}>
-                                        {getRoleDisplayName(MemberRole.PROJECT_MANAGER)}
-                                    </Select.Option>
-                                    <Select.Option value={MemberRole.FRONTEND_DEVELOPER}>
-                                        {getRoleDisplayName(MemberRole.FRONTEND_DEVELOPER)}
-                                    </Select.Option>
-                                    <Select.Option value={MemberRole.BACKEND_DEVELOPER}>
-                                        {getRoleDisplayName(MemberRole.BACKEND_DEVELOPER)}
-                                    </Select.Option>
-                                    <Select.Option value={MemberRole.FULLSTACK_DEVELOPER}>
-                                        {getRoleDisplayName(MemberRole.FULLSTACK_DEVELOPER)}
-                                    </Select.Option>
-                                    <Select.Option value={MemberRole.DESIGNER}>
-                                        {getRoleDisplayName(MemberRole.DESIGNER)}
-                                    </Select.Option>
-                                    <Select.Option value={MemberRole.TESTER}>
-                                        {getRoleDisplayName(MemberRole.TESTER)}
-                                    </Select.Option>
-                                </Select>
-                            </Col>
+                                <div style={{
+                                    minWidth: '250px',
+                                    flex: '1 1 250px',
+                                    maxWidth: '300px'
+                                }}>
+                                    <DatePicker.RangePicker
+                                        placeholder={['Từ ngày', 'Đến ngày']}
+                                        style={{ width: '100%' }}
+                                        value={filterDateRange}
+                                        onChange={(dates) => {
+                                            if (dates && dates[0] && dates[1]) {
+                                                setFilterDateRange([dates[0], dates[1]]);
+                                            } else {
+                                                setFilterDateRange(null);
+                                            }
+                                        }}
+                                    />
+                                </div>
 
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <DatePicker.RangePicker
-                                    placeholder={['Từ ngày', 'Đến ngày']}
-                                    style={{ width: '100%' }}
-                                    value={filterDateRange}
-                                    onChange={(dates) => {
-                                        if (dates && dates[0] && dates[1]) {
-                                            setFilterDateRange([dates[0], dates[1]]);
-                                        } else {
-                                            setFilterDateRange(null);
-                                        }
-                                    }}
-                                />
-                            </Col>
-
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <Space>
+                                <div style={{
+                                    display: 'flex',
+                                    gap: '8px',
+                                    alignItems: 'center',
+                                    flexShrink: 0
+                                }}>
                                     <Select
                                         placeholder="Sắp xếp"
-                                        style={{ width: 120 }}
+                                        style={{ width: 140 }}
                                         value={`${sortBy}-${sortOrder}`}
                                         onChange={(value) => {
                                             const [field, order] = value.split('-');
@@ -612,11 +648,10 @@ function Projects() {
                                     >
                                         Reset
                                     </Button>
-                                </Space>
-                            </Col>
-                        </Row>
+                                </div>
+                            </div>
+                        </div>
 
-                        {/* Filter Summary */}
                         {getActiveFiltersCount() > 0 && (
                             <>
                                 <Divider style={{ margin: '12px 0' }} />

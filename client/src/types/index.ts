@@ -275,6 +275,7 @@ export interface Task {
     deadline: string;
     timeSpentMinutes?: number;
     completedAt?: string | null;
+    pausedAt?: string | null;
     estimatedHours?: number;
     createdAt: string;
     updatedAt: string;
@@ -297,6 +298,7 @@ export const TaskProgress = {
     ON_TRACK: 'Đúng tiến độ',
     AT_RISK: 'Có rủi ro',
     DELAYED: 'Trễ hẹn',
+    PAUSED: 'Tạm dừng',
     DONE: 'Hoàn thành'
 } as const;
 
@@ -304,7 +306,7 @@ export interface IncomingRequest {
     id: string;
     type: 'invite' | 'request' | 'edit' | string;
     senderId: string;
-    recipientId: string;
+    recipientId: string | string[];
     projectId?: string | null;
     payload?: any;
     status: 'pending' | 'accepted' | 'rejected';

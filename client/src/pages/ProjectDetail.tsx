@@ -54,10 +54,112 @@ import { fetchAllUsers } from '../store/usersSlice';
 import type { Task, ProjectMember, TaskPriorityType, MemberRoleType, TaskProgressType } from '../types';
 import { TaskStatus, TaskPriority, MemberRole, TaskProgress, getRoleColor } from '../types';
 import MemberAvatar from '../components/MemberAvatar';
+import { usePassiveTimeTracking } from '../hooks/usePassiveTimeTracking';
+import { formatTime } from '../services/passiveTimeService';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
+
+const calculateTaskAutoPriority = (task: Task): TaskPriorityType => {
+    if (!task.estimatedHours) return task.priority;
+    const startTime = new Date(task.startDate).getTime();
+    const deadlineTime = new Date(task.deadline).getTime();
+    const currentTime = Date.now();
+    const totalDuration = deadlineTime - startTime;
+    const elapsedTime = Math.max(0, currentTime - startTime);
+    const timeSpentHours = (task.timeSpentMinutes || 0) / 60;
+    const timePressure = Math.min(1, Math.max(0, elapsedTime / totalDuration));
+    const workEfficiency = task.estimatedHours > 0 ? timeSpentHours / task.estimatedHours : 0;
+    let deadlineRisk = 0;
+    const daysToDeadline = (deadlineTime - currentTime) / (1000 * 60 * 60 * 24);
+
+    if (daysToDeadline < 0) {
+        deadlineRisk = 1;
+    } else if (daysToDeadline < 1) {
+        deadlineRisk = 0.9;
+    } else if (daysToDeadline < 3) {
+        deadlineRisk = 0.7;
+    } else if (daysToDeadline < 7) {
+        deadlineRisk = 0.5;
+    } else {
+        deadlineRisk = Math.max(0, 0.3 - (daysToDeadline - 7) * 0.02);
+    }
+
+    let businessImpact = 0.5;
+    switch (task.progress) {
+        case TaskProgress.DELAYED:
+            businessImpact = 1.0;
+            break;
+        case TaskProgress.AT_RISK:
+            businessImpact = 0.8;
+            break;
+        case TaskProgress.ON_TRACK:
+            businessImpact = 0.4;
+            break;
+        case TaskProgress.DONE:
+            businessImpact = 0.1;
+            break;
+    }
+    let statusMultiplier = 1.0;
+    switch (task.status) {
+        case TaskStatus.PENDING:
+            statusMultiplier = 1.2;
+            break;
+        case TaskStatus.IN_PROGRESS:
+            statusMultiplier = 1.0;
+            break;
+        case TaskStatus.TODO:
+            statusMultiplier = 0.8;
+            break;
+        case TaskStatus.DONE:
+            return TaskPriority.LOW;
+    }
+
+    let efficiencyMultiplier = 1.0;
+    if (workEfficiency > 2.0) {
+        efficiencyMultiplier = 1.3;
+    } else if (workEfficiency > 1.5) {
+        efficiencyMultiplier = 1.2;
+    } else if (workEfficiency > 1.0) {
+        efficiencyMultiplier = 1.1;
+    } else if (workEfficiency < 0.1 && task.status === TaskStatus.IN_PROGRESS) {
+        efficiencyMultiplier = 0.9;
+    }
+
+    const priorityScore = (
+        timePressure * 0.3 +
+        Math.min(workEfficiency, 2.0) * 0.25 +
+        deadlineRisk * 0.25 +
+        businessImpact * 0.2
+    ) * statusMultiplier * efficiencyMultiplier;
+
+    if (priorityScore >= 0.8) {
+        return TaskPriority.HIGH;
+    } else if (priorityScore >= 0.5) {
+        return TaskPriority.MEDIUM;
+    } else {
+        return TaskPriority.LOW;
+    }
+};
+
+const getPriorityColor = (priority: TaskPriorityType) => {
+    switch (priority) {
+        case TaskPriority.HIGH: return 'red';
+        case TaskPriority.MEDIUM: return 'orange';
+        case TaskPriority.LOW: return 'green';
+        default: return 'default';
+    }
+};
+
+const getPriorityText = (priority: TaskPriorityType) => {
+    switch (priority) {
+        case TaskPriority.HIGH: return 'Cao';
+        case TaskPriority.MEDIUM: return 'Trung bình';
+        case TaskPriority.LOW: return 'Thấp';
+        default: return priority;
+    }
+};
 
 interface TaskModalProps {
     visible: boolean;
@@ -335,17 +437,55 @@ const TaskModal: React.FC<TaskModalProps> = ({
                     </Col>
                 </Row>
 
-                <Form.Item
-                    label="Độ ưu tiên"
-                    name="priority"
-                    rules={[{ required: true, message: 'Vui lòng chọn độ ưu tiên' }]}
-                >
-                    <Select placeholder="Chọn độ ưu tiên">
-                        <Option value={TaskPriority.LOW}>Thấp</Option>
-                        <Option value={TaskPriority.MEDIUM}>Trung bình</Option>
-                        <Option value={TaskPriority.HIGH}>Cao</Option>
-                    </Select>
-                </Form.Item>
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
+                            label="Độ ưu tiên"
+                            name="priority"
+                            rules={[{ required: true, message: 'Vui lòng chọn độ ưu tiên' }]}
+                        >
+                            <Select placeholder="Chọn độ ưu tiên">
+                                <Option value={TaskPriority.LOW}>Thấp</Option>
+                                <Option value={TaskPriority.MEDIUM}>Trung bình</Option>
+                                <Option value={TaskPriority.HIGH}>Cao</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        {task && task.estimatedHours && (
+                            <Form.Item label="Phân tích độ ưu tiên">
+                                <div style={{ border: '1px solid #f0f0f0', padding: 8, borderRadius: 4, backgroundColor: '#fafafa' }}>
+                                    <div style={{ fontSize: 12, color: '#666', marginBottom: 4 }}>
+
+                                    </div>
+                                    <div style={{ fontSize: 11, color: '#888', lineHeight: 1.3 }}>
+                                        {(() => {
+                                            const startTime = new Date(task.startDate).getTime();
+                                            const deadlineTime = new Date(task.deadline).getTime();
+                                            const currentTime = Date.now();
+                                            const totalDuration = deadlineTime - startTime;
+                                            const elapsedTime = Math.max(0, currentTime - startTime);
+                                            const timeSpentHours = (task.timeSpentMinutes || 0) / 60;
+
+                                            const timePressure = Math.min(1, Math.max(0, elapsedTime / totalDuration));
+                                            const workEfficiency = task.estimatedHours > 0 ? timeSpentHours / task.estimatedHours : 0;
+                                            const daysToDeadline = (deadlineTime - currentTime) / (1000 * 60 * 60 * 24);
+
+                                            return (
+                                                <>
+                                                    <div>• Áp lực thời gian: {(timePressure * 100).toFixed(0)}%</div>
+                                                    <div>• Hiệu suất: {(workEfficiency * 100).toFixed(0)}% vs ước tính</div>
+                                                    <div>• Thời gian còn lại: {Math.ceil(daysToDeadline)} ngày</div>
+                                                    <div>• Tiến độ: {task.progress}</div>
+                                                </>
+                                            );
+                                        })()}
+                                    </div>
+                                </div>
+                            </Form.Item>
+                        )}
+                    </Col>
+                </Row>
 
                 <Form.Item
                     label="Thời gian ước tính (giờ)"
@@ -516,6 +656,9 @@ const ProjectDetail: React.FC = () => {
     const [searchText, setSearchText] = useState('');
     const [sortBy, setSortBy] = useState<'deadline' | 'priority'>('deadline');
 
+    // Passive time tracking integration
+    const passiveTracking = usePassiveTimeTracking();
+
     const currentProject = projects.find(p => p.id === id);
 
     useEffect(() => {
@@ -544,6 +687,31 @@ const ProjectDetail: React.FC = () => {
             dispatch(clearMembersError());
         };
     }, [dispatch]);
+    useEffect(() => {
+        if (tasks.length > 0) {
+            passiveTracking.updateTrackingFromTaskChanges(tasks);
+            const inProgressTasks = tasks.filter(t => t.status === 'In Progress');
+            if (inProgressTasks.length > 0) {
+                console.log('ProjectDetail: Found In Progress tasks:', inProgressTasks.map(t => ({ id: t.id, name: t.name })));
+            }
+        }
+    }, [tasks]);
+    useEffect(() => {
+        if (tasks.length > 0 && user?.id) {
+            tasks.forEach(task => {
+                if (task.estimatedHours) {
+                    const autoPriority = calculateTaskAutoPriority(task);
+                    if (autoPriority !== task.priority) {
+                        console.log(`[Auto-Priority] Updating task ${task.id} from ${task.priority} to ${autoPriority}`);
+                        dispatch(updateTaskAsync({
+                            id: task.id,
+                            taskData: { priority: autoPriority }
+                        }));
+                    }
+                }
+            });
+        }
+    }, [tasks, user?.id, dispatch]);
 
     const handleAddTask = () => {
         setEditingTask(undefined);
@@ -647,40 +815,26 @@ const ProjectDetail: React.FC = () => {
         }
     };
 
-    const filteredTasks = tasks.filter(task =>
-        task.name.toLowerCase().includes(searchText.toLowerCase())
-    ).sort((a, b) => {
-        if (sortBy === 'deadline') {
-            return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
-        } else {
-            const priorityOrder = { [TaskPriority.HIGH]: 3, [TaskPriority.MEDIUM]: 2, [TaskPriority.LOW]: 1 };
-            return priorityOrder[b.priority] - priorityOrder[a.priority];
-        }
-    });
+    const filteredTasks = tasks
+        .filter(task => task.projectId === currentProject?.id)
+        .filter(task => task.name.toLowerCase().includes(searchText.toLowerCase()))
+        .sort((a, b) => {
+            if (sortBy === 'deadline') {
+                return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+            } else {
+                const priorityOrder = { [TaskPriority.HIGH]: 3, [TaskPriority.MEDIUM]: 2, [TaskPriority.LOW]: 1 };
+                return priorityOrder[b.priority] - priorityOrder[a.priority];
+            }
+        });
 
-    const getPriorityColor = (priority: TaskPriorityType) => {
-        switch (priority) {
-            case TaskPriority.HIGH: return 'red';
-            case TaskPriority.MEDIUM: return 'orange';
-            case TaskPriority.LOW: return 'green';
-            default: return 'default';
-        }
-    };
 
-    const getPriorityText = (priority: TaskPriorityType) => {
-        switch (priority) {
-            case TaskPriority.HIGH: return 'Cao';
-            case TaskPriority.MEDIUM: return 'Trung bình';
-            case TaskPriority.LOW: return 'Thấp';
-            default: return priority;
-        }
-    };
 
     const getProgressColor = (progress: TaskProgressType) => {
         switch (progress) {
             case TaskProgress.ON_TRACK: return 'green';
             case TaskProgress.AT_RISK: return 'orange';
             case TaskProgress.DELAYED: return 'red';
+            case TaskProgress.PAUSED: return 'default'; // Màu xám
             case TaskProgress.DONE: return 'blue';
             default: return 'default';
         }
@@ -751,33 +905,43 @@ const ProjectDetail: React.FC = () => {
             key: 'progress',
             width: '10%',
             onCell: () => ({ className: 'table-col-progress' }),
-            render: (progress: string, record) => (
-                <div>
-                    <Tag color={getProgressColor(progress as any)}>
-                        {progress}
-                    </Tag>
-                    {record.estimatedHours !== undefined && (
-                        <div style={{ fontSize: 12, color: '#888', marginTop: 4 }}>
-                            {typeof record.timeSpentMinutes === 'number' && record.estimatedHours > 0
-                                ? `Tiến độ: ${(record.timeSpentMinutes / 60).toFixed(2)}/${record.estimatedHours} giờ`
-                                : `Ước tính: ${record.estimatedHours} giờ`}
-                        </div>
-                    )}
-                </div>
-            )
+            render: (progress: string, record) => {
+                const summary = passiveTracking.getTaskSummary(record.id);
+                const totalTimeMinutes = summary.totalMinutes || record.timeSpentMinutes || 0;
+
+                return (
+                    <div>
+                        <Tag color={getProgressColor(progress as any)} style={{ marginRight: 0 }}>
+                            {progress}
+                        </Tag>
+                        {record.estimatedHours !== undefined && (
+                            <div style={{ fontSize: 12, color: '#888', marginTop: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+                                {totalTimeMinutes > 0 && record.estimatedHours > 0
+                                    ? `⏱️ ${formatTime(totalTimeMinutes)}/${record.estimatedHours}h`
+                                    : record.estimatedHours > 0
+                                        ? `Ước tính: ${record.estimatedHours}h`
+                                        : totalTimeMinutes > 0
+                                            ? `Đã làm: ${formatTime(totalTimeMinutes)}`
+                                            : 'Chưa theo dõi thời gian'
+                                }
+                            </div>
+                        )}
+                    </div>
+                );
+            }
         },
         {
             title: 'Hành động',
             key: 'actions',
             width: '11%',
             render: (_, record) => (
-                <Space style={{ justifyContent: 'center', width: '100%' }}>
+                <Space size="small">
                     <Button
                         size="small"
                         type="text"
                         icon={<EditOutlined />}
                         onClick={() => handleEditTask(record)}
-                        style={{ color: '#1890ff' }}
+                        style={{ color: '#1890ff', width: '50px' }}
                     >
                         Sửa
                     </Button>
@@ -787,6 +951,7 @@ const ProjectDetail: React.FC = () => {
                         danger
                         icon={<DeleteOutlined />}
                         onClick={() => handleDeleteTask(record)}
+                        style={{ width: '50px' }}
                     >
                         Xóa
                     </Button>
@@ -840,7 +1005,7 @@ const ProjectDetail: React.FC = () => {
         {
             title: '',
             key: 'actions',
-            width: 50,
+            width: '10%',
             render: (_, record) => record.role !== MemberRole.PROJECT_OWNER && (
                 <Button
                     size="small"
@@ -1032,8 +1197,9 @@ const ProjectDetail: React.FC = () => {
                 </Row>
             </Card>
 
+
             <Card>
-                <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
+                <Row justify="end" align="middle" style={{ marginBottom: 16 }}>
                     <Col>
                         <Space>
                             <Select

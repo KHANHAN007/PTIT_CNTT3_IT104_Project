@@ -10,7 +10,16 @@ export const tasksService = {
 
     async getUserTasks(userId: string): Promise<Task[]> {
         const response = await api.get(`/tasks?assigneeId=${userId}`);
-        return response.data;
+        const tasks = response.data;
+
+        // Double-check: Filter tasks để đảm bảo chỉ có tasks thuộc về user này
+        const validTasks = tasks.filter((task: Task) => task.assigneeId === userId);
+
+        if (validTasks.length !== tasks.length) {
+            console.warn(`[TasksService] Filtered out ${tasks.length - validTasks.length} invalid tasks for user ${userId}`);
+        }
+
+        return validTasks;
     },
 
     async getTasksByIds(ids: string[]): Promise<Task[]> {
@@ -22,7 +31,13 @@ export const tasksService = {
 
     async getTask(id: string): Promise<Task> {
         const response = await api.get(`/tasks/${id}`);
-        return response.data;
+        const task = response.data;
+
+        if (!task || !task.id) {
+            throw new Error(`Task với ID ${id} không tồn tại`);
+        }
+
+        return task;
     },
 
     async createTask(taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>): Promise<Task> {
