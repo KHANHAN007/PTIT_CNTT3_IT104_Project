@@ -18,7 +18,7 @@ function Login() {
 
     useEffect(() => {
         if (user && user.id) {
-            navigate('/profile', { replace: true });
+            navigate('/projects', { replace: true });
         }
     }, [user, navigate]);
     useEffect(() => {

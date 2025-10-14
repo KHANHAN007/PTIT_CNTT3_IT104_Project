@@ -26,41 +26,6 @@ export const tasksService = {
     },
 
     async createTask(taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>): Promise<Task> {
-        const errors: string[] = [];
-
-        if (!taskData.name.trim()) {
-            errors.push('Tên nhiệm vụ không được để trống');
-        }
-
-        if (taskData.name && (taskData.name.length < 3 || taskData.name.length > 100)) {
-            errors.push('Tên nhiệm vụ phải có độ dài từ 3-100 ký tự');
-        }
-        const existingTasksResponse = await api.get(`/tasks?projectId=${taskData.projectId}`);
-        const existingTasks = existingTasksResponse.data;
-
-        const duplicateTask = existingTasks.find(
-            (t: Task) => t.name.toLowerCase() === taskData.name.toLowerCase()
-        );
-
-        if (duplicateTask) {
-            errors.push('Tên nhiệm vụ đã tồn tại trong dự án');
-        }
-
-        const startDate = new Date(taskData.startDate);
-        const deadline = new Date(taskData.deadline);
-        const now = new Date();
-
-        if (startDate <= now) {
-            errors.push('Ngày bắt đầu phải lớn hơn ngày hiện tại');
-        }
-
-        if (deadline <= startDate) {
-            errors.push('Hạn chót phải lớn hơn ngày bắt đầu');
-        }
-
-        if (errors.length) {
-            throw { messages: errors };
-        }
 
         const computeProgress = (timeMinutes: number | undefined, estimatedHours: number | undefined): TaskProgressType => {
             if (!estimatedHours || estimatedHours <= 0) return TaskProgress.ON_TRACK;
@@ -87,49 +52,6 @@ export const tasksService = {
     },
 
     async updateTask(id: string, taskData: Partial<Task>): Promise<Task> {
-        const errors: string[] = [];
-
-        if (taskData.name) {
-            if (!taskData.name.trim()) {
-                errors.push('Tên nhiệm vụ không được để trống');
-            }
-
-            if (taskData.name.length < 3 || taskData.name.length > 100) {
-                errors.push('Tên nhiệm vụ phải có độ dài từ 3-100 ký tự');
-            }
-            const currentTaskResponse = await api.get(`/tasks/${id}`);
-            const currentTask = currentTaskResponse.data;
-
-            const existingTasksResponse = await api.get(`/tasks?projectId=${currentTask.projectId}`);
-            const existingTasks = existingTasksResponse.data;
-
-            const duplicateTask = existingTasks.find(
-                (t: Task) => t.name.toLowerCase() === taskData.name!.toLowerCase() && t.id !== id
-            );
-
-            if (duplicateTask) {
-                errors.push('Tên nhiệm vụ đã tồn tại trong dự án');
-            }
-        }
-
-        if (taskData.startDate && taskData.deadline) {
-            const startDate = new Date(taskData.startDate);
-            const deadline = new Date(taskData.deadline);
-            const now = new Date();
-
-            if (startDate <= now) {
-                errors.push('Ngày bắt đầu phải lớn hơn ngày hiện tại');
-            }
-
-            if (deadline <= startDate) {
-                errors.push('Hạn chót phải lớn hơn ngày bắt đầu');
-            }
-        }
-
-        if (errors.length) {
-            throw { messages: errors };
-        }
-
         const computeProgress = (timeMinutes: number | undefined, estimatedHours: number | undefined): TaskProgressType => {
             if (!estimatedHours || estimatedHours <= 0) return TaskProgress.ON_TRACK;
             const ratio = (timeMinutes || 0) / (estimatedHours * 60);

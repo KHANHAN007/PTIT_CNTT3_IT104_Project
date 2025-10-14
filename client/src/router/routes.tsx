@@ -37,7 +37,7 @@ export const routes: RouteObject[] = [
         path: "/",
         element: (
             <ProtectedLayout>
-                <Profile />
+                <Projects />
             </ProtectedLayout>
         ),
     },

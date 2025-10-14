@@ -79,7 +79,12 @@ const projectsSlice = createSlice({
             })
             .addCase(createProject.fulfilled, (state, action) => {
                 state.loading = false;
-                state.projects.push(action.payload);
+                const existingIndex = state.projects.findIndex(p => p.id === action.payload.id);
+                if (existingIndex === -1) {
+                    state.projects.push(action.payload);
+                } else {
+                    state.projects[existingIndex] = action.payload;
+                }
             })
             .addCase(createProject.rejected, (state, action) => {
                 state.loading = false;

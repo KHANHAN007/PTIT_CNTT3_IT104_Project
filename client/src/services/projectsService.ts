@@ -1,6 +1,7 @@
 import type { Project } from "../types";
 import { api } from "./api";
 import { MemberRole } from '../types';
+import dayjs from 'dayjs';
 
 export interface CreateProjectRequest {
     name: string;
@@ -37,8 +38,22 @@ export const projectsService = {
             const memberProjRes = await api.get(`/projects?${query}`);
             memberProjects = memberProjRes.data || [];
         }
-        console.log('Fetched projects:', { ownedProjects, managerProjects, memberProjects });
-        return [...ownedProjects, ...memberProjects, ...managerProjects];
+        const projectsMap = new Map<string, Project>();
+        ownedProjects.forEach(p => projectsMap.set(p.id, p));
+        managerProjects.forEach(p => {
+            if (!projectsMap.has(p.id)) {
+                projectsMap.set(p.id, p);
+            }
+        });
+        memberProjects.forEach(p => {
+            if (!projectsMap.has(p.id)) {
+                projectsMap.set(p.id, p);
+            }
+        });
+
+        const uniqueProjects = Array.from(projectsMap.values());
+        console.log('Fetched projects:', { ownedProjects, managerProjects, memberProjects, uniqueProjects });
+        return uniqueProjects;
     },
 
     async getProjectById(projectId: string): Promise<Project> {
@@ -56,12 +71,12 @@ export const projectsService = {
     async createProject(projectData: CreateProjectRequest): Promise<Project> {
         const newProject = {
             ...projectData,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            createdAt: dayjs().toISOString(),
+            updatedAt: dayjs().toISOString()
         };
         const res = await api.post('/projects', newProject);
         const created = res.data;
-        const createdAt = new Date().toISOString();
+        const createdAt = dayjs().toISOString();
         try {
             const ownerRes = await api.get(`/users/${projectData.ownerId}`);
             const owner = ownerRes.data;
@@ -73,7 +88,7 @@ export const projectsService = {
                 joinedAt: createdAt
             };
             await api.post('/members', ownerMember);
-            if (projectData.managerId) {
+            if (projectData.managerId && projectData.managerId !== projectData.ownerId) {
                 try {
                     const manRes = await api.get(`/users/${projectData.managerId}`);
                     const man = manRes.data;
@@ -86,7 +101,7 @@ export const projectsService = {
                     };
                     await api.post('/members', mgrMember);
                 } catch (err) {
-                    console.error('Failed', err);
+                    console.error('Failed to create manager member', err);
                 }
             }
             if (Array.isArray(projectData.members)) {
@@ -117,15 +132,12 @@ export const projectsService = {
     },
 
     async updateProject(projectId: string, projectData: UpdateProjectRequest): Promise<Project> {
-        // Get current project data first to preserve all existing fields
         const currentRes = await api.get(`/projects/${projectId}`);
         const currentProject = currentRes.data;
-
-        // Merge with new data, preserving existing fields
         const updateData = {
-            ...currentProject, // Keep all existing fields
-            ...projectData,    // Override with new data
-            updatedAt: new Date().toISOString()
+            ...currentProject,
+            ...projectData,
+            updatedAt: dayjs().toISOString()
         };
 
         const res = await api.put(`/projects/${projectId}`, updateData);

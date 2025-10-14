@@ -230,10 +230,10 @@ const PersonalTasks: React.FC = () => {
 
     const getProgressColor = (progress: TaskProgressType) => {
         switch (progress) {
-            case TaskProgress.ON_TRACK: return 'green';
-            case TaskProgress.AT_RISK: return 'orange';
-            case TaskProgress.DELAYED: return 'red';
-            case TaskProgress.DONE: return 'blue';
+            case TaskProgress.ON_TRACK: return '#198754';
+            case TaskProgress.AT_RISK: return '#FFA500';
+            case TaskProgress.DELAYED: return '#DC3545';
+            case TaskProgress.DONE: return '#108ee9';
             default: return 'default';
         }
     };
@@ -251,7 +251,12 @@ const PersonalTasks: React.FC = () => {
             key: 'priority',
             className: 'table-col-priority',
             render: (priority) => (
-                <Tag color={getPriorityColor(priority)}>{getPriorityText(priority)}</Tag>
+                <Tag
+                    color={getPriorityColor(priority)}
+                   
+                >
+                    {getPriorityText(priority)}
+                </Tag>
             ),
         },
         {
@@ -259,21 +264,32 @@ const PersonalTasks: React.FC = () => {
             key: 'status',
             width: '10%',
             className: 'table-col-status',
-            render: (status) => <span>{status}<EditOutlined style={{ color: "#999" }} /></span>,
+            render: (status, record) => <span>{status}<EditOutlined style={{ color: "#999", cursor: 'pointer' }}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingTask(record);
+                        setStatusModalVisible(true);
+                    }} /></span>,
         },
         {
             dataIndex: 'startDate',
             key: 'startDate',
             width: '12%',
             className: 'table-col-start-date',
-            render: (date) => dayjs(date).format('DD-MM'),
+            render: (date) =>
+                <span style={{ color: '#1890ff' }}>
+                    {dayjs(date).format('MM - DD')}
+                </span>
         },
         {
             dataIndex: 'deadline',
             width: '12%',
             key: 'deadline',
             className: 'table-col-deadline',
-            render: (date) => dayjs(date).format('DD-MM'),
+            render: (date) =>
+                <span style={{ color: '#1890ff' }}>
+                    {dayjs(date).format('MM - DD')}
+                </span>
         },
         {
             dataIndex: 'progress',
@@ -298,9 +314,9 @@ const PersonalTasks: React.FC = () => {
 
     const getPriorityColor = (priority: TaskPriorityType) => {
         switch (priority) {
-            case TaskPriority.HIGH: return 'red';
-            case TaskPriority.MEDIUM: return 'orange';
-            case TaskPriority.LOW: return 'blue';
+            case TaskPriority.HIGH: return '#DC3545';
+            case TaskPriority.MEDIUM: return '#FFA500';
+            case TaskPriority.LOW: return '#0DCAF0';
             default: return 'default';
         }
     };
@@ -332,7 +348,6 @@ const PersonalTasks: React.FC = () => {
                     </Col>
                 </Row>
 
-                {/* Advanced Filters */}
                 <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
                     <Row gutter={[16, 16]} align="middle">
                         <Col xs={24} sm={12} md={6} lg={3}>
@@ -436,7 +451,6 @@ const PersonalTasks: React.FC = () => {
                         </Col>
                     </Row>
 
-                    {/* Filter Summary */}
                     {getActiveFiltersCount() > 0 && (
                         <>
                             <Divider style={{ margin: '12px 0' }} />
@@ -534,12 +548,6 @@ const PersonalTasks: React.FC = () => {
                                     size="small"
                                     showHeader={false}
                                     rowClassName={(_record, index) => `personal-task-row row-${index}`}
-                                    onRow={(record) => ({
-                                        onClick: () => {
-                                            setEditingTask(record);
-                                            setStatusModalVisible(true);
-                                        }
-                                    })}
                                     style={{
                                         border: 'none',
                                         borderTop: '1px solid #f0f0f0',

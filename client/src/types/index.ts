@@ -45,8 +45,8 @@ export interface Project {
     description: string;
     imageUrl: string;
     ownerId: string;
-    managerId: string; // Có thể không có manager
-    memberIds: string[]; // Có thể không có thành viên
+    managerId: string;
+    memberIds: string[];
     createdAt: string;
     updatedAt: string;
 }

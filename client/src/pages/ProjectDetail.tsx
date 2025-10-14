@@ -24,11 +24,11 @@ import { message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import {
     PlusOutlined,
-    EditOutlined,
     DeleteOutlined,
     UserAddOutlined,
     SearchOutlined,
     TeamOutlined,
+    CaretRightOutlined,
 } from '@ant-design/icons';
 import { useParams, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -40,8 +40,7 @@ import {
     createTaskAsync,
     updateTaskAsync,
     deleteTaskAsync,
-    clearError as clearTasksError,
-    clearFormError as clearTasksFormError
+    clearError as clearTasksError
 } from '../store/tasksSlice';
 import {
     updateMemberRoleAsync,
@@ -67,8 +66,6 @@ interface TaskModalProps {
     onCancel: () => void;
     onOk: (values: any) => void;
     loading: boolean;
-    formErrorExternal?: string | string[] | null;
-    onClearFormError?: () => void;
 }
 
 const TaskModal: React.FC<TaskModalProps> = ({
@@ -79,54 +76,8 @@ const TaskModal: React.FC<TaskModalProps> = ({
     onCancel,
     onOk,
     loading
-    , formErrorExternal, onClearFormError
 }) => {
     const [form] = Form.useForm();
-    const duplicateTimerRef = React.useRef<number | null>(null);
-    useEffect(() => {
-        return () => {
-            if (duplicateTimerRef.current) clearTimeout(duplicateTimerRef.current);
-        };
-    }, []);
-
-    const runDuplicateCheck = (name: string) => {
-        if (duplicateTimerRef.current) clearTimeout(duplicateTimerRef.current);
-        duplicateTimerRef.current = window.setTimeout(async () => {
-            try {
-                if (!name || !name.trim() || name.length < 3) return;
-                const existing = await tasksService.getTasks(projectId);
-                const dup = existing.find(t => t.name.toLowerCase() === name.toLowerCase() && (!task || t.id !== task.id));
-                if (dup) {
-                    form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ đã tồn tại trong dự án'] }]);
-                }
-            } catch (err) {
-            }
-        }, 450) as unknown as number;
-    };
-
-    const handleImmediateValidation = (changedValues: any, allValues: any) => {
-        if (Object.prototype.hasOwnProperty.call(changedValues, 'name')) {
-            const name = changedValues.name;
-            form.setFields([{ name: 'name', errors: [] }]);
-
-            if (!name || !name.trim()) {
-                form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ không được để trống'] }]);
-            } else if (name.length < 3 || name.length > 100) {
-                form.setFields([{ name: 'name', errors: ['Tên nhiệm vụ phải có độ dài từ 3-100 ký tự'] }]);
-            } else {
-                runDuplicateCheck(name);
-            }
-        }
-        if (Object.prototype.hasOwnProperty.call(changedValues, 'startDate') || Object.prototype.hasOwnProperty.call(changedValues, 'deadline')) {
-            const start = allValues.startDate;
-            const deadline = allValues.deadline;
-            if (start && deadline && deadline.isBefore(start, 'day')) {
-                form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
-            } else {
-                form.setFields([{ name: 'deadline', errors: [] }, { name: 'startDate', errors: [] }]);
-            }
-        }
-    };
 
     useEffect(() => {
         if (visible) {
@@ -142,60 +93,14 @@ const TaskModal: React.FC<TaskModalProps> = ({
         }
     }, [visible, task, form]);
 
-    useEffect(() => {
-        form.setFields([
-            { name: 'name', errors: [] },
-            { name: 'startDate', errors: [] },
-            { name: 'deadline', errors: [] },
-            { name: 'assigneeId', errors: [] },
-        ]);
-
-        if (!formErrorExternal) return;
-
-        const errors = Array.isArray(formErrorExternal) ? formErrorExternal : [formErrorExternal];
-
-        const mapErrorToField = (msg: string) => {
-            const lower = msg.toLowerCase();
-            if (lower.includes('tên nhiệm vụ') || lower.includes('đã tồn tại') || lower.includes('tên')) return 'name';
-            if (lower.includes('ngày bắt đầu') || lower.includes('bắt đầu')) return 'startDate';
-            if (lower.includes('hạn chót') || lower.includes('hạn cuối') || lower.includes('deadline')) return 'deadline';
-            if (lower.includes('người phụ trách') || lower.includes('assignee')) return 'assigneeId';
-            return 'name';
-        };
-
-        const fieldsErrors: Record<string, string[]> = {};
-        errors.forEach((m: string) => {
-            const field = mapErrorToField(m as string);
-            fieldsErrors[field] = fieldsErrors[field] || [];
-            fieldsErrors[field].push(m as string);
-        });
-
-        const setPayload = Object.entries(fieldsErrors).map(([name, errs]) => ({ name, errors: errs }));
-        if (setPayload.length) form.setFields(setPayload as any);
-    }, [formErrorExternal, form]);
-
-
     const handleOk = () => {
         form.validateFields().then(values => {
-            const start = values.startDate;
-            const deadline = values.deadline;
-            if (start && deadline && deadline.isBefore(start, 'day')) {
-                form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
-                return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
-            }
-
             const formattedValues = {
                 ...values,
                 projectId,
                 startDate: values.startDate.format('YYYY-MM-DD'),
                 deadline: values.deadline.format('YYYY-MM-DD')
             };
-            form.setFields([
-                { name: 'startDate', errors: [] },
-                { name: 'deadline', errors: [] },
-                { name: 'name', errors: [] },
-            ]);
-
             Promise.resolve(onOk(formattedValues)).catch(() => {
             });
         });
@@ -206,14 +111,7 @@ const TaskModal: React.FC<TaskModalProps> = ({
         <Modal
             title={task ? 'Sửa nhiệm vụ' : 'Thêm nhiệm vụ'}
             open={visible}
-            onCancel={() => {
-                form.setFields([
-                    { name: 'startDate', errors: [] },
-                    { name: 'deadline', errors: [] },
-                    { name: 'name', errors: [] },
-                ]);
-                onCancel();
-            }}
+            onCancel={onCancel}
             footer={[
                 <Button key="cancel" onClick={onCancel}>
                     Hủy
@@ -225,14 +123,34 @@ const TaskModal: React.FC<TaskModalProps> = ({
             width={600}
         >
 
-            <Form form={form} layout="vertical" onValuesChange={(changedValues, allValues) => { onClearFormError && onClearFormError(); handleImmediateValidation(changedValues, allValues); }}>
+            <Form form={form} layout="vertical">
                 <Form.Item
                     label="Tên nhiệm vụ"
                     name="name"
                     rules={[
                         { required: true, message: 'Tên nhiệm vụ không được để trống' },
-                        { min: 3, max: 100, message: 'Tên nhiệm vụ phải có độ dài từ 3-100 ký tự' }
+                        { min: 3, max: 100, message: 'Tên nhiệm vụ phải có độ dài từ 3-100 ký tự' },
+                        {
+                            validator: async (_, value) => {
+                                if (!value || value.length < 3) return Promise.resolve();
+                                try {
+                                    const existing = await tasksService.getTasks(projectId);
+                                    const duplicate = existing.find(t =>
+                                        t.name.toLowerCase() === value.toLowerCase() &&
+                                        (!task || t.id !== task.id)
+                                    );
+                                    if (duplicate) {
+                                        return Promise.reject(new Error('Tên nhiệm vụ đã tồn tại trong dự án'));
+                                    }
+                                    return Promise.resolve();
+                                } catch (error) {
+                                    console.error('Error checking duplicate task name:', error);
+                                    return Promise.resolve();
+                                }
+                            }
+                        }
                     ]}
+                    validateTrigger={['onBlur', 'onChange']}
                 >
                     <Input placeholder="Soạn thảo đề cương dự án" />
                 </Form.Item>
@@ -271,6 +189,17 @@ const TaskModal: React.FC<TaskModalProps> = ({
                             name="startDate"
                             rules={[
                                 { required: true, message: 'Vui lòng chọn ngày bắt đầu' },
+                                {
+                                    validator(_, value) {
+                                        if (!value) return Promise.resolve();
+
+                                        const now = dayjs().startOf('day');
+                                        if (value.isBefore(now) || value.isSame(now, 'day')) {
+                                            return Promise.reject(new Error('Ngày bắt đầu phải lớn hơn ngày hiện tại'));
+                                        }
+                                        return Promise.resolve();
+                                    }
+                                },
                                 ({ getFieldValue }) => ({
                                     validator(_, value) {
                                         const deadline = getFieldValue('deadline');
@@ -281,20 +210,14 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                     }
                                 })
                             ]}
-                            validateTrigger="onChange"
+                            validateTrigger={['onChange', 'onBlur']}
                         >
                             <DatePicker
                                 style={{ width: '100%' }}
                                 format="DD/MM/YYYY"
                                 placeholder="mm/dd/yyyy"
-                                onChange={(_) => {
-                                    const startDate = form.getFieldValue('startDate');
-                                    const deadline = form.getFieldValue('deadline');
-                                    if (startDate && deadline && deadline.isBefore(startDate, 'day')) {
-                                        form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
-                                    } else {
-                                        form.setFields([{ name: 'deadline', errors: [] }]);
-                                    }
+                                disabledDate={(current) => {
+                                    return current && current < dayjs().startOf('day');
                                 }}
                             />
                         </Form.Item>
@@ -307,28 +230,34 @@ const TaskModal: React.FC<TaskModalProps> = ({
                                 { required: true, message: 'Vui lòng chọn hạn cuối' },
                                 ({ getFieldValue }) => ({
                                     validator(_, value) {
+                                        if (!value) return Promise.resolve();
+
                                         const startDate = getFieldValue('startDate');
-                                        if (!value || !startDate || !value.isBefore(startDate, 'day')) {
-                                            return Promise.resolve();
+                                        if (!startDate) return Promise.resolve();
+
+                                        if (value.isBefore(startDate, 'day')) {
+                                            return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
                                         }
-                                        return Promise.reject(new Error('Hạn cuối phải sau hoặc bằng ngày bắt đầu'));
+                                        return Promise.resolve();
                                     }
                                 })
                             ]}
-                            validateTrigger="onChange"
+                            validateTrigger={['onChange', 'onBlur']}
                         >
                             <DatePicker
                                 style={{ width: '100%' }}
                                 format="DD/MM/YYYY"
                                 placeholder="mm/dd/yyyy"
-                                onChange={(_) => {
+                                disabledDate={(current) => {
+                                    if (!current) return false;
+                                    const today = dayjs().startOf('day');
                                     const startDate = form.getFieldValue('startDate');
-                                    const deadline = form.getFieldValue('deadline');
-                                    if (startDate && deadline && deadline.isBefore(startDate, 'day')) {
-                                        form.setFields([{ name: 'deadline', errors: ['Hạn cuối phải sau hoặc bằng ngày bắt đầu'] }]);
-                                    } else {
-                                        form.setFields([{ name: 'deadline', errors: [] }]);
+                                    if (current < today) return true;
+                                    if (startDate && current < startDate.startOf('day')) {
+                                        return true;
                                     }
+
+                                    return false;
                                 }}
                             />
                         </Form.Item>
@@ -496,13 +425,13 @@ const AddMemberModal: React.FC<MemberModalProps> = ({
     );
 };
 
-const ProjectDetail: React.FC = () => {
+const ProjectDetail = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const { projects } = useAppSelector(state => state.projects);
-    const { tasks, loading: tasksLoading, error: tasksError, errorForm: tasksErrorForm } = useAppSelector(state => state.tasks);
+    const { tasks, loading: tasksLoading, error: tasksError } = useAppSelector(state => state.tasks);
     const { members, loading: membersLoading, error: membersError } = useAppSelector(state => state.members);
     const { user } = useAppSelector(state => state.auth);
     const { users } = useAppSelector(state => state.users);
@@ -547,13 +476,11 @@ const ProjectDetail: React.FC = () => {
 
     const handleAddTask = () => {
         setEditingTask(undefined);
-        dispatch(clearTasksFormError());
         setTaskModalVisible(true);
     };
 
     const handleEditTask = (task: Task) => {
         setEditingTask(task);
-        dispatch(clearTasksFormError());
         setTaskModalVisible(true);
     };
 
@@ -660,9 +587,9 @@ const ProjectDetail: React.FC = () => {
 
     const getPriorityColor = (priority: TaskPriorityType) => {
         switch (priority) {
-            case TaskPriority.HIGH: return 'red';
-            case TaskPriority.MEDIUM: return 'orange';
-            case TaskPriority.LOW: return 'green';
+            case TaskPriority.HIGH: return '#DC3545';
+            case TaskPriority.MEDIUM: return '#FFA500';
+            case TaskPriority.LOW: return '#0DCAF0';
             default: return 'default';
         }
     };
@@ -678,10 +605,10 @@ const ProjectDetail: React.FC = () => {
 
     const getProgressColor = (progress: TaskProgressType) => {
         switch (progress) {
-            case TaskProgress.ON_TRACK: return 'green';
-            case TaskProgress.AT_RISK: return 'orange';
-            case TaskProgress.DELAYED: return 'red';
-            case TaskProgress.DONE: return 'blue';
+            case TaskProgress.ON_TRACK: return '#198754';
+            case TaskProgress.AT_RISK: return '#FFA500';
+            case TaskProgress.DELAYED: return '#DC3545';
+            case TaskProgress.DONE: return '#108ee9';
             default: return 'default';
         }
     };
@@ -715,7 +642,7 @@ const ProjectDetail: React.FC = () => {
             key: 'priority',
             width: '10%',
             render: (priority: string) => (
-                <Tag color={getPriorityColor(priority as any)}>
+                <Tag color={getPriorityColor(priority as any)} >
                     {getPriorityText(priority as any)}
                 </Tag>
             ),
@@ -773,19 +700,18 @@ const ProjectDetail: React.FC = () => {
             render: (_, record) => (
                 <Space style={{ justifyContent: 'center', width: '100%' }}>
                     <Button
+                        variant="solid"
+                        color='gold'
                         size="small"
-                        type="text"
-                        icon={<EditOutlined />}
                         onClick={() => handleEditTask(record)}
-                        style={{ color: '#1890ff' }}
+                        style={{ color: 'black' }}
                     >
                         Sửa
                     </Button>
                     <Button
+                        color='red'
+                        variant="solid"
                         size="small"
-                        type="text"
-                        danger
-                        icon={<DeleteOutlined />}
                         onClick={() => handleDeleteTask(record)}
                     >
                         Xóa
@@ -1033,29 +959,6 @@ const ProjectDetail: React.FC = () => {
             </Card>
 
             <Card>
-                <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
-                    <Col>
-                        <Space>
-                            <Select
-                                value={sortBy}
-                                onChange={setSortBy}
-                                style={{ width: 200 }}
-                                placeholder="Sắp xếp theo"
-                            >
-                                <Option value="deadline">Sắp xếp theo hạn chót</Option>
-                                <Option value="priority">Sắp xếp theo độ ưu tiên</Option>
-                            </Select>
-                            <Input
-                                placeholder="Tìm kiếm nhiệm vụ"
-                                prefix={<SearchOutlined />}
-                                value={searchText}
-                                onChange={(e) => setSearchText(e.target.value)}
-                                style={{ width: 250 }}
-                            />
-                        </Space>
-                    </Col>
-                </Row>
-
                 {(tasksError || membersError) && (
                     <Alert
                         message={tasksError || membersError}
@@ -1070,8 +973,26 @@ const ProjectDetail: React.FC = () => {
                     />
                 )}
 
-                <div style={{ marginBottom: 16 }}>
+                <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Title level={4}>Danh Sách Nhiệm Vụ</Title>
+                    <Space>
+                        <Select
+                            value={sortBy}
+                            onChange={setSortBy}
+                            style={{ width: 200 }}
+                            placeholder="Sắp xếp theo"
+                        >
+                            <Option value="deadline">Sắp xếp theo hạn chót</Option>
+                            <Option value="priority">Sắp xếp theo độ ưu tiên</Option>
+                        </Select>
+                        <Input
+                            placeholder="Tìm kiếm nhiệm vụ"
+                            prefix={<SearchOutlined />}
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            style={{ width: 250 }}
+                        />
+                    </Space>
                 </div>
 
                 <div className="task-table-header">
@@ -1087,12 +1008,23 @@ const ProjectDetail: React.FC = () => {
                 <Collapse
                     className="task-collapse"
                     ghost
+                    expandIcon={({ isActive }) => (
+                        <div style={{
+                            transition: 'transform 0.3s ease',
+                            transform: isActive ? 'rotate(90deg)' : 'rotate(0deg)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontSize: '14px',
+                        }}>
+                            <CaretRightOutlined />
+                        </div>
+                    )}
                 >
                     {[
-                        { key: 'todo', status: TaskStatus.TODO, title: 'To do', color: '#1890ff' },
-                        { key: 'inprogress', status: TaskStatus.IN_PROGRESS, title: 'In Progress', color: '#fa8c16' },
-                        { key: 'pending', status: TaskStatus.PENDING, title: 'Pending', color: '#f5222d' },
-                        { key: 'done', status: TaskStatus.DONE, title: 'Done', color: '#52c41a' }
+                        { key: 'todo', status: TaskStatus.TODO, title: 'To do' },
+                        { key: 'inprogress', status: TaskStatus.IN_PROGRESS, title: 'In Progress' },
+                        { key: 'pending', status: TaskStatus.PENDING, title: 'Pending' },
+                        { key: 'done', status: TaskStatus.DONE, title: 'Done' }
                     ].map(section => {
                         const sectionTasks = filteredTasks.filter(task => task.status === section.status);
                         return (
@@ -1101,7 +1033,6 @@ const ProjectDetail: React.FC = () => {
                                 header={
                                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                                         <span style={{
-                                            color: section.color,
                                             fontWeight: 600,
                                             fontSize: '16px'
                                         }}>
@@ -1146,10 +1077,8 @@ const ProjectDetail: React.FC = () => {
                 members={members}
                 projectId={currentProject.id}
                 loading={tasksLoading}
-                onCancel={() => { dispatch(clearTasksFormError()); setTaskModalVisible(false); }}
+                onCancel={() => setTaskModalVisible(false)}
                 onOk={handleTaskModalOk}
-                formErrorExternal={tasksErrorForm}
-                onClearFormError={() => dispatch(clearTasksFormError())}
             />
 
             <Modal

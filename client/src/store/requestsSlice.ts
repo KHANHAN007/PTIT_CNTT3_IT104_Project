@@ -34,7 +34,6 @@ export const acceptRequest = createAsyncThunk(
 export const acceptAndAddMember = createAsyncThunk(
     'requests/acceptAndAddMember',
     async ({ requestId, memberData }: { requestId: string; memberData: { projectId: string; userId?: string; email: string; role: string } }) => {
-        // 1) create the member
         const createdMember = await membersService.addMember({
             projectId: memberData.projectId,
             userId: memberData.userId || '',
@@ -42,7 +41,6 @@ export const acceptAndAddMember = createAsyncThunk(
             role: memberData.role,
         } as any);
 
-        // 2) mark the request accepted
         const updatedRequest = await requestsService.updateRequestStatus(requestId, 'accepted');
 
         return { updatedRequest, createdMember };

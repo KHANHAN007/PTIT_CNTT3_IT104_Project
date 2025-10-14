@@ -25,7 +25,7 @@ import {
     Badge,
     Divider,
 } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, TeamOutlined, FilterOutlined, ClearOutlined, SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined, TeamOutlined, FilterOutlined, ClearOutlined} from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
 import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../components/ImageUpload';
@@ -115,7 +115,6 @@ function Projects() {
             description: project.description,
             imageUrl: project.imageUrl,
         });
-        // For editing, we don't change manager/members, so reset these states
         setManagerId(project.managerId);
         setMemberIds([]);
         setIsProjectModalVisible(true);
@@ -131,7 +130,6 @@ function Projects() {
             const values = await form.validateFields();
 
             if (editingProject) {
-                // For editing, we only need the basic project fields
                 const updateData = {
                     name: values.name,
                     description: values.description,
@@ -140,7 +138,6 @@ function Projects() {
                 await dispatch(updateProject({ id: editingProject.id, projectData: updateData })).unwrap();
                 message.success('Cập nhật dự án thành công!');
             } else {
-                // For creating new project, validate manager and members
                 if (!managerId) {
                     message.error('Vui lòng chọn quản lý dự án (manager)');
                     return;
@@ -210,21 +207,12 @@ function Projects() {
 
     const filteredProjects = getUserProjects()
         .filter(project => {
-            // Text search filter
             const matchesSearch = searchText === '' ||
                 project.name.toLowerCase().includes(searchText.toLowerCase()) ||
                 project.description.toLowerCase().includes(searchText.toLowerCase());
-
-            // Owner filter
             const matchesOwner = !filterOwner || project.ownerId === filterOwner;
-
-            // Manager filter
             const matchesManager = !filterManager || project.managerId === filterManager;
-
-            // Role filter - check if current user has specific role in this project
             const matchesRole = !filterRole || getUserRoleInProject(project.id) === filterRole;
-
-            // Date range filter
             const matchesDateRange = !filterDateRange || (
                 new Date(project.createdAt) >= filterDateRange[0].toDate() &&
                 new Date(project.createdAt) <= filterDateRange[1].toDate()
@@ -483,18 +471,22 @@ function Projects() {
                         />
                     </div>
 
-                    {/* Advanced Filters */}
                     <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
-                        <Row gutter={[16, 16]} align="middle">
-                            <Col xs={24} sm={12} md={6} lg={4}>
-                                <div style={{ marginBottom: 8 }}>
-                                    <Badge count={getActiveFiltersCount()} offset={[10, 0]}>
-                                        <FilterOutlined /> Bộ lọc
-                                    </Badge>
-                                </div>
-                            </Col>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                            gap: '16px',
+                            alignItems: 'center'
+                        }}>
+                            <div style={{
+                                display: 'flex', alignItems: 'center', justifyContent: 'start',
+                            }}>
+                                <Badge count={getActiveFiltersCount()}>
+                                    <FilterOutlined /> Bộ lọc
+                                </Badge>
+                            </div>
 
-                            <Col xs={24} sm={12} md={6} lg={4}>
+                            <div style={{ display: 'flex', gap: '12px', flexDirection: 'row', alignItems: 'center', justifyContent: 'end' }}>
                                 <Select
                                     placeholder="Chủ sở hữu"
                                     style={{ width: '100%' }}
@@ -508,9 +500,6 @@ function Projects() {
                                         </Select.Option>
                                     ))}
                                 </Select>
-                            </Col>
-
-                            <Col xs={24} sm={12} md={6} lg={4}>
                                 <Select
                                     placeholder="Quản lý"
                                     style={{ width: '100%' }}
@@ -524,9 +513,6 @@ function Projects() {
                                         </Select.Option>
                                     ))}
                                 </Select>
-                            </Col>
-
-                            <Col xs={24} sm={12} md={6} lg={4}>
                                 <Select
                                     placeholder="Vai trò của bạn"
                                     style={{ width: '100%' }}
@@ -556,9 +542,6 @@ function Projects() {
                                         {getRoleDisplayName(MemberRole.TESTER)}
                                     </Select.Option>
                                 </Select>
-                            </Col>
-
-                            <Col xs={24} sm={12} md={6} lg={4}>
                                 <DatePicker.RangePicker
                                     placeholder={['Từ ngày', 'Đến ngày']}
                                     style={{ width: '100%' }}
@@ -571,9 +554,6 @@ function Projects() {
                                         }
                                     }}
                                 />
-                            </Col>
-
-                            <Col xs={24} sm={12} md={6} lg={4}>
                                 <Space>
                                     <Select
                                         placeholder="Sắp xếp"
@@ -613,10 +593,10 @@ function Projects() {
                                         Reset
                                     </Button>
                                 </Space>
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
 
-                        {/* Filter Summary */}
+
                         {getActiveFiltersCount() > 0 && (
                             <>
                                 <Divider style={{ margin: '12px 0' }} />
@@ -757,7 +737,12 @@ function Projects() {
                                 {!editingProject && (
                                     <>
                                         <div style={{ flex: 1, width: '100%' }}>
-                                            <Form.Item label="Quản lý dự án (Manager)" style={{ marginBottom: 8 }}>
+                                            <Form.Item
+                                                label="Quản lý dự án (Manager)"
+                                                style={{ marginBottom: 8 }}
+                                                name="managerId"
+                                                rules={[{ required: true, message: 'Vui lòng chọn quản lý dự án' }]}
+                                            >
                                                 <Select
                                                     style={{ width: '100%' }}
                                                     placeholder="Chọn quản lý dự án"
@@ -776,7 +761,11 @@ function Projects() {
                                         </div>
 
                                         <div style={{ flex: 1, width: '100%' }}>
-                                            <Form.Item label="Thêm thành viên">
+                                            <Form.Item
+                                                label="Thêm thành viên"
+                                                name="memberIds"
+                                                rules={[{ required: true, message: 'Vui lòng chọn ít nhất một thành viên' }]}
+                                            >
                                                 <Select
                                                     style={{ width: '100%' }}
                                                     mode="multiple"
